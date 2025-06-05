@@ -1,8 +1,11 @@
 using Ink.Runtime;
+using TMPro;
 using UnityEngine;
 
 public class InkConsoleTest : MonoBehaviour
 {
+    public TextMeshProUGUI dialogue;
+    public TextMeshProUGUI playerChoice;
     private Story story;
     public TextAsset inkJson;
 
@@ -15,8 +18,46 @@ public class InkConsoleTest : MonoBehaviour
         }
 
         story = new Story(inkJson.text);
-        story.ChoosePathString("start");
-        PlayStory();
+        //Debug.Log(story.Continue());
+        dialogue.text = story.Continue().Trim();
+        //PlayStory();
+    }
+    public void NextLine()
+    {
+        if (story.canContinue)
+        {
+            //Debug.Log(story.Continue());
+            dialogue.text = story.Continue().Trim();
+        }
+        else
+        {
+            if (story.currentChoices.Count > 0)
+            {
+                for (int i = 0; i < story.currentChoices.Count; i++)
+                {
+                    Debug.Log($"Choice {i}: '{story.currentChoices[i].text}'");
+                }
+            }
+        }
+    }
+    public void ChooseOption(int index)
+    {
+        if (story.currentChoices.Count > index)
+        {
+            string selectedText = story.currentChoices[index].text;
+            Debug.Log("Player selected: " + selectedText);
+
+             
+            playerChoice.text = selectedText;
+
+            story.ChooseChoiceIndex(index);
+
+            // Now continue the story and show the reply
+            string reply = story.Continue().Trim();
+            Debug.Log(reply);
+            dialogue.text = reply;
+            NextLine();
+        }
     }
 
     void PlayStory()
@@ -37,19 +78,7 @@ public class InkConsoleTest : MonoBehaviour
                 Debug.Log($"Choice {i}: '{story.currentChoices[i].text}'");
             }
 
-            int choiceIndex = 1;  // try to pick choice 1
-
-            if (choiceIndex >= story.currentChoices.Count)
-            {
-                Debug.LogWarning($"Choice index {choiceIndex} out of range. Picking choice 0 instead.");
-                choiceIndex = 0;  // fallback to choice 0 if choice 1 not available
-            }
-            else
-            {
-                Debug.Log($"Picking choice {choiceIndex}");
-            }
-
-            story.ChooseChoiceIndex(choiceIndex);
+            story.ChooseChoiceIndex(0);
             PlayStory();
         }
         else
