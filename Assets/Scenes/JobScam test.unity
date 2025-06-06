@@ -261,7 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 1257137250}
   playerChoice: {fileID: 1385965652}
-  inkJson: {fileID: 4900000, guid: 43a4f95412307794896389752cef210f, type: 3}
+  inkJson: {fileID: 4900000, guid: a5895620e0dad344582b264c6c83390b, type: 3}
 --- !u!4 &180264617
 Transform:
   m_ObjectHideFlags: 0
@@ -1563,8 +1563,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -562, y: 27}
-  m_SizeDelta: {x: 713.6477, y: 930.4744}
+  m_AnchoredPosition: {x: -524.06775, y: -5.1849976}
+  m_SizeDelta: {x: 789.5122, y: 994.8444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1257137250
 MonoBehaviour:
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

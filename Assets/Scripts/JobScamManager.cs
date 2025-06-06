@@ -12,9 +12,13 @@ using TMPro;
 
 public class JobScamManager : InkManager
 {
-    protected override void Start()
-    {
-        base.Start();
+    public TextAsset[] inkJsonFiles;
 
+    void Start()
+    {
+        int index = Random.Range(0, inkJsonFiles.Length);
+        TextAsset selectedInk = inkJsonFiles[index];
+        // Load the story
+        story = new Story(selectedInk.text);
     }
 }

@@ -16,18 +16,16 @@ public class InkManager
 
     protected Story story;
 
-    protected virtual void Start()
+    void Start()
     {
-        story = new Story(inkJSON.text);
-        story.ChoosePathString("start");
-        ContinueStory();
+
     }
 
     public void ContinueStory()
     {
         while (story.canContinue)
         {
-            string text = story.Continue().Trim();
+            string text = story.Continue();
             //Instantiate text message
             //have typing animation and wait that duration
         }
@@ -55,7 +53,7 @@ public class InkManager
             story.ChooseChoiceIndex(index);
 
             // Now continue the story and show the reply
-            string reply = story.Continue().Trim();
+            string reply = story.Continue();
             Debug.Log(reply);
             //Instantiate scammer text
         }

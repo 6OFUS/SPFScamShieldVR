@@ -19,7 +19,7 @@ public class InkConsoleTest : MonoBehaviour
 
         story = new Story(inkJson.text);
         //Debug.Log(story.Continue());
-        dialogue.text = story.Continue().Trim();
+        dialogue.text = story.Continue();
         //PlayStory();
     }
     public void NextLine()
@@ -27,7 +27,9 @@ public class InkConsoleTest : MonoBehaviour
         if (story.canContinue)
         {
             //Debug.Log(story.Continue());
-            dialogue.text = story.Continue().Trim();
+            string dialogueTest = story.Continue();
+            dialogue.text = dialogueTest;
+            Debug.Log(dialogueTest);
         }
         else
         {
