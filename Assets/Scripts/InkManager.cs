@@ -9,10 +9,11 @@ using UnityEngine;
 using Ink.Runtime;
 using TMPro;
 
-public class InkManager
+public class InkManager : MonoBehaviour 
 {
     public TextAsset inkJSON;
-    public TextMeshProUGUI storyText; // narrative/guide text UI
+    public TextMeshProUGUI dialogue; // narrative/guide text UI
+    public TextMeshProUGUI playerChoice;
 
     protected Story story;
 
@@ -20,19 +21,25 @@ public class InkManager
     {
 
     }
-
-    public void ContinueStory()
+    public IEnumerator ContinueStory()
     {
         while (story.canContinue)
         {
             string text = story.Continue();
+            Debug.Log(text);
             //Instantiate text message
             //have typing animation and wait that duration
+            dialogue.text = text;
+            yield return new WaitForSeconds(5f);
         }
 
         if (story.currentChoices.Count > 0)
         {
-            //Instantiate choices
+            for (int i = 0; i < story.currentChoices.Count; i++)
+            {
+                Debug.Log($"Choice {i}: '{story.currentChoices[i].text}'");
+                //Instantiate choices
+            }
         }
         else
         {
@@ -47,15 +54,37 @@ public class InkManager
             string selectedText = story.currentChoices[index].text;
             Debug.Log("Player selected: " + selectedText);
 
-            // Instantiate player selected text
 
+            playerChoice.text = selectedText;
 
             story.ChooseChoiceIndex(index);
 
             // Now continue the story and show the reply
-            string reply = story.Continue();
+            string reply = story.Continue().Trim();
             Debug.Log(reply);
-            //Instantiate scammer text
+            dialogue.text = reply;
+            NextLine();
+        }
+    }
+
+    public void NextLine()
+    {
+        if (story.canContinue)
+        {
+            //Debug.Log(story.Continue());
+            string dialogueTest = story.Continue();
+            dialogue.text = dialogueTest;
+            Debug.Log(dialogueTest);
+        }
+        else
+        {
+            if (story.currentChoices.Count > 0)
+            {
+                for (int i = 0; i < story.currentChoices.Count; i++)
+                {
+                    Debug.Log($"Choice {i}: '{story.currentChoices[i].text}'");
+                }
+            }
         }
     }
 }

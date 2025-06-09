@@ -32,9 +32,12 @@ let me know if you're keen to proceed, happy to share more!
 + [Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_offer_dialogue_2 ===
-//TO BE ADDED
-...
--> END
+totally understand - it's smart to be careful!
+if it helps, you can reply to the email i sent from lucia.tan@t-commerce.com, or even call our office line listed on the website to confirm my name.
+no pressure at all - just let me know if you'd like to move forward or need more info first 
+
++ [just checked the site. looks okay, lets proceed] -> win_ending
++ [Screenshot and submit to ScamShield] -> report_scamshield
 
 === send_sticker === 
 + [Sticker 1] -> job_offer_dialogue_3
