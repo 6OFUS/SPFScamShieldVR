@@ -1141,7 +1141,7 @@ PrefabInstance:
       addedObject: {fileID: 2144759140}
     - targetCorrespondingSourceObject: {fileID: 8153792354969276475, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1223544038}
+      addedObject: {fileID: 987522549}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9110902088590504698, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       insertIndex: -1
@@ -1487,6 +1487,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5092080604168910759, guid: 36cffe2c281e2304d99ee9237f1a4bc4, type: 3}
+--- !u!224 &987522549 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5351067246443060532, guid: 9d62fe67a5911e04da7372ba3f1a7cc2, type: 3}
+  m_PrefabInstance: {fileID: 1223544037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1023696828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1561,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8da6de5835d934382e07160f6404c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  senderMessagePrefab: {fileID: 7963727649406168465, guid: 9d62fe67a5911e04da7372ba3f1a7cc2, type: 3}
+  senderMessagePrefab: {fileID: 4406368911978114269, guid: 9d62fe67a5911e04da7372ba3f1a7cc2, type: 3}
   messagesScrollView: {fileID: 1113505171}
 --- !u!224 &1113505171 stripped
 RectTransform:
@@ -1942,11 +1947,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d62fe67a5911e04da7372ba3f1a7cc2, type: 3}
---- !u!224 &1223544038 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6806653313408238900, guid: 9d62fe67a5911e04da7372ba3f1a7cc2, type: 3}
-  m_PrefabInstance: {fileID: 1223544037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1249617917
 GameObject:
   m_ObjectHideFlags: 0
