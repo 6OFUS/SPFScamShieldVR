@@ -9,6 +9,7 @@ using UnityEngine;
 using Ink.Runtime;
 using TMPro;
 using System.Linq;
+using UnityEngine.UI;
 
 public class InkManager : MonoBehaviour 
 {
@@ -23,6 +24,8 @@ public class InkManager : MonoBehaviour
 
     [Header("Player choice")]
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
+    public GameObject choiceButtonPrefab;
+    public Transform choiceContent;
 
     public IEnumerator ContinueStory()
     {
@@ -73,16 +76,24 @@ public class InkManager : MonoBehaviour
         {
             Debug.Log($"Choice: {choice.choiceName} (Original index: {choice.choiceIndex})");
 
-            /*
-            // Example using a button prefab:
-            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceParent);
+            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
             TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = choice.text;
+            buttonText.text = choice.choiceName;
 
             // Capture the correct index in a local variable to avoid closure issue
-            int capturedIndex = choice.originalIndex;
-            buttonObj.GetComponent<Button>().onClick.AddListener(() => ChooseOption(capturedIndex));
-            */
+            int capturedIndex = choice.choiceIndex;
+            buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+                ChooseOption(capturedIndex);
+                ClearChoices();
+                });
+        }
+    }
+
+    void ClearChoices()
+    {
+        foreach (Transform button in choiceContent)
+        {
+            Destroy(button.gameObject);
         }
     }
 
