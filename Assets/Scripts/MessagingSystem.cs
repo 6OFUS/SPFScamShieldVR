@@ -1,23 +1,28 @@
+/*
+    Author: Kevin Heng
+    Date: 09/06/2025
+    Description: The SendMessage class is used for the messaging system between sender and player
+*/
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SendMessage : MonoBehaviour
+public class MessagingSystem : MonoBehaviour
 {
     /// <summary>
-    /// The prefab used to display messages in the UI
+    /// The prefab used for sender message
     /// </summary>
     public GameObject senderMessagePrefab;
 
     /// <summary>
-    /// The parent transform in which the messages will be instantiated (usually a scroll view)
+    /// Content child under scroll view
     /// </summary>
     public Transform messagesScrollView;
 
 
     /// <summary>
-    /// Sends the next message from the messages array to the player.
+    /// Sends the next message from the sender
     /// </summary>
     public void SenderNextMessage(string message)
     {
@@ -35,15 +40,9 @@ public class SendMessage : MonoBehaviour
             Debug.LogError("TextMeshProUGUI component not found in messagePrefab!");
         }
     }
-        // Start is called before the first frame update
-        void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerNextMessage()
     {
-        
+
     }
 }
