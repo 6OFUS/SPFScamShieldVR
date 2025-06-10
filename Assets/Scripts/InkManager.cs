@@ -30,7 +30,7 @@ public class InkManager : MonoBehaviour
             string dialogue = story.Continue();
             //Instantiate text message 
             sendMessage.SenderNextMessage(dialogue);
-            dialogueText.text = dialogue;
+            //dialogueText.text = dialogue;
             yield return new WaitForSeconds(messageTime);
         }
 
