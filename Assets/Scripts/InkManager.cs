@@ -11,11 +11,13 @@ using TMPro;
 
 public class InkManager : MonoBehaviour 
 {
-    public TextAsset inkJSON;
-    public TextMeshProUGUI dialogue; // narrative/guide text UI
+    public TextMeshProUGUI dialogueText; 
     public TextMeshProUGUI playerChoice;
+    
+    public float messageTime;
 
     protected Story story;
+    public SendMessage sendMessage;
 
     void Start()
     {
@@ -25,12 +27,11 @@ public class InkManager : MonoBehaviour
     {
         while (story.canContinue)
         {
-            string text = story.Continue();
-            Debug.Log(text);
-            //Instantiate text message
-            //have typing animation and wait that duration
-            dialogue.text = text;
-            yield return new WaitForSeconds(5f);
+            string dialogue = story.Continue();
+            //Instantiate text message 
+            sendMessage.SenderNextMessage(dialogue);
+            dialogueText.text = dialogue;
+            yield return new WaitForSeconds(messageTime);
         }
 
         if (story.currentChoices.Count > 0)
@@ -58,33 +59,14 @@ public class InkManager : MonoBehaviour
             playerChoice.text = selectedText;
 
             story.ChooseChoiceIndex(index);
-
             // Now continue the story and show the reply
-            string reply = story.Continue().Trim();
-            Debug.Log(reply);
-            dialogue.text = reply;
-            NextLine();
+            StartCoroutine(WaitForReply());
         }
     }
 
-    public void NextLine()
+    IEnumerator WaitForReply()
     {
-        if (story.canContinue)
-        {
-            //Debug.Log(story.Continue());
-            string dialogueTest = story.Continue();
-            dialogue.text = dialogueTest;
-            Debug.Log(dialogueTest);
-        }
-        else
-        {
-            if (story.currentChoices.Count > 0)
-            {
-                for (int i = 0; i < story.currentChoices.Count; i++)
-                {
-                    Debug.Log($"Choice {i}: '{story.currentChoices[i].text}'");
-                }
-            }
-        }
+        yield return new WaitForSeconds(messageTime);
+        yield return StartCoroutine(ContinueStory());
     }
 }
