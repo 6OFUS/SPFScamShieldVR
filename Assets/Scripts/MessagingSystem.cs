@@ -15,6 +15,8 @@ public class MessagingSystem : MonoBehaviour
     /// </summary>
     public GameObject senderMessagePrefab;
 
+    public GameObject playerMessagePrefab;
+
     /// <summary>
     /// Content child under scroll view
     /// </summary>
@@ -41,8 +43,19 @@ public class MessagingSystem : MonoBehaviour
         }
     }
 
-    public void PlayerNextMessage()
+    public void PlayerNextMessage(string message)
     {
+        GameObject newMessage = Instantiate(playerMessagePrefab, messagesScrollView);
 
+        TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null)
+        {
+            //audioSource.Play();
+            textComponent.text = message;
+        }
+        else
+        {
+            Debug.LogError("TextMeshProUGUI component not found in messagePrefab!");
+        }
     }
 }

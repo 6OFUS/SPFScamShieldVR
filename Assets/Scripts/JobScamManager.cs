@@ -20,6 +20,6 @@ public class JobScamManager : InkManager
         TextAsset selectedInk = inkJsonFiles[index];
         // Load the story
         story = new Story(selectedInk.text);
-        StartCoroutine(ContinueStory());
+        //StartCoroutine(ContinueStory());
     }
 }

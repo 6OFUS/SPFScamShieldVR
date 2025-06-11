@@ -27,6 +27,10 @@ public class InkManager : MonoBehaviour
     public GameObject choiceButtonPrefab;
     public Transform choiceContent;
 
+    public void StartStory()
+    {
+        StartCoroutine(ContinueStory());
+    }
     public IEnumerator ContinueStory()
     {
         while (story.canContinue)
@@ -57,9 +61,10 @@ public class InkManager : MonoBehaviour
         string selectedText = story.currentChoices[index].text;
         Debug.Log("Player selected: " + selectedText);
 
-        playerChoice.text = selectedText;
+        //playerChoice.text = selectedText;
 
         story.ChooseChoiceIndex(index);
+        sendMessage.PlayerNextMessage(selectedText);
         // Now continue the story and show the reply
         StartCoroutine(WaitForReply());
     }
