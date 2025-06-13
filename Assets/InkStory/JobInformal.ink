@@ -1,4 +1,4 @@
-﻿-> job_offer_intro
+-> job_offer_intro
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
