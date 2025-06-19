@@ -2,64 +2,65 @@
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
-Hi Fei Yang! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started!
+Hi Fei Yang! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
 
 
 //OPEN AMAIL 
-+ [Click here to check Amail] -> job_offer_dialogue_1
++ [Player:open_amail Click here to check Amail] -> job_offer_dialogue_1
 
 === job_offer_dialogue_1 ===
 //SHOW THIS ONLY WHEN GO BACK TO WHATSUP
 //PLAYER CHOICES
-+ [Sounds good! What do I need to do?] -> job_offer_dialogue_2
-+ [Can I know more about how it works?] -> job_offer_dialogue_2
-+ [Is this a freelance role or official employment?] -> job_offer_dialogue_3
++ [Player:message Sounds good! What do I need to do?] -> job_offer_dialogue_2
++ [Player:message Can I know more about how it works?] -> job_offer_dialogue_2
++ [Player:message Is this a freelance role or official employment?] -> job_offer_dialogue_3
 
 === job_offer_dialogue_2 ===
-You will complete simple tasks directly from your mobile device - each takes under 10 minutes.<br><br>For example: If you're assigned a task to purchase an item worth SGD 20, you'll receive SGD 28 in return (your initial amount + SGD 8 commission).<<br><br>Earnings are paid out daily via PayNow, and all transactions will be reflected in your partner dashboard. <br><br><color=blue><u>luxcommerceasia.com</u></color>
+You will complete simple tasks directly from your mobile device - each takes under 10 minutes.<br><br>For example: If you're assigned a task to purchase an item worth SGD 20, you'll receive SGD 28 in return (your initial amount + SGD 8 commission).<<br><br>Earnings are paid out daily via PayNow, and all transactions will be reflected in your partner dashboard. <br><br><color=blue><u>luxcommerceasia.com</u></color> #Sender:message
 
-+ [Okay, I'll register and try a few tasks.] -> register_account
-+ [Do I need to spend money to start?] -> job_verification_payout_dialogue_1
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll register and try a few tasks.] -> register_account
++ [Player:message Do I need to spend money to start?] -> job_verification_payout_dialogue_1
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_offer_dialogue_3 ===
-That's a good question! This is a freelance contractor role - you'll be classified under our remote contributor program. <br><br>We work with part-timers and freelancers who want to earn flexible income on their own time. No long-term commitment is required, and we process payouts daily via PayNow.
+That's a good question! This is a freelance contractor role - you'll be classified under our remote contributor program. <br><br>We work with part-timers and freelancers who want to earn flexible income on their own time. No long-term commitment is required, and we process payouts daily via PayNow. #Sender:message
 
 //PLAYER CHOICES
-+ [Sounds good, I'd like to know how the tasks work.] -> job_offer_dialogue_2
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Sounds good, I'd like to know how the tasks work.] -> job_offer_dialogue_2
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ JOB VERIFICATION ------------------------------
 === job_verification_payout_dialogue_1 ===
-That's a great question and totally understandable. You're not paying us anything. The system simply requires that new users complete a purchase cycle, which simulates a real transaction. <br><br>To activate your account, an initial top-up of SGD 50 is required. This is not a fee, but part of the system's anti-fraud measure to verify real users and enable transaction simulation. <br><br>Please note: <br>At least 3 tasks must be completed before funds can be withdrawn. This ensures fairness and prevents system abuse or premature withdrawal. <br><br><b><u>Our Legitimacy</u></b> <br>We are a registered business and committed to transparency. For your assurance, we have attached our official company authorization letter in the email sent to you. Our goal is to empower young adults and recent graduates with a fast, flexible income opportunity while supporting our e-commerce growth.
+That's a great question and totally understandable. You're not paying us anything. The system simply requires that new users complete a purchase cycle, which simulates a real transaction. <br><br>To activate your account, an initial top-up of SGD 50 is required. This is not a fee, but part of the system's anti-fraud measure to verify real users and enable transaction simulation. <br><br>Please note: <br>At least 3 tasks must be completed before funds can be withdrawn. This ensures fairness and prevents system abuse or premature withdrawal. <br><br><b><u>Our Legitimacy</u></b> <br>We are a registered business and committed to transparency. For your assurance, we have attached our official company authorization letter in the email sent to you. Our goal is to empower young adults and recent graduates with a fast, flexible income opportunity while supporting our e-commerce growth. #Sender:message
 
 //PLAYER CHOICES
-+ [Okay, that makes sense. I'll give it a try.] -> register_account
-+ [Can I start without doing a purchase cycle?] -> job_verification_payout_dialogue_2
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message Can I start without doing a purchase cycle?] -> job_verification_payout_dialogue_2
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_2 === 
-I totally understand your concern. Unfortunately, the purchase cycle is a required step to unlock task access - it's part of the portal's anti-bot and fraud prevention system. I's not a payment to us, and it's not a fee - it's just a simulation of an actual task. <br><br>Once you complete it, your full amount plus 8-12% commission is immediately reflected in your dashboard, and you'll be eligible to withdraw after completing three groups. We've had thousands of users go through the same process smoothly.
+I totally understand your concern. Unfortunately, the purchase cycle is a required step to unlock task access - it's part of the portal's anti-bot and fraud prevention system. I's not a payment to us, and it's not a fee - it's just a simulation of an actual task. <br><br>Once you complete it, your full amount plus 8-12% commission is immediately reflected in your dashboard, and you'll be eligible to withdraw after completing three groups. We've had thousands of users go through the same process smoothly. #Sender:message
 
 //PLAYER CHOICES
-+ [Okay, that makes sense. I'll give it a try.] -> register_account
-+ [Can you guarantee I'll get the money back after the task?] -> job_verification_payout_dialogue_3
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message Can you guarantee I'll get the money back after the task?] -> job_verification_payout_dialogue_3
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_3 === 
-Yes, absolutely. The system is automated and built to credit both your task amount and commission immediately after each completed group. <br><br>For example, if your task cycle involves $28, your balance will show $28 right after. We've processed over 2,000 contributor payouts this month alone, and all successful applicants receive their earnings as long as tasks are completed correctly. <br><Br>If you face any delay, our support team is available 24/7 to help. 
+Yes, absolutely. The system is automated and built to credit both your task amount and commission immediately after each completed group. <br><br>For example, if your task cycle involves $28, your balance will show $28 right after. We've processed over 2,000 contributor payouts this month alone, and all successful applicants receive their earnings as long as tasks are completed correctly. <br><Br>If you face any delay, our support team is available 24/7 to help. #Sender:message
 
 //PLAYER CHOICES
-+ [Alright, I'll go ahead with the task.] -> register_account
-+ [Can I see a sample payout proof before I continue?] -> job_verification_payout_dialogue_4
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Alright, I'll go ahead with the task.] -> register_account
++ [Player:message Can I see a sample payout proof before I continue?] -> job_verification_payout_dialogue_4
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_4 === 
 //SCAMMER SENDS PAYOUT IMAGE
+(send payout image) #Sender:image
 
 //PLAYER CHOICES
-+ [Alright, I'll go ahead with the task.] -> register_account
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Alright, I'll go ahead with the task.] -> register_account
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ TASK FLOW ------------------------------
 === register_account ===

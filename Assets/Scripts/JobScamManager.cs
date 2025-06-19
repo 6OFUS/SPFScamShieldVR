@@ -9,17 +9,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using Ink.Runtime;
 using TMPro;
+using System;
 
 public class JobScamManager : InkManager
 {
-    public TextAsset[] inkJsonFiles;
+    [SerializeField] private GameObject amailUI;
+
+    public override void PlayerAction(string action)
+    {
+        switch (action)
+        {
+            case "open_amail":
+                amailUI.SetActive(true);
+                Debug.Log("opening amail");
+                break;
+            default:
+                base.PlayerAction(action); 
+                break;
+        }
+    }
 
     void Start()
     {
-        int index = Random.Range(0, inkJsonFiles.Length);
-        TextAsset selectedInk = inkJsonFiles[index];
-        // Load the story
-        story = new Story(selectedInk.text);
-        StartCoroutine(ContinueStory());
+        RandomiseScenario();
+
+        //StartCoroutine(ContinueStory());
     }
 }
