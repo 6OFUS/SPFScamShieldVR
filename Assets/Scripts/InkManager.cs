@@ -178,6 +178,9 @@ public class InkManager : MonoBehaviour
                 sendMessage.PlayerNextMessage(selectedText);
                 StartCoroutine(WaitForReply());
                 break;
+            case "submit_scamshield":
+
+                break;
         }
     }
     public void SenderAction(string action, string dialogue)

@@ -68,68 +68,66 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 -> job_task_2_dialogue_1
 
 === job_task_2_dialogue_1 ===
-Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud.
+Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
 
-+ [Okay, I'll complete the first task.] -> job_task_2_dialogue_2
-+ [Can I withdraw after the first task group?] -> job_task_2_dialogue_3
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll complete the first task.] -> job_task_2_dialogue_2
++ [Player:message Can I withdraw after the first task group?] -> job_task_2_dialogue_3
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_2 ===
 //PLAYER TO DO FIRST TASK GROUPS BEFORE SENDER SENDS MESSAGE
 
-You've completed 1 task, great job! Just two more group needed, total amount SGD $60. It will be returned with your full commission: $84. Most partners do this in 10 minutes.
+You've completed 1 task, great job! Just two more group needed, total amount SGD $60. It will be returned with your full commission: $84. Most partners do this in 10 minutes. #Sender:message
 
-+ [Okay, I'll do the next group.] -> job_task_2_loading_error
-+ [I think I will withdraw now.] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll do the next group.] -> job_task_2_loading_error
++ [Player:withdraw I think I will withdraw now.] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_3 ===
-That's a great question!For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! 
+That's a great question!For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
 
-+ [Okay, I'll complete the first task.] -> job_task_2_dialogue_2
-+ [Try to withdraw the money] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll complete the first task.] -> job_task_2_dialogue_2
++ [Player:withdraw Try to withdraw the money] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_withdrawal_error ===
 //SYSTEM ERROR NEED COMPLETE BONUS TASK
 -> job_task_2_dialogue_4
 
 === job_task_2_dialogue_4 ===
-Don't worry, everyone experiences this. Once 3 tasks are done, the system processes all balances instantly. You're so close!
+Don't worry, everyone experiences this. Once 3 tasks are done, the system processes all balances instantly. You're so close! #Sender:message
 
-+ [Okay, I'll continue with the next task group.] -> job_task_2_loading_error
-+ [I want to withdraw now.] -> job_task_2_dialogue_5
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll continue with the next task group.] -> job_task_2_loading_error
++ [Player:message I want to withdraw now.] -> job_task_2_dialogue_5
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_loading_error ===
 //PLAYER ATTEMPT TO DO LAST TASK GROUP -> ERROR MESSAGE ON WEBSITE
 
-+ [Hi, I clicked on the next task but it kept on loading. Is this normal?] -> job_cannot_send_message
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Hi, I clicked on the next task but it kept on loading. Is this normal?] -> job_cannot_send_message
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_5 ===
-I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your payout when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins.
+I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your payout when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
 
-+ [Okay, I'll continue with the next task group.] -> job_task_2_loading_error
-+ [Can I get a refund if I stop now?] -> job_task_2_dialogue_6
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Okay, I'll continue with the next task group.] -> job_task_2_loading_error
++ [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_6 ===
-I totally get it, Feiyang. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? 
+I totally get it, Feiyang. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message
 
-+ [Hello? Just checking if there's any update...] -> job_cannot_send_message
-+ [Wait 15min] -> job_task_2_after_waiting
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
++ [Player:wait Wait 15min] -> job_task_2_after_waiting
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_after_waiting ===
-+ [Hello? Just checking if there's any update...] -> job_cannot_send_message
++ [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
 
 === job_cannot_send_message === 
-You can no longer send messages to this contact.
-
-+ [HELLO] -> lose_ending
-+ [WHAT] -> lose_ending
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:error_message HELLO] -> lose_ending
++ [Player:error_message WHAT] -> lose_ending
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ SCAMSHIELD PROCEDURE ------------------------------
 === report_scamshield ===
