@@ -15,16 +15,15 @@ public class JobScamManager : InkManager
 {
     [SerializeField] private GameObject amailUI;
 
-    public override void PlayerAction(string action)
+    public override void PlayerAction(string action, int index)
     {
         switch (action)
         {
             case "open_amail":
                 amailUI.SetActive(true);
-                Debug.Log("opening amail");
                 break;
             default:
-                base.PlayerAction(action); 
+                base.PlayerAction(action, index); 
                 break;
         }
     }

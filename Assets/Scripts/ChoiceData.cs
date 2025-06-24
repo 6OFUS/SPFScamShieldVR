@@ -22,14 +22,22 @@ public class ChoiceData
             int spaceIndex = fullText.IndexOf(' ');
             if (spaceIndex > -1)
             {
-                choiceAction = fullText.Substring(0, spaceIndex).Replace("Player:", "");
-                choiceName = fullText.Substring(spaceIndex + 1); 
+                // Extract action by skipping the "Player:" part and slicing cleanly
+                choiceAction = fullText.Substring("Player:".Length, spaceIndex - "Player:".Length);
+                choiceName = fullText.Substring(spaceIndex + 1);
             }
             else
             {
-                choiceAction = "";
-                choiceName = fullText;
+                // If no space, default to treating the whole thing as the action
+                choiceAction = fullText.Substring("Player:".Length);
+                choiceName = "";
             }
         }
+        else
+        {
+            choiceAction = "message"; // Default action
+            choiceName = fullText;
+        }
     }
+
 }

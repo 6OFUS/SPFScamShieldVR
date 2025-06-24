@@ -11,23 +11,58 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 
+
 public class InkManager : MonoBehaviour 
 {
+    /// <summary>
+    /// The active Ink story instance used for dialogue control.
+    /// </summary>
     public Story story;
-    public List<string> storyTags = new List<string>();
+    /// <summary>
+    /// Tags extracted from the current point in the story
+    /// </summary>v
+    private List<string> storyTags = new List<string>();
 
+    [Header("Scenario selection")]
+    /// <summary>
+    /// List of Ink JSON files representing the different possible scenarios
+    /// </summary>
     public TextAsset[] inkJsonFiles;
+    /// <summary>
+    /// Corresponding UI canvases for each scenario
+    /// </summary>
     public GameObject[] uiCanvas;
 
     [Header("Messaging")]
+    /// <summary>
+    /// Time taken between player and sender message
+    /// </summary>
     public float messageTime;
+    /// <summary>
+    /// Reference MessagingSystem class
+    /// </summary>
     public MessagingSystem sendMessage;
 
     [Header("Player choice")]
+    /// <summary>
+    /// Prefab for choice button UI 
+    /// </summary>
     public GameObject choiceButtonPrefab;
+    /// <summary>
+    /// Parent transform where choice buttons will be instantiated
+    /// </summary>
     public Transform choiceContent;
+    /// <summary>
+    /// List of current choices presented to player
+    /// </summary>
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
-    private int lastSelectedChoiceIndex;
+
+
+    [Header("UI")]
+    /// <summary>
+    /// UI for the report section on Whatsup screen
+    /// </summary>
+    public GameObject whatsupReportUI;
 
 
     /// <summary>
@@ -73,25 +108,14 @@ public class InkManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
+                Debug.Log($"Choice added: {playerChoices[i].choiceName} (Original index: {playerChoices[i].choiceIndex}) {playerChoices[i].choiceAction}");
             }
-            //Shuffle and Instantiate choices
+
             ShuffleChoices(playerChoices);
             DisplayChoices();
         }
     }
 
-    /// <summary>
-    /// Handles the player's choice selection from the current Ink choices
-    /// </summary>
-    /// <param name="index">Index of the selected choice from choices given</param>
-    public void ChooseOption(int index)
-    {
-        lastSelectedChoiceIndex = index;
-        string action = playerChoices[lastSelectedChoiceIndex].choiceAction;
-        PlayerAction(action);
-        story.ChooseChoiceIndex(lastSelectedChoiceIndex);
-        Debug.Log(lastSelectedChoiceIndex);
-    }
 
     /// <summary>
     /// Coroutine to wait for next message to send
@@ -104,20 +128,31 @@ public class InkManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Handles the player's choice selection from the current Ink choices
+    /// </summary>
+    /// <param name="index">Index of the selected choice from choices given</param>
+    public void ChooseOption(int index)
+    {
+        string action = playerChoices[index].choiceAction;
+        PlayerAction(action, index);
+        story.ChooseChoiceIndex(playerChoices[index].choiceIndex);
+    }
+
+    /// <summary>
     /// Function to display the UI choice buttons
     /// </summary>
     void DisplayChoices()
     {
         foreach (var choice in playerChoices)
         {
-            Debug.Log($"Choice: {choice.choiceName} (Original index: {choice.choiceIndex})");
+            Debug.Log($"Choice: {choice.choiceName} (Original index: {choice.choiceIndex}) {choice.choiceAction}");
 
             GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
             TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = choice.choiceName;
 
             // Capture the correct index in a local variable to avoid closure issue
-            int capturedIndex = choice.choiceIndex;
+            int capturedIndex = playerChoices.IndexOf(choice);
             buttonObj.GetComponent<Button>().onClick.AddListener(() => {
                 ChooseOption(capturedIndex);
                 ClearChoices();
@@ -145,14 +180,18 @@ public class InkManager : MonoBehaviour
     {
         for (int i = 0; i < choices.Count; i++)
         {
-            int randomIndex = Random.Range(i, playerChoices.Count);
+            int randomIndex = Random.Range(i, choices.Count);
             ChoiceData temp = choices[i];
             choices[i] = choices[randomIndex];
             choices[randomIndex] = temp;
         }
-        
+        playerChoices = new List<ChoiceData>(choices);
     }
 
+    /// <summary>
+    /// To handle the different sender actions based on the current tags in Ink story
+    /// </summary>
+    /// <param name="dialogue"></param>
     public virtual void HandleSenderActions(string dialogue)
     {
         storyTags = story.currentTags;
@@ -163,26 +202,34 @@ public class InkManager : MonoBehaviour
             {
                 string senderAction = tag.Substring("Sender:".Length);
                 SenderAction(senderAction, dialogue);
-
             }
         }
     }
-    
 
-    public virtual void PlayerAction(string action)
+    /// <summary>
+    /// Executes actions triggered by the player's choice selection
+    /// </summary>
+    /// <param name="action"> Action name </param>
+    public virtual void PlayerAction(string action,int index)
     {
         switch (action)
         {
             case "message":
-                string selectedText = playerChoices[lastSelectedChoiceIndex].choiceName;
+                string selectedText = playerChoices[index].choiceName;
                 sendMessage.PlayerNextMessage(selectedText);
                 StartCoroutine(WaitForReply());
                 break;
             case "submit_scamshield":
-
+                whatsupReportUI.SetActive(true);
                 break;
         }
     }
+
+    /// <summary>
+    /// Execute actions triggered by the sender based on the tag
+    /// </summary>
+    /// <param name="action"> Tag for sender actions </param>
+    /// <param name="dialogue"> Dialogue content sent by sender </param>
     public void SenderAction(string action, string dialogue)
     {
         switch (action)
@@ -192,4 +239,5 @@ public class InkManager : MonoBehaviour
                 break;
         }
     }
+
 }
