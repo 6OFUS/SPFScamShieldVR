@@ -18,7 +18,7 @@ Hi Fei Yang! This is Jason from LUX Commerce Asia. I came across your resume and
 === job_offer_dialogue_2 ===
 You will complete simple tasks directly from your mobile device - each takes under 10 minutes.<br><br>For example: If you're assigned a task to purchase an item worth SGD 20, you'll receive SGD 28 in return (your initial amount + SGD 8 commission).<<br><br>Earnings are paid out daily via PayNow, and all transactions will be reflected in your partner dashboard. <br><br><color=blue><u>luxcommerceasia.com</u></color> #Sender:message
 
-+ [Player:message Okay, I'll register and try a few tasks.] -> register_account
++ [Player:message_register_account Okay, I'll register and try a few tasks.] -> register_account
 + [Player:message Do I need to spend money to start?] -> job_verification_payout_dialogue_1
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -34,7 +34,7 @@ That's a good question! This is a freelance contractor role - you'll be classifi
 That's a great question and totally understandable. You're not paying us anything. The system simply requires that new users complete a purchase cycle, which simulates a real transaction. <br><br>To activate your account, an initial top-up of SGD 50 is required. This is not a fee, but part of the system's anti-fraud measure to verify real users and enable transaction simulation. <br><br>Please note: <br>At least 3 tasks must be completed before funds can be withdrawn. This ensures fairness and prevents system abuse or premature withdrawal. <br><br><b><u>Our Legitimacy</u></b> <br>We are a registered business and committed to transparency. For your assurance, we have attached our official company authorization letter in the email sent to you. Our goal is to empower young adults and recent graduates with a fast, flexible income opportunity while supporting our e-commerce growth. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
 + [Player:message Can I start without doing a purchase cycle?] -> job_verification_payout_dialogue_2
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -42,7 +42,7 @@ That's a great question and totally understandable. You're not paying us anythin
 I totally understand your concern. Unfortunately, the purchase cycle is a required step to unlock task access - it's part of the portal's anti-bot and fraud prevention system. I's not a payment to us, and it's not a fee - it's just a simulation of an actual task. <br><br>Once you complete it, your full amount plus 8-12% commission is immediately reflected in your dashboard, and you'll be eligible to withdraw after completing three groups. We've had thousands of users go through the same process smoothly. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
 + [Player:message Can you guarantee I'll get the money back after the task?] -> job_verification_payout_dialogue_3
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -50,7 +50,7 @@ I totally understand your concern. Unfortunately, the purchase cycle is a requir
 Yes, absolutely. The system is automated and built to credit both your task amount and commission immediately after each completed group. <br><br>For example, if your task cycle involves $28, your balance will show $28 right after. We've processed over 2,000 contributor payouts this month alone, and all successful applicants receive their earnings as long as tasks are completed correctly. <br><Br>If you face any delay, our support team is available 24/7 to help. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message Alright, I'll go ahead with the task.] -> register_account
++ [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
 + [Player:message Can I see a sample payout proof before I continue?] -> job_verification_payout_dialogue_4
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -59,13 +59,14 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 (send payout image) #Sender:image
 
 //PLAYER CHOICES
-+ [Player:message Alright, I'll go ahead with the task.] -> register_account
++ [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ TASK FLOW ------------------------------
 === register_account ===
 //PLAYER TO REGISTER FOR ACCOUNT ON WEBSITE LINK
--> job_task_2_dialogue_1
+//PAUSE HERE THEN GO TO job_task_2_dialogue_1
+-> END 
 
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message

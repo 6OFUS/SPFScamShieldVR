@@ -14,6 +14,9 @@ using System;
 public class JobScamManager : InkManager
 {
     [SerializeField] private GameObject amailUI;
+    [SerializeField] private GameObject websiteHomeUI;
+
+    [SerializeField] private bool accountRegistered;
 
     public override void PlayerAction(string action, int index)
     {
@@ -21,6 +24,11 @@ public class JobScamManager : InkManager
         {
             case "open_amail":
                 amailUI.SetActive(true);
+                break;
+            case "message_register_account":
+                string selectedText = playerChoices[index].choiceName;
+                sendMessage.PlayerNextMessage(selectedText);
+                websiteHomeUI.SetActive(true);
                 break;
             default:
                 base.PlayerAction(action, index); 
