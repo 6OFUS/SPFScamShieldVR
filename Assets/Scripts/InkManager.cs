@@ -163,7 +163,7 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Remove all choices UI from the choice list
     /// </summary>
-    void ClearChoices()
+    public void ClearChoices()
     {
         foreach (Transform button in choiceContent)
         {
