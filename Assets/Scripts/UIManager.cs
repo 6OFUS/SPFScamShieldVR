@@ -16,12 +16,12 @@ public class UIManager : MonoBehaviour
     public Image flashImage; 
     public float flashDuration;
 
-    [Header("UI")]
-    public GameObject scamshieldScreen;
-
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip screenshotClip;
+
+    [Header("Scamshield UI")]
+    public GameObject scamshieldScreen;
 
     public void Screenshot()
     {

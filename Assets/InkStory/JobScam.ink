@@ -1,4 +1,4 @@
-﻿-> job_offer_intro
+-> job_offer_intro
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
@@ -71,23 +71,22 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
 
-+ [Player:message Okay, I'll complete the first task.] -> END
++ [Player:message_complete_task Okay, I'll complete the first task.] -> END
 + [Player:message Can I withdraw after the first task group?] -> job_task_2_dialogue_3
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_2 ===
 //PLAYER TO DO FIRST TASK GROUPS BEFORE SENDER SENDS MESSAGE
+You've completed 1 task, great job! Just two more group needed. It will be returned with your full commission: $84. Most partners do this in 10 minutes. #Sender:message
 
-You've completed 1 task, great job! Just two more group needed, total amount SGD $60. It will be returned with your full commission: $84. Most partners do this in 10 minutes. #Sender:message
-
-+ [Player:message Okay, I'll do the next group.] -> job_task_2_loading_error
++ [Player:message_complete_task Okay, I'll do the next group.] -> END
 + [Player:withdraw I think I will withdraw now.] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_3 ===
 That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
 
-+ [Player:message Okay, I'll complete the first task.] -> job_task_2_dialogue_2
++ [Player:message_complete_task Okay, I'll complete the first task.] -> END
 + [Player:withdraw Try to withdraw the money] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -98,7 +97,7 @@ That's a great question! For new users, the system requires a minimum of 3 compl
 === job_task_2_dialogue_4 ===
 Don't worry, everyone experiences this. Once 3 tasks are done, the system processes all balances instantly. You're so close! #Sender:message
 
-+ [Player:message Okay, I'll continue with the next task group.] -> job_task_2_loading_error
++ [Player:message_complete_task Okay, I'll continue with the next task group.] -> END
 + [Player:message I want to withdraw now.] -> job_task_2_dialogue_5
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -111,7 +110,7 @@ Don't worry, everyone experiences this. Once 3 tasks are done, the system proces
 === job_task_2_dialogue_5 ===
 I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your payout when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
 
-+ [Player:message Okay, I'll continue with the next task group.] -> job_task_2_loading_error
++ [Player:message_complete_task Okay, I'll continue with the next task group.] -> END
 + [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 

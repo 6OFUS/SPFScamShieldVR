@@ -11,17 +11,32 @@ using UnityEngine.UI;
 
 public class JobScamUIManager : UIManager
 {
-    [Header("UI")]
+    [Header("WhatsUp UI")]
     /// <summary>
     /// UI for the report section on Whatsup screen
     /// </summary>
     public GameObject whatsupReportUI;
     public GameObject whatsupHomeButton;
     public GameObject whatsupReturnText;
+
+    [Header("Amail UI")]
     public GameObject amailUI;
+
+    [Header("Scam website UI")]
     public GameObject websiteHomeUI;
-    public GameObject loadingScreenUI;
     public GameObject websiteHomeLoggedInUI;
+    public GameObject websiteReturnText;
+    public GameObject silverTierButton;
+
+    [Header("Scam website task UI")]
+    public GameObject taskScreen;
+    public List<GameObject> itemNumUI = new List<GameObject>();
+
+    [Header("Loading screen UI")]
+    public GameObject loadingScreenUI;
+    public GameObject loadingScreenReturnText;
+    public GameObject loadingScreenHomeButton;
+
 
     public override IEnumerator FlashEffect()
     {

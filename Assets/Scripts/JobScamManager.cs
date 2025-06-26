@@ -20,9 +20,12 @@ public class JobScamManager : InkManager
     private Button currentChoiceButton;
 
     [Header("Account creation")]
-    public bool accountRegistered;
     public int inputCount;
     public float loadingTime;
+
+    [Header("Website task")]
+    [SerializeField] private bool firstTaskCompleted;
+    [SerializeField] private int numItemsAdded;
 
     public override void PlayerAction(string action, int index)
     {
@@ -35,6 +38,11 @@ public class JobScamManager : InkManager
                 string selectedText = playerChoices[index].choiceName;
                 sendMessage.PlayerNextMessage(selectedText);
                 uiManager.websiteHomeUI.SetActive(true);
+                break;
+            case "message_complete_task":
+                uiManager.websiteHomeLoggedInUI.SetActive(true);
+                uiManager.websiteReturnText.SetActive(false);
+                uiManager.silverTierButton.SetActive(true);
                 break;
             case "Player:submit_scamshield":
                 uiManager.whatsupReportUI.SetActive(true);
@@ -72,7 +80,7 @@ public class JobScamManager : InkManager
         });
     }
 
-    public IEnumerator RegisterAccountCoroutine()
+    private IEnumerator RegisterAccountCoroutine()
     {
         if(inputCount == 4)
         {
@@ -80,7 +88,6 @@ public class JobScamManager : InkManager
             yield return new WaitForSeconds(loadingTime);
             uiManager.loadingScreenUI.SetActive(false);
             uiManager.websiteHomeLoggedInUI.SetActive(true);
-            accountRegistered = true;
             knotName = "job_task_2_dialogue_1";
         }
     }
@@ -90,6 +97,37 @@ public class JobScamManager : InkManager
         StartCoroutine(RegisterAccountCoroutine());
     }
 
+    public void TaskGroup()
+    {
+        if (!firstTaskCompleted)
+        {
+            //direct to task page
+            uiManager.taskScreen.SetActive(true);
+        }
+        else
+        {
+            //direct to long loading page
+            StartCoroutine(LoadingError());
+        }
+    }
+
+    private IEnumerator LoadingError()
+    {
+        uiManager.loadingScreenUI.SetActive(true);
+        yield return new WaitForSeconds(loadingTime * 2);
+        uiManager.loadingScreenReturnText.SetActive(true);
+        uiManager.loadingScreenHomeButton.SetActive(true);
+        knotName = "job_task_2_loading_error";
+    }
+
+    public void AddItemsToCart()
+    {
+        if(numItemsAdded <= 3)
+        {
+            numItemsAdded++;
+            uiManager.itemNumUI[numItemsAdded].SetActive(true);
+        }
+    }
 
     void Start()
     {
