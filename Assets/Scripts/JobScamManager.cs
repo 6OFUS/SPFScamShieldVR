@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 05/06/2025
-    Description: The JobScamManager class is used to handle the functions for job scam scenarios
+    Description: The JobScamManager class is used to handle all the functions related to the job scam scenarios
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -14,32 +14,30 @@ using Ink.Parsed;
 
 public class JobScamManager : InkManager
 {
-    [SerializeField] private GameObject amailUI;
-    [SerializeField] private GameObject websiteHomeUI;
-    [SerializeField] private GameObject loadingScreenUI;
-    [SerializeField] private GameObject loadingImageUI;
-    [SerializeField] private GameObject websiteHomeLoggedInUI;
+    public JobScamUIManager uiManager;
 
-
-    [Header("Account creation")]
-    [SerializeField] private bool accountRegistered;
     private TextMeshProUGUI currentInputFieldText;
     private Button currentChoiceButton;
-    [SerializeField] private int inputCount;
-    [SerializeField] private float loadingTime;
 
+    [Header("Account creation")]
+    public bool accountRegistered;
+    public int inputCount;
+    public float loadingTime;
 
     public override void PlayerAction(string action, int index)
     {
         switch (action)
         {
             case "open_amail":
-                amailUI.SetActive(true);
+                uiManager.amailUI.SetActive(true);
                 break;
             case "message_register_account":
                 string selectedText = playerChoices[index].choiceName;
                 sendMessage.PlayerNextMessage(selectedText);
-                websiteHomeUI.SetActive(true);
+                uiManager.websiteHomeUI.SetActive(true);
+                break;
+            case "Player:submit_scamshield":
+                uiManager.whatsupReportUI.SetActive(true);
                 break;
             default:
                 base.PlayerAction(action, index); 
@@ -78,13 +76,12 @@ public class JobScamManager : InkManager
     {
         if(inputCount == 4)
         {
-            Debug.Log("registering");
-            loadingScreenUI.SetActive(true);
-            loadingImageUI.SetActive(true);
+            uiManager.loadingScreenUI.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
-            loadingScreenUI.SetActive(false);
-            loadingImageUI.SetActive(false);
-            websiteHomeLoggedInUI.SetActive(true);
+            uiManager.loadingScreenUI.SetActive(false);
+            uiManager.websiteHomeLoggedInUI.SetActive(true);
+            accountRegistered = true;
+            knotName = "job_task_2_dialogue_1";
         }
     }
 
@@ -92,10 +89,10 @@ public class JobScamManager : InkManager
     {
         StartCoroutine(RegisterAccountCoroutine());
     }
+
+
     void Start()
     {
         RandomiseScenario();
-
-        //StartCoroutine(ContinueStory());
     }
 }

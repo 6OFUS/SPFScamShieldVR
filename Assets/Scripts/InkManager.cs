@@ -23,6 +23,8 @@ public class InkManager : MonoBehaviour
     /// </summary>v
     private List<string> storyTags = new List<string>();
 
+    protected string knotName;
+
     [Header("Scenario selection")]
     /// <summary>
     /// List of Ink JSON files representing the different possible scenarios
@@ -58,13 +60,6 @@ public class InkManager : MonoBehaviour
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
 
 
-    [Header("UI")]
-    /// <summary>
-    /// UI for the report section on Whatsup screen
-    /// </summary>
-    public GameObject whatsupReportUI;
-
-
     /// <summary>
     /// Function to randomise the scam scenario player will go through
     /// </summary>
@@ -88,7 +83,7 @@ public class InkManager : MonoBehaviour
     /// Coroutine to continue Ink story automatically
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public IEnumerator ContinueStory()
+    public virtual IEnumerator ContinueStory()
     {
         while (story.canContinue)
         {
@@ -114,8 +109,17 @@ public class InkManager : MonoBehaviour
             ShuffleChoices(playerChoices);
             DisplayChoices();
         }
+        else
+        {
+            ResumeStory(knotName);
+        }
     }
 
+    public virtual void ResumeStory(string knotName)
+    {
+        story.ChoosePathString(knotName);
+        StartCoroutine(ContinueStory());
+    }
 
     /// <summary>
     /// Coroutine to wait for next message to send
@@ -218,9 +222,6 @@ public class InkManager : MonoBehaviour
                 string selectedText = playerChoices[index].choiceName;
                 sendMessage.PlayerNextMessage(selectedText);
                 StartCoroutine(WaitForReply());
-                break;
-            case "submit_scamshield":
-                whatsupReportUI.SetActive(true);
                 break;
         }
     }

@@ -71,7 +71,7 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
 
-+ [Player:message Okay, I'll complete the first task.] -> job_task_2_dialogue_2
++ [Player:message Okay, I'll complete the first task.] -> END
 + [Player:message Can I withdraw after the first task group?] -> job_task_2_dialogue_3
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 

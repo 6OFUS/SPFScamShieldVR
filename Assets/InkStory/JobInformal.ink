@@ -8,14 +8,14 @@ you applied for a positioj
 lets schedule interview
 
 //PLAYER CHOICES
-+ [Is this job legit?] -> job_offer_dialogue_1
-+ [Scammer lah you!] -> send_sticker
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Is this job legit?] -> job_offer_dialogue_1
++ [Player:message Scammer lah you!] -> send_sticker
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === send_sticker === 
-+ [Sticker 1] -> job_offer_dialogue_3
-+ [Sticker 2] -> job_offer_dialogue_3
-+ [Sticker 3] -> job_offer_dialogue_3
++ [Player: Sticker 1] -> job_offer_dialogue_3
++ [Player: Sticker 2] -> job_offer_dialogue_3
++ [Player: Sticker 3] -> job_offer_dialogue_3
 
 === job_offer_dialogue_1 ===
 hey feiyang, no worries at all 
@@ -26,17 +26,17 @@ my contact email is lucia.tan@t-commerce.com
 let me know if you're keen to proceed, happy to share more!
 
 //PLAYER CHOICES
-+ [Tap on the link] -> tap_on_website_link
-+ [Hmm... I still don't really believe you leh.] -> job_offer_dialogue_2
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player: Tap on the link] -> tap_on_website_link
++ [Player:message Hmm... I still don't really believe you leh.] -> job_offer_dialogue_2
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_offer_dialogue_2 ===
 totally understand - it's smart to be careful!
 if it helps, you can reply to the email i sent from lucia.tan@t-commerce.com, or even call our office line listed on the website to confirm my name.
 no pressure at all - just let me know if you'd like to move forward or need more info first 
 
-+ [Just checked the site. Looks okay, let's proceed.] -> win_ending
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Just checked the site. Looks okay, let's proceed.] -> win_ending
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 
 === job_offer_dialogue_3
@@ -53,9 +53,9 @@ i'll withdraw your application for now. best of luck with your job search.
 
 === return_from_website ===
 //BACK BUTTON TO CONTINUE STORY
-+ [Just checked the site. looks okay, lets proceed.] -> win_ending
-+ [Found your site but can't find your name there. are you really part of HR?] -> job_verification_dialogue_1
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Just checked the site. looks okay, lets proceed.] -> win_ending
++ [Player:message Found your site but can't find your name there. are you really part of HR?] -> job_verification_dialogue_1
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ JOB VERIFICATION ------------------------------
 === job_verification_dialogue_1 ===
@@ -63,17 +63,17 @@ haha no worries! my email's actually listed under the Contact Us section - might
 but yup, i'm part of the onboarding team under HR. totally understand the need to double check 
 let me know if you'd like me to loop in another colleague or send a formal email again for peace of mind
 
-+ [Appreciate the clarification. Could you send a formal intro email again? Just to be safe.] -> job_verification_dialogue_2
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Appreciate the clarification. Could you send a formal intro email again? Just to be safe.] -> job_verification_dialogue_2
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_dialogue_2 === 
 //GO TO PHONE HOME PAGE -> OPEN EMAIL -> OPEN MAIL SENT BY RECRUITER
 -> return_from_email
 
 === return_from_email ===
-+ [Thank you! Let's proceed.] -> win_ending
-+ [Ignore recruiter] -> lose_not_scam_ending
-+ [Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message Thank you! Let's proceed.] -> win_ending
++ [Player: Ignore recruiter] -> lose_not_scam_ending
++ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ SCAMSHIELD PROCEDURE ------------------------------
 === report_scamshield ===

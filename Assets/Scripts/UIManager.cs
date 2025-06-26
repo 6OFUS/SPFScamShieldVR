@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject scamshieldScreen;
-    public GameObject whatsupHomeButton;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -28,7 +27,6 @@ public class UIManager : MonoBehaviour
     {
         if (!screenshotTaken)
         {
-            Debug.Log("screenshot taken");
             screenshotTaken = true;
             audioSource.clip = screenshotClip;
             audioSource.Play();
@@ -45,9 +43,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private IEnumerator FlashEffect()
+    public virtual IEnumerator FlashEffect()
     {
-        // Step 1: Fade in
+        //Fade in
         float elapsed = 0f;
         while (elapsed < flashDuration / 2)
         {
@@ -57,7 +55,7 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
-        // Step 2: Fade out
+        //Fade out
         elapsed = 0f;
         while (elapsed < flashDuration / 2)
         {
@@ -69,6 +67,5 @@ public class UIManager : MonoBehaviour
 
         flashImage.color = new Color(1, 1, 1, 0);
         flashImage.gameObject.SetActive(false);
-        whatsupHomeButton.SetActive(true);
     }
 }
