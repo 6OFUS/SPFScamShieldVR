@@ -32,15 +32,15 @@ public class JobScamManager : InkManager
         switch (action)
         {
             case "open_amail":
-                uiManager.amailUI.SetActive(true);
+                uiManager.amailScreen.SetActive(true);
                 break;
             case "message_register_account":
                 string selectedText = playerChoices[index].choiceName;
                 sendMessage.PlayerNextMessage(selectedText);
-                uiManager.websiteHomeUI.SetActive(true);
+                uiManager.websiteHomeScreen.SetActive(true);
                 break;
             case "message_complete_task":
-                uiManager.websiteHomeLoggedInUI.SetActive(true);
+                uiManager.websiteHomeLoggedInScreen.SetActive(true);
                 uiManager.websiteReturnText.SetActive(false);
                 uiManager.silverTierButton.SetActive(true);
                 break;
@@ -84,11 +84,20 @@ public class JobScamManager : InkManager
     {
         if(inputCount == 4)
         {
-            uiManager.loadingScreenUI.SetActive(true);
+            uiManager.loadingScreen.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
-            uiManager.loadingScreenUI.SetActive(false);
-            uiManager.websiteHomeLoggedInUI.SetActive(true);
+            uiManager.websiteHomeLoggedInScreen.SetActive(true);
+
+            uiManager.loadingScreen.SetActive(false);
+            uiManager.websiteHomeScreen.SetActive(false);
+            uiManager.whatsupScreen.SetActive(false);
+            uiManager.websiteCreateAccountScreen.SetActive(false);
+
             knotName = "job_task_2_dialogue_1";
+        }
+        else
+        {
+            //ERROR AUDIO
         }
     }
 
@@ -97,23 +106,35 @@ public class JobScamManager : InkManager
         StartCoroutine(RegisterAccountCoroutine());
     }
 
-    public void TaskGroup()
+    public void FirstTaskGroup()
     {
         if (!firstTaskCompleted)
         {
-            //direct to task page
-            uiManager.taskScreen.SetActive(true);
+            StartCoroutine(LoadFirstTaskGroup());
         }
-        else
+    }
+
+    private IEnumerator LoadFirstTaskGroup()
+    {
+        uiManager.websiteHomeLoggedInScreen.SetActive(false);
+        uiManager.websiteSelectTaskScreen.SetActive(false);
+        uiManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uiManager.loadingScreen.SetActive(false);
+        uiManager.taskScreen.SetActive(true);
+    }
+
+    public void FollowingTaskGroups()
+    {
+        if (firstTaskCompleted)
         {
-            //direct to long loading page
             StartCoroutine(LoadingError());
         }
     }
 
     private IEnumerator LoadingError()
     {
-        uiManager.loadingScreenUI.SetActive(true);
+        uiManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
         uiManager.loadingScreenReturnText.SetActive(true);
         uiManager.loadingScreenHomeButton.SetActive(true);
@@ -122,10 +143,27 @@ public class JobScamManager : InkManager
 
     public void AddItemsToCart()
     {
-        if(numItemsAdded <= 3)
+        if(numItemsAdded < 3)
         {
-            numItemsAdded++;
             uiManager.itemNumUI[numItemsAdded].SetActive(true);
+            numItemsAdded++;
+        }
+    }
+
+    private IEnumerator LoadCheckOut()
+    {
+        uiManager.taskScreen.SetActive(false);
+        uiManager.loadingBackToDashboardScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uiManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+        knotName = "job_task_2_dialogue_2";
+    }
+
+    public void CheckOut()
+    {
+        if(numItemsAdded == 3)
+        {
+            StartCoroutine(LoadCheckOut());
         }
     }
 

@@ -21,7 +21,7 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Tags extracted from the current point in the story
     /// </summary>v
-    private List<string> storyTags = new List<string>();
+    public List<string> storyTags = new List<string>();
 
     protected string knotName;
 

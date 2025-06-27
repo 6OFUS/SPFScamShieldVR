@@ -20,7 +20,7 @@ public class MessagingSystem : MonoBehaviour
     /// <summary>
     /// Content child under scroll view
     /// </summary>
-    public Transform messagesScrollView;
+    public Transform messagesContent;
 
 
     /// <summary>
@@ -29,7 +29,7 @@ public class MessagingSystem : MonoBehaviour
     public void SenderNextMessage(string message)
     {
 
-        GameObject newMessage = Instantiate(senderMessagePrefab, messagesScrollView);
+        GameObject newMessage = Instantiate(senderMessagePrefab, messagesContent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -45,7 +45,7 @@ public class MessagingSystem : MonoBehaviour
 
     public void PlayerNextMessage(string message)
     {
-        GameObject newMessage = Instantiate(playerMessagePrefab, messagesScrollView);
+        GameObject newMessage = Instantiate(playerMessagePrefab, messagesContent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
