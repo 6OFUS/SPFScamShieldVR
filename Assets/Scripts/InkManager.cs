@@ -23,17 +23,7 @@ public class InkManager : MonoBehaviour
     /// </summary>v
     public List<string> storyTags = new List<string>();
 
-    protected string knotName;
-
-    [Header("Scenario selection")]
-    /// <summary>
-    /// List of Ink JSON files representing the different possible scenarios
-    /// </summary>
-    public TextAsset[] inkJsonFiles;
-    /// <summary>
-    /// Corresponding UI canvases for each scenario
-    /// </summary>
-    public GameObject[] uiCanvas;
+    public string knotName;
 
     [Header("Messaging")]
     /// <summary>
@@ -60,16 +50,6 @@ public class InkManager : MonoBehaviour
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
 
 
-    /// <summary>
-    /// Function to randomise the scam scenario player will go through
-    /// </summary>
-    public void RandomiseScenario()
-    {
-        int index = Random.Range(0, inkJsonFiles.Length);
-        TextAsset selectedInk = inkJsonFiles[index];
-        uiCanvas[index].SetActive(true);
-        story = new Story(selectedInk.text);
-    }
 
     /// <summary>
     /// Function to start the story via messages

@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 26/06/2025
-    Description: The JobScamUIManager class is used to manage all UI and its functions related to the job scam scenarios
+    Description: The JobScamUIManager class is used to manage all UI and its functions related to the job scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -27,10 +27,12 @@ public class JobScamUIManager : UIManager
     public GameObject websiteHomeScreen;
     public GameObject websiteCreateAccountScreen;
     public GameObject websiteHomeLoggedInScreen;
-    public GameObject websiteReturnText;
-    public GameObject silverTierButton;
+    public GameObject websiteHomeLoggedInReturnText;
+    public GameObject websiteHomeSilverTierButton;
     public GameObject websiteSelectTaskScreen;
     public GameObject websiteHomeAfterFirstTaskScreen;
+    public GameObject websiteHomeAfterFirstTaskSilverTierButton;
+    public GameObject withdrawButton;
 
     [Header("Scam website task UI")]
     public GameObject taskScreen;
@@ -41,7 +43,6 @@ public class JobScamUIManager : UIManager
     public GameObject loadingScreenReturnText;
     public GameObject loadingScreenHomeButton;
     public GameObject loadingBackToDashboardScreen;
-
 
     public override IEnumerator FlashEffect()
     {

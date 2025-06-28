@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 05/06/2025
-    Description: The JobScamManager class is used to handle all the functions related to the job scam scenarios
+    Description: The JobScamManager class is used to handle all the functions related to the job scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using Ink.Parsed;
 
 public class JobScamManager : InkManager
 {
-    public JobScamUIManager uiManager;
+    public JobScamUIManager jobScamUIManager;
 
     private TextMeshProUGUI currentInputFieldText;
     private Button currentChoiceButton;
@@ -32,20 +32,41 @@ public class JobScamManager : InkManager
         switch (action)
         {
             case "open_amail":
-                uiManager.amailScreen.SetActive(true);
+                jobScamUIManager.amailScreen.SetActive(true);
                 break;
             case "message_register_account":
-                string selectedText = playerChoices[index].choiceName;
-                sendMessage.PlayerNextMessage(selectedText);
-                uiManager.websiteHomeScreen.SetActive(true);
+                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                jobScamUIManager.websiteHomeScreen.SetActive(true);
                 break;
             case "message_complete_task":
-                uiManager.websiteHomeLoggedInScreen.SetActive(true);
-                uiManager.websiteReturnText.SetActive(false);
-                uiManager.silverTierButton.SetActive(true);
+                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                jobScamUIManager.whatsupScreen.SetActive(false);
+                if (!firstTaskCompleted)
+                {
+                    jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
+                    jobScamUIManager.websiteHomeLoggedInReturnText.SetActive(false);
+                    jobScamUIManager.websiteHomeSilverTierButton.SetActive(true);
+                }
+                else
+                {
+                    jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                    jobScamUIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
+                }
+                    break;
+            case "submit_scamshield":
+                jobScamUIManager.whatsupReportUI.SetActive(true);
                 break;
-            case "Player:submit_scamshield":
-                uiManager.whatsupReportUI.SetActive(true);
+            case "error_message":
+                sendMessage.PlayerNextMessage("You can no longer send messages to this contact.");
+                break;
+            case "withdraw":
+                jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                jobScamUIManager.withdrawButton.SetActive(true);
+                break;
+            case "message_withdraw":
+                jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                jobScamUIManager.withdrawButton.SetActive(true);
+                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
                 break;
             default:
                 base.PlayerAction(action, index); 
@@ -84,14 +105,14 @@ public class JobScamManager : InkManager
     {
         if(inputCount == 4)
         {
-            uiManager.loadingScreen.SetActive(true);
+            jobScamUIManager.loadingScreen.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
-            uiManager.websiteHomeLoggedInScreen.SetActive(true);
+            jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
 
-            uiManager.loadingScreen.SetActive(false);
-            uiManager.websiteHomeScreen.SetActive(false);
-            uiManager.whatsupScreen.SetActive(false);
-            uiManager.websiteCreateAccountScreen.SetActive(false);
+            jobScamUIManager.loadingScreen.SetActive(false);
+            jobScamUIManager.websiteHomeScreen.SetActive(false);
+            jobScamUIManager.whatsupScreen.SetActive(false);
+            jobScamUIManager.websiteCreateAccountScreen.SetActive(false);
 
             knotName = "job_task_2_dialogue_1";
         }
@@ -116,12 +137,13 @@ public class JobScamManager : InkManager
 
     private IEnumerator LoadFirstTaskGroup()
     {
-        uiManager.websiteHomeLoggedInScreen.SetActive(false);
-        uiManager.websiteSelectTaskScreen.SetActive(false);
-        uiManager.loadingScreen.SetActive(true);
+        jobScamUIManager.websiteHomeLoggedInScreen.SetActive(false);
+        jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
+        jobScamUIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
-        uiManager.loadingScreen.SetActive(false);
-        uiManager.taskScreen.SetActive(true);
+        jobScamUIManager.loadingScreen.SetActive(false);
+        jobScamUIManager.taskScreen.SetActive(true);
+        firstTaskCompleted = true;
     }
 
     public void FollowingTaskGroups()
@@ -134,10 +156,11 @@ public class JobScamManager : InkManager
 
     private IEnumerator LoadingError()
     {
-        uiManager.loadingScreen.SetActive(true);
+        jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
+        jobScamUIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
-        uiManager.loadingScreenReturnText.SetActive(true);
-        uiManager.loadingScreenHomeButton.SetActive(true);
+        jobScamUIManager.loadingScreenReturnText.SetActive(true);
+        jobScamUIManager.loadingScreenHomeButton.SetActive(true);
         knotName = "job_task_2_loading_error";
     }
 
@@ -145,17 +168,17 @@ public class JobScamManager : InkManager
     {
         if(numItemsAdded < 3)
         {
-            uiManager.itemNumUI[numItemsAdded].SetActive(true);
+            jobScamUIManager.itemNumUI[numItemsAdded].SetActive(true);
             numItemsAdded++;
         }
     }
 
     private IEnumerator LoadCheckOut()
     {
-        uiManager.taskScreen.SetActive(false);
-        uiManager.loadingBackToDashboardScreen.SetActive(true);
+        jobScamUIManager.taskScreen.SetActive(false);
+        jobScamUIManager.loadingBackToDashboardScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
-        uiManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+        jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
         knotName = "job_task_2_dialogue_2";
     }
 
@@ -169,6 +192,6 @@ public class JobScamManager : InkManager
 
     void Start()
     {
-        RandomiseScenario();
+
     }
 }
