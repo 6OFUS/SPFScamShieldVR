@@ -44,7 +44,8 @@ public class JobScamManager : InkManager
                 if (!firstTaskCompleted)
                 {
                     jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
-                    jobScamUIManager.websiteHomeLoggedInReturnText.SetActive(false);
+                    //jobScamUIManager.websiteHomeLoggedInReturnText.SetActive(false);
+                    jobScamUIManager.returnText.SetActive(false);
                     jobScamUIManager.websiteHomeSilverTierButton.SetActive(true);
                 }
                 else
@@ -159,7 +160,8 @@ public class JobScamManager : InkManager
         jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
         jobScamUIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
-        jobScamUIManager.loadingScreenReturnText.SetActive(true);
+        //jobScamUIManager.loadingScreenReturnText.SetActive(true);
+        jobScamUIManager.returnText.SetActive(true);
         jobScamUIManager.loadingScreenHomeButton.SetActive(true);
         knotName = "job_task_2_loading_error";
     }
@@ -179,6 +181,7 @@ public class JobScamManager : InkManager
         jobScamUIManager.loadingBackToDashboardScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+        jobScamUIManager.returnText.SetActive(true);
         knotName = "job_task_2_dialogue_2";
     }
 

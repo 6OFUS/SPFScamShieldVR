@@ -87,7 +87,6 @@ You've completed 1 task, great job! Just two more group needed. It will be retur
 That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
 
 + [Player:message_complete_task Okay, I'll complete the first task.] -> END //go to job_task_2_dialogue_2
-+ [Player:withdraw Try to withdraw the money] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_withdrawal_error ===

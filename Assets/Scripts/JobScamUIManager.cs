@@ -18,7 +18,7 @@ public class JobScamUIManager : UIManager
     /// </summary>
     public GameObject whatsupReportUI;
     public GameObject whatsupHomeButton;
-    public GameObject whatsupReturnText;
+    //public GameObject whatsupReturnText;
 
     [Header("Amail UI")]
     public GameObject amailScreen;
@@ -27,7 +27,7 @@ public class JobScamUIManager : UIManager
     public GameObject websiteHomeScreen;
     public GameObject websiteCreateAccountScreen;
     public GameObject websiteHomeLoggedInScreen;
-    public GameObject websiteHomeLoggedInReturnText;
+    //public GameObject websiteHomeLoggedInReturnText;
     public GameObject websiteHomeSilverTierButton;
     public GameObject websiteSelectTaskScreen;
     public GameObject websiteHomeAfterFirstTaskScreen;
@@ -40,7 +40,7 @@ public class JobScamUIManager : UIManager
 
     [Header("Loading screen UI")]
     public GameObject loadingScreen;
-    public GameObject loadingScreenReturnText;
+    //public GameObject loadingScreenReturnText;
     public GameObject loadingScreenHomeButton;
     public GameObject loadingBackToDashboardScreen;
 
@@ -48,6 +48,7 @@ public class JobScamUIManager : UIManager
     {
         yield return base.FlashEffect();
         whatsupHomeButton.SetActive(true);
-        whatsupReturnText.SetActive(true);
+        //whatsupReturnText.SetActive(true);
+        returnText.SetActive(true);
     }
 }
