@@ -83,7 +83,6 @@ public class InkManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
-                Debug.Log($"Choice added: {playerChoices[i].choiceName} (Original index: {playerChoices[i].choiceIndex}) {playerChoices[i].choiceAction}");
             }
 
             ShuffleChoices(playerChoices);
@@ -91,11 +90,11 @@ public class InkManager : MonoBehaviour
         }
         else
         {
-            ResumeStory(knotName);
+            LoadStoryPoint(knotName);
         }
     }
 
-    public virtual void ResumeStory(string knotName)
+    public virtual void LoadStoryPoint(string knotName)
     {
         story.ChoosePathString(knotName);
         StartCoroutine(ContinueStory());
@@ -105,7 +104,7 @@ public class InkManager : MonoBehaviour
     /// Coroutine to wait for next message to send
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    IEnumerator WaitForReply()
+    public IEnumerator WaitForReply()
     {
         yield return new WaitForSeconds(messageTime);
         yield return StartCoroutine(ContinueStory());
@@ -129,8 +128,6 @@ public class InkManager : MonoBehaviour
     {
         foreach (var choice in playerChoices)
         {
-            Debug.Log($"Choice: {choice.choiceName} (Original index: {choice.choiceIndex}) {choice.choiceAction}");
-
             GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
             TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = choice.choiceName;
@@ -211,7 +208,7 @@ public class InkManager : MonoBehaviour
     /// </summary>
     /// <param name="action"> Tag for sender actions </param>
     /// <param name="dialogue"> Dialogue content sent by sender </param>
-    public void SenderAction(string action, string dialogue)
+    public virtual void SenderAction(string action, string dialogue)
     {
         switch (action)
         {

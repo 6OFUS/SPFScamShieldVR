@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     [Header("Scamshield UI")]
     public GameObject scamshieldScreen;
 
+    [Header("Instructions UI")]
     public GameObject returnText;
 
     public void Screenshot()

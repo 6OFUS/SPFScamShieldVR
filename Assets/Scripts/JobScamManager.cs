@@ -57,17 +57,17 @@ public class JobScamManager : InkManager
             case "submit_scamshield":
                 jobScamUIManager.whatsupReportUI.SetActive(true);
                 break;
-            case "error_message":
-                sendMessage.PlayerNextMessage("You can no longer send messages to this contact.");
-                break;
-            case "withdraw":
-                jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                jobScamUIManager.withdrawButton.SetActive(true);
-                break;
             case "message_withdraw":
                 jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                 jobScamUIManager.withdrawButton.SetActive(true);
                 sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                break;
+            case "error_message":
+                sendMessage.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
+                StartCoroutine(WaitForReply());
+                break;
+            case "lose_ending":
+                jobScamUIManager.loseScreen.SetActive(true);
                 break;
             default:
                 base.PlayerAction(action, index); 
@@ -75,6 +75,18 @@ public class JobScamManager : InkManager
         }
     }
 
+    public override void SenderAction(string action, string dialogue)
+    {
+        switch(action)
+        {
+            case "image":
+                sendMessage.SenderImage(jobScamUIManager.scamPayoutImage);
+                break;
+            default:
+                base.SenderAction(action, dialogue);
+                break;
+        }
+    }
     public void SetCurrentInputField(TextMeshProUGUI inputField)
     {
         currentInputFieldText = inputField;
@@ -109,6 +121,7 @@ public class JobScamManager : InkManager
             jobScamUIManager.loadingScreen.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
             jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
+            jobScamUIManager.returnText.SetActive(true);
 
             jobScamUIManager.loadingScreen.SetActive(false);
             jobScamUIManager.websiteHomeScreen.SetActive(false);
@@ -193,8 +206,17 @@ public class JobScamManager : InkManager
         }
     }
 
-    void Start()
+    public void Withdraw()
     {
+        StartCoroutine(WithdrawCoroutine());
+    }
 
+    private IEnumerator WithdrawCoroutine()
+    {
+        jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
+        jobScamUIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        jobScamUIManager.loadingScreen.SetActive(false);
+        jobScamUIManager.websiteWithdrawErrorScreen.SetActive(true);
     }
 }

@@ -117,16 +117,17 @@ I totally understand where you're coming from, Feiyang. The 3-task withdrawal ru
 I totally get it, Feiyang. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message
 
 + [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
-+ [Player:wait Wait 15min] -> job_task_2_after_waiting
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_after_waiting ===
 + [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
 
 === job_cannot_send_message === 
-+ [Player:error_message HELLO] -> lose_ending
-+ [Player:error_message WHAT] -> lose_ending
++ [Player:error_message HELLO] -> end_message
 + [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
+
+=== end_message ===
++ [Player:lose_ending WHAT] -> END //GAME ENDS HERE
 
 //------------------------------ SCAMSHIELD PROCEDURE ------------------------------
 === report_scamshield ===
@@ -138,6 +139,3 @@ I totally get it, Feiyang. Let me do this, I'll escalate your case to our HR set
 //SHOW WIN SCREEN
 -> END
 
-=== lose_ending ===
-//SHOW LOSE SCREEN
--> END
