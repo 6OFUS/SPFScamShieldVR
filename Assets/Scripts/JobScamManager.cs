@@ -27,6 +27,21 @@ public class JobScamManager : InkManager
     [SerializeField] private bool firstTaskCompleted;
     [SerializeField] private int numItemsAdded;
 
+    public override void DisplayChoices()
+    {
+        base.DisplayChoices();
+        if (scamshieldButton == null)
+        {
+            scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
+            scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                jobScamUIManager.Screenshot();
+                ClearChoices();
+                Destroy(scamshieldButton);
+            });
+        }
+        scamshieldButton.transform.SetAsLastSibling();
+    }
     public override void PlayerAction(string action, int index)
     {
         switch (action)
@@ -44,7 +59,6 @@ public class JobScamManager : InkManager
                 if (!firstTaskCompleted)
                 {
                     jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
-                    //jobScamUIManager.websiteHomeLoggedInReturnText.SetActive(false);
                     jobScamUIManager.returnText.SetActive(false);
                     jobScamUIManager.websiteHomeSilverTierButton.SetActive(true);
                 }
@@ -54,9 +68,6 @@ public class JobScamManager : InkManager
                     jobScamUIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
                 }
                     break;
-            case "submit_scamshield":
-                jobScamUIManager.whatsupReportUI.SetActive(true);
-                break;
             case "message_withdraw":
                 jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                 jobScamUIManager.withdrawButton.SetActive(true);
@@ -68,6 +79,8 @@ public class JobScamManager : InkManager
                 break;
             case "lose_ending":
                 jobScamUIManager.loseScreen.SetActive(true);
+                ClearChoices();
+                Destroy(scamshieldButton);
                 break;
             default:
                 base.PlayerAction(action, index); 
@@ -98,7 +111,7 @@ public class JobScamManager : InkManager
 
     public void InputChoice(string inputName)
     {
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
+        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = inputName;
 
@@ -112,6 +125,11 @@ public class JobScamManager : InkManager
             ClearChoices();
             inputCount++;
         });
+
+        if (scamshieldButton != null && scamshieldButton.transform.IsChildOf(choiceContainer))
+        {
+            scamshieldButton.transform.SetAsLastSibling();
+        }
     }
 
     private IEnumerator RegisterAccountCoroutine()

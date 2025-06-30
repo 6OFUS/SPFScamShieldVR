@@ -13,14 +13,13 @@ public class JobScamUIManager : UIManager
 {
     [Header("WhatsUp UI")]
     public GameObject whatsupScreen;
-    /// <summary>
-    /// UI for the report section on Whatsup screen
-    /// </summary>
-    public GameObject whatsupReportUI;
     public GameObject whatsupHomeButton;
 
     [Header("Amail UI")]
     public GameObject amailScreen;
+
+    [Header("Home UI")]
+    public GameObject homeScreenUI;
 
     [Header("Scam website UI")]
     public GameObject websiteHomeScreen;
@@ -49,11 +48,52 @@ public class JobScamUIManager : UIManager
     [Header("End screen UI")]
     public GameObject loseScreen;
 
+    private GameObject uiCanvas;
+
     public override IEnumerator FlashEffect()
     {
         yield return base.FlashEffect();
         whatsupHomeButton.SetActive(true);
-        //whatsupReturnText.SetActive(true);
         returnText.SetActive(true);
+
+
+        ResetHomeButtons();
+    }
+
+    public override void ResetHomeButtons()
+    {
+        foreach (Button homeButton in homeButtons)
+        {
+            homeButton.gameObject.SetActive(true);
+            homeButton.onClick.RemoveAllListeners();
+            homeButton.onClick.AddListener(() =>
+            {
+                foreach (GameObject canvas in scenarioController.uiCanvas)
+                {
+                    if (canvas.activeInHierarchy)
+                    {
+                        uiCanvas = canvas;
+                        break;
+                    }
+                }
+                DisableAllCanvasChildren(uiCanvas);
+                homeScreenUI.SetActive(true);
+                returnText.SetActive(false);
+            });
+        }
+    }
+
+    private void Start()
+    {
+        foreach (Button homeButton in homeButtons)
+        {
+            homeButton.onClick.AddListener(() =>
+            {
+                if (homeScreenUI.activeInHierarchy)
+                {
+                    inkManager.choiceContainer.gameObject.SetActive(false);
+                }
+            });
+        }
     }
 }

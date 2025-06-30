@@ -24,6 +24,7 @@ public class InkManager : MonoBehaviour
     public List<string> storyTags = new List<string>();
 
     public string knotName;
+    public bool stopStory;
 
     [Header("Messaging")]
     /// <summary>
@@ -40,10 +41,15 @@ public class InkManager : MonoBehaviour
     /// Prefab for choice button UI 
     /// </summary>
     public GameObject choiceButtonPrefab;
+
+    public GameObject scamshieldChoiceButtonPrefab;
+
+    public GameObject scamshieldButton;
+
     /// <summary>
     /// Parent transform where choice buttons will be instantiated
     /// </summary>
-    public Transform choiceContent;
+    public Transform choiceContainer;
     /// <summary>
     /// List of current choices presented to player
     /// </summary>
@@ -67,6 +73,10 @@ public class InkManager : MonoBehaviour
     {
         while (story.canContinue)
         {
+            if (stopStory)
+            {
+                yield break;
+            }
             string dialogue = story.Continue();
             if(!string.IsNullOrWhiteSpace(dialogue))
             {
@@ -124,11 +134,11 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Function to display the UI choice buttons
     /// </summary>
-    void DisplayChoices()
+    public virtual void DisplayChoices()
     {
         foreach (var choice in playerChoices)
         {
-            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContent);
+            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
             TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = choice.choiceName;
 
@@ -146,9 +156,12 @@ public class InkManager : MonoBehaviour
     /// </summary>
     public void ClearChoices()
     {
-        foreach (Transform button in choiceContent)
+        foreach (Transform button in choiceContainer)
         {
-            Destroy(button.gameObject);
+            if(button.gameObject != scamshieldButton)
+            {
+                Destroy(button.gameObject);
+            }
         }
     }
 

@@ -16,6 +16,11 @@ public class UIManager : MonoBehaviour
     public Image flashImage; 
     public float flashDuration;
 
+    public InkManager inkManager;
+    public ScenarioController scenarioController;
+
+    public List<Button> homeButtons = new List<Button>();
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip screenshotClip;
@@ -26,15 +31,21 @@ public class UIManager : MonoBehaviour
     [Header("Instructions UI")]
     public GameObject returnText;
 
+    [Header("App UI")]
+    public Button whatsupAppButton;
+
     public void Screenshot()
     {
+        Debug.Log("Screenshot");
         if (!screenshotTaken)
         {
+            inkManager.stopStory = true;
             screenshotTaken = true;
             audioSource.clip = screenshotClip;
             audioSource.Play();
             flashImage.gameObject.SetActive(true);
             StartCoroutine(FlashEffect());
+            whatsupAppButton.enabled = false;
         }
     }
 
@@ -70,5 +81,18 @@ public class UIManager : MonoBehaviour
 
         flashImage.color = new Color(1, 1, 1, 0);
         flashImage.gameObject.SetActive(false);
+    }
+
+    public void DisableAllCanvasChildren(GameObject parent)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    public virtual void ResetHomeButtons()
+    {
+
     }
 }
