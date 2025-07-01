@@ -87,6 +87,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in parent.transform)
         {
+            Debug.Log(child.name);
             child.gameObject.SetActive(false);
         }
     }

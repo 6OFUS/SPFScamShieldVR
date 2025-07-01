@@ -11,19 +11,20 @@ using UnityEngine.UI;
 
 public class MessagingSystem : MonoBehaviour
 {
+    public ScenarioController scenarioController;
+
+    [Header("Sender messages")]
     /// <summary>
     /// The prefab used for sender message
     /// </summary>
     public GameObject senderMessagePrefab;
 
-    public GameObject playerMessagePrefab;
-
     public GameObject senderImagePrefab;
 
-    /// <summary>
-    /// Content child under scroll view
-    /// </summary>
-    public Transform messagesContent;
+    [Header("Player messages")]
+    public GameObject playerMessagePrefab;
+    public GameObject playerStickerPrefab;
+
 
 
     /// <summary>
@@ -32,7 +33,7 @@ public class MessagingSystem : MonoBehaviour
     public void SenderNextMessage(string message)
     {
 
-        GameObject newMessage = Instantiate(senderMessagePrefab, messagesContent);
+        GameObject newMessage = Instantiate(senderMessagePrefab, scenarioController.whatsupContent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -41,22 +42,9 @@ public class MessagingSystem : MonoBehaviour
             textComponent.text = message;
         }
     }
-
-    public void PlayerNextMessage(string message)
-    {
-        GameObject newMessage = Instantiate(playerMessagePrefab, messagesContent);
-
-        TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
-        if (textComponent != null)
-        {
-            //audioSource.Play();
-            textComponent.text = message;
-        }
-    }
-
     public void SenderImage(Sprite image)
     {
-        GameObject newImage = Instantiate(senderImagePrefab, messagesContent);
+        GameObject newImage = Instantiate(senderImagePrefab, scenarioController.whatsupContent);
         Transform imageTransform = newImage.transform.Find("bg/Image");
         if (imageTransform == null)
         {
@@ -70,6 +58,40 @@ public class MessagingSystem : MonoBehaviour
         {
             imageComponent.sprite = image;         // Set the "Source Image"
             imageComponent.SetNativeSize();         // Optional: match image size
+        }
+        else
+        {
+            Debug.LogError("Missing sprite or Image component.");
+        }
+    }
+
+    public void PlayerNextMessage(string message)
+    {
+        GameObject newMessage = Instantiate(playerMessagePrefab, scenarioController.whatsupContent);
+
+        TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null)
+        {
+            //audioSource.Play();
+            textComponent.text = message;
+        }
+    }
+
+    public void PlayerSendSticker(Sprite image)
+    {
+        GameObject newSticker = Instantiate(playerStickerPrefab, scenarioController.whatsupContent);
+        Transform imageTransform = newSticker.transform.Find("bg/sticker");
+        if (imageTransform == null)
+        {
+            Debug.LogError("Could not find 'background' in senderImagePrefab.");
+            return;
+        }
+
+        Image imageComponent = imageTransform.GetComponentInChildren<Image>();
+
+        if (imageComponent != null && newSticker != null)
+        {
+            imageComponent.sprite = image;
         }
         else
         {

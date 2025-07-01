@@ -50,11 +50,11 @@ public class JobScamManager : InkManager
                 jobScamUIManager.amailScreen.SetActive(true);
                 break;
             case "message_register_account":
-                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 jobScamUIManager.websiteHomeScreen.SetActive(true);
                 break;
             case "message_complete_task":
-                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 jobScamUIManager.whatsupScreen.SetActive(false);
                 if (!firstTaskCompleted)
                 {
@@ -71,10 +71,10 @@ public class JobScamManager : InkManager
             case "message_withdraw":
                 jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                 jobScamUIManager.withdrawButton.SetActive(true);
-                sendMessage.PlayerNextMessage(playerChoices[index].choiceName);
+                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 break;
             case "error_message":
-                sendMessage.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
+                messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
                 StartCoroutine(WaitForReply());
                 break;
             case "lose_ending":
@@ -100,7 +100,7 @@ public class JobScamManager : InkManager
         switch(action)
         {
             case "image":
-                sendMessage.SenderImage(jobScamUIManager.scamPayoutImage);
+                messagingSystem.SenderImage(jobScamUIManager.scamPayoutImage);
                 break;
             default:
                 base.SenderAction(action, dialogue);
@@ -248,6 +248,7 @@ public class JobScamManager : InkManager
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
+        choiceContainer.gameObject.SetActive(true);
         jobScamUIManager.winScreen.SetActive(true);
         GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();

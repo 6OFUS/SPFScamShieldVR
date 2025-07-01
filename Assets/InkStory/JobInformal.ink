@@ -33,14 +33,14 @@ let me know if you're keen to proceed, happy to share more! #Sender:message
 Hey no worries at all, it's smart to be cautious! #Sender:message
 No pressure, just let me know if you'd like to go ahead or if you need more info first! #Sender:message
 
-+ [Player:check_website Check the site] -> win_ending
++ [Player:check_website Check the site] -> tap_on_website_link
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 
-=== job_offer_dialogue_3
-hey feiyang... not sure if that was meant as a joke, but just to clarify i'm a legit recruiter from T-Commerce Asia.<br>we reached out because you applied on LinkedIn, and we really liked your profile.<br>it's okay to double-check things - but calling someone a scammer without confirming first isn't very respectful.<br>i'll withdraw your application for now. best of luck with your job search.
+=== job_offer_dialogue_3 ===
+hey feiyang... not sure if that was meant as a joke, but just to clarify i'm a legit recruiter from T-Commerce Asia.<br>we reached out because you applied on LinkedIn, and we really liked your profile.<br>it's okay to double-check things - but calling someone a scammer without confirming first isn't very respectful.<br>i'll withdraw your application for now. best of luck with your job search. #Sender:message
 
--> lose_ending
++ [Player:jobless_lose_ending Ok, I'm really sorry.]-> lose_ending
 
 === tap_on_website_link === 
 //SHOW COMPANY WEBSITE HERE
@@ -48,7 +48,7 @@ hey feiyang... not sure if that was meant as a joke, but just to clarify i'm a l
 
 === return_from_website ===
 //BACK BUTTON TO CONTINUE STORY
-+ [Player:message Just checked the site. Looks okay, lets proceed.] -> win_ending
++ [Player:win_ending Just checked the site. Looks okay, lets proceed.] -> END
 + [Player:message Found your site but can't find your name there. Are you really part of HR?] -> job_verification_dialogue_1
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
@@ -69,7 +69,7 @@ Alright email sent! #Sender:message
 //-> return_from_email
 
 === return_from_email ===
-+ [Player:message Thank you! Let's proceed.] -> win_ending
++ [Player:win_ending Thank you! Let's proceed.] -> END
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ SCAMSHIELD PROCEDURE ------------------------------

@@ -36,7 +36,7 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Reference MessagingSystem class
     /// </summary>
-    public MessagingSystem sendMessage;
+    public MessagingSystem messagingSystem;
 
     [Header("Player choice")]
     /// <summary>
@@ -95,6 +95,8 @@ public class InkManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
+                Debug.Log(playerChoices[i].choiceName);
+                Debug.Log(playerChoices[i].choiceIndex);
             }
 
             ShuffleChoices(playerChoices);
@@ -128,6 +130,7 @@ public class InkManager : MonoBehaviour
     /// <param name="index">Index of the selected choice from choices given</param>
     public void ChooseOption(int index)
     {
+        Debug.Log(index);
         string action = playerChoices[index].choiceAction;
         PlayerAction(action, index);
         story.ChooseChoiceIndex(playerChoices[index].choiceIndex);
@@ -212,7 +215,7 @@ public class InkManager : MonoBehaviour
         {
             case "message":
                 string selectedText = playerChoices[index].choiceName;
-                sendMessage.PlayerNextMessage(selectedText);
+                messagingSystem.PlayerNextMessage(selectedText);
                 StartCoroutine(WaitForReply());
                 break;
         }
@@ -228,14 +231,13 @@ public class InkManager : MonoBehaviour
         switch (action)
         {
             case "message":
-                sendMessage.SenderNextMessage(dialogue);
+                messagingSystem.SenderNextMessage(dialogue);
                 break;
         }
     }
 
     protected virtual IEnumerator ReportToScamShield()
     {
-        //float clipLength = scamshieldAnimator.runtimeAnimatorController.animationClips[0].length;
         yield return new WaitForSeconds(scamshieldLoading.length);
     }
 

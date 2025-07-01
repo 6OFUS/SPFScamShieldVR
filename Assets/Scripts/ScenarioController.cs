@@ -19,6 +19,10 @@ public class ScenarioController : MonoBehaviour
 
     public UIManager[] uiManagers;
 
+    public Transform[] messagesContent;
+
+    public Transform whatsupContent;
+
     /// <summary>
     /// Function to randomise the scam scenario player will go through
     /// </summary>
@@ -30,7 +34,7 @@ public class ScenarioController : MonoBehaviour
         uiCanvas[index].SetActive(true);
         scenarioManagers[index].gameObject.SetActive(true);
         uiManagers[index].gameObject.SetActive(true);
-
+        whatsupContent = messagesContent[index];
         scenarioManagers[index].story = new Story(selectedInk.text);
     }
 
