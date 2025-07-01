@@ -26,6 +26,8 @@ public class InkManager : MonoBehaviour
     public string knotName;
     public bool stopStory;
 
+    public AnimationClip scamshieldLoading;
+
     [Header("Messaging")]
     /// <summary>
     /// Time taken between player and sender message
@@ -231,4 +233,14 @@ public class InkManager : MonoBehaviour
         }
     }
 
+    protected virtual IEnumerator ReportToScamShield()
+    {
+        //float clipLength = scamshieldAnimator.runtimeAnimatorController.animationClips[0].length;
+        yield return new WaitForSeconds(scamshieldLoading.length);
+    }
+
+    public void Report()
+    {
+        StartCoroutine(ReportToScamShield());
+    }
 }
