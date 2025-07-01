@@ -22,17 +22,18 @@ Totally understand the concern. Yes, this is a legitimate role.<br><br>You appli
 === job_offer_dialogue_2 ===
 The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! 
 
-+ [Player:message Sounds good! I'm okay to take the call today.] -> win_ending
++ [Player:win_ending Sounds good! I'm okay to take the call today.] -> win_ending
 + [Player:message Is this job legit?] -> job_offer_dialogue_1
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_offer_dialogue_3 ===
 hey feiyang... not sure if that was meant as a joke, but just to clarify, I'm a legit recruiter from T-Commerce Asia.<br><br>We reached out because you applied on LinkedIn, and we really liked your profile.<br><br>It's okay to double-check things but calling someone a scammer without confirming first isn't very respectful.<br><br>I'll withdraw your application for now. best of luck with your job search. #Sender:message
--> lose_ending
+
++ [Player:jobless_lose_ending Ok, I'm really sorry.]-> lose_ending
 
 === job_verification_dialogue_1 ===
 //OPEN WEBSITE THEN REPLY
-+ [Player:message Just checked the site. Looks okay, let's proceed] -> win_ending
++ [Player:win_ending Just checked the site. Looks okay, let's proceed] -> win_ending
 + [Player:message Found your site but can't find your name there. Are you really part of HR?] -> job_verification_dialogue_2
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
@@ -48,7 +49,7 @@ Alright email sent! #Sender:message
 
 + [Player:open_amail Check Amail] -> win_ending
 
-+ [Player:message Thank you. Let's proceed.] -> win_ending
++ [Player:win_ending Thank you. Let's proceed.] -> win_ending
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 //------------------------------ SCAMSHIELD PROCEDURE ------------------------------

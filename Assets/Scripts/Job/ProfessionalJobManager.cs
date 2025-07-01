@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InformalJobManager : InkManager
+public class ProfessionalJobManager : InkManager
 {
-    public InformalJobUIManager uIManager;
+    public ProfessionalJobUIManager uIManager;
 
     public override void PlayerAction(string action, int index)
     {
@@ -39,9 +39,9 @@ public class InformalJobManager : InkManager
     public override void DisplayChoices()
     {
         //IMAGE OPTIONS HERE
-        foreach(var choice in playerChoices)
+        foreach (var choice in playerChoices)
         {
-            if(choice.choiceAction == "sticker")
+            if (choice.choiceAction == "sticker")
             {
                 //choiceContainer.GetComponent<VerticalLayoutGroup>().spacing = 
                 GameObject buttonObj = Instantiate(uIManager.stickerChoicePrefab, choiceContainer);

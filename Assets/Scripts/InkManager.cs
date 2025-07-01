@@ -143,6 +143,11 @@ public class InkManager : MonoBehaviour
     {
         foreach (var choice in playerChoices)
         {
+            if(choice.choiceAction == "sticker")
+            {
+                continue;
+            }
+
             GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
             TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             buttonText.text = choice.choiceName;
