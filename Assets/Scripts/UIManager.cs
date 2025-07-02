@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,11 +20,14 @@ public class UIManager : MonoBehaviour
     public InkManager inkManager;
     public ScenarioController scenarioController;
 
+
     public List<Button> homeButtons = new List<Button>();
 
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip screenshotClip;
+    public AudioClip loseClip;
+    public AudioClip winClip;
 
     [Header("Scamshield UI")]
     public GameObject scamshieldScreen;
@@ -33,6 +37,7 @@ public class UIManager : MonoBehaviour
 
     [Header("App UI")]
     public Button whatsupAppButton;
+
 
     public void Screenshot()
     {

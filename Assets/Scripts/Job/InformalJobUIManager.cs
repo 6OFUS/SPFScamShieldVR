@@ -1,3 +1,8 @@
+/*
+    Author: Kevin Heng
+    Date: 01/07/2025
+    Description: The InformalJobUIManager class is used to manage all UI related to the informal job ad scenario
+*/
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;

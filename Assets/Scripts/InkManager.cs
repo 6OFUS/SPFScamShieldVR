@@ -10,6 +10,7 @@ using Ink.Runtime;
 using TMPro;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 
 public class InkManager : MonoBehaviour 
@@ -27,6 +28,8 @@ public class InkManager : MonoBehaviour
     public bool stopStory;
 
     public AnimationClip scamshieldLoading;
+
+    public Fade fadeScript;
 
     [Header("Messaging")]
     /// <summary>
@@ -249,5 +252,19 @@ public class InkManager : MonoBehaviour
     public void Report()
     {
         StartCoroutine(ReportToScamShield());
+    }
+
+    protected void ProceedToVideo(VideoClip videoClip)
+    {
+        choiceContainer.gameObject.SetActive(true);
+        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = "Proceed to video recap";
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            ClearChoices();
+            StartCoroutine(fadeScript.FadeTeleport(videoClip));
+        });
     }
 }

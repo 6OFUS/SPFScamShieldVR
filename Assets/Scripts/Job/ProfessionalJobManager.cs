@@ -1,12 +1,21 @@
+/*
+    Author: Kevin Heng
+    Date: 01/07/2025
+    Description: The ProfessionalJobManager class is used to handle all the functions related to the professional job ad scenario
+*/
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ProfessionalJobManager : InkManager
 {
     public ProfessionalJobUIManager uIManager;
+
+    public VideoClip loseVideoClip;
+    public VideoClip winVideoClip;
 
     public override void PlayerAction(string action, int index)
     {
@@ -18,17 +27,24 @@ public class ProfessionalJobManager : InkManager
                 break;
             case "check_website":
                 uIManager.websiteHomeScreen.SetActive(true);
-                knotName = "return_from_website";
+                knotName = "job_verification_dialogue_1";
                 break;
             case "open_amail":
                 uIManager.amailScreen.SetActive(true);
                 knotName = "return_from_email";
                 break;
             case "win_ending":
+                uIManager.audioSource.clip = uIManager.winClip;
+                uIManager.audioSource.Play();
                 uIManager.winScreen.SetActive(true);
+                ProceedToVideo(winVideoClip);
                 break;
             case "jobless_lose_ending":
+                uIManager.scenarioController.canvas.SetActive(false);
+                uIManager.audioSource.clip = uIManager.loseClip;
+                uIManager.audioSource.Play();
                 uIManager.loseJoblessScreen.SetActive(true);
+                ProceedToVideo(loseVideoClip);
                 break;
             default:
                 base.PlayerAction(action, index);
@@ -73,15 +89,11 @@ public class ProfessionalJobManager : InkManager
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
-        choiceContainer.gameObject.SetActive(true);
-        uIManager.mightNotBeScamScreen.SetActive(true);
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Proceed to video recap";
+        uIManager.scenarioController.canvas.SetActive(false);
 
-        buttonObj.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            ClearChoices();
-        });
+        uIManager.audioSource.clip = uIManager.loseClip;
+        uIManager.audioSource.Play();
+        uIManager.mightNotBeScamScreen.SetActive(true);
+        ProceedToVideo(loseVideoClip);
     }
 }

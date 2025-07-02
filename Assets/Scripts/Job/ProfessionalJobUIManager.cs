@@ -1,7 +1,13 @@
+/*
+    Author: Kevin Heng
+    Date: 01/07/2025
+    Description: The ProfessionalJobUIManager class is used to manage all UI related to the professional job ad scenario
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class ProfessionalJobUIManager : UIManager
 {
@@ -22,6 +28,7 @@ public class ProfessionalJobUIManager : UIManager
     private GameObject uiCanvas;
 
     public GameObject stickerChoicePrefab;
+
 
     public override IEnumerator FlashEffect()
     {

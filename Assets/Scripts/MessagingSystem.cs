@@ -25,6 +25,11 @@ public class MessagingSystem : MonoBehaviour
     public GameObject playerMessagePrefab;
     public GameObject playerStickerPrefab;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip messageReceived;
+    public AudioClip messageSent;
+
 
 
     /// <summary>
@@ -32,7 +37,6 @@ public class MessagingSystem : MonoBehaviour
     /// </summary>
     public void SenderNextMessage(string message)
     {
-
         GameObject newMessage = Instantiate(senderMessagePrefab, scenarioController.whatsupContent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
@@ -41,6 +45,8 @@ public class MessagingSystem : MonoBehaviour
             //audioSource.Play();
             textComponent.text = message;
         }
+        audioSource.clip = messageReceived;
+        audioSource.Play();
     }
     public void SenderImage(Sprite image)
     {
@@ -63,6 +69,8 @@ public class MessagingSystem : MonoBehaviour
         {
             Debug.LogError("Missing sprite or Image component.");
         }
+        audioSource.clip = messageReceived;
+        audioSource.Play();
     }
 
     public void PlayerNextMessage(string message)
@@ -75,6 +83,8 @@ public class MessagingSystem : MonoBehaviour
             //audioSource.Play();
             textComponent.text = message;
         }
+        audioSource.clip = messageSent;
+        audioSource.Play();
     }
 
     public void PlayerSendSticker(Sprite image)
@@ -97,5 +107,7 @@ public class MessagingSystem : MonoBehaviour
         {
             Debug.LogError("Missing sprite or Image component.");
         }
+        audioSource.clip = messageSent;
+        audioSource.Play();
     }
 }

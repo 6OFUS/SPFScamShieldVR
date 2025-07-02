@@ -3,14 +3,15 @@
     Date: 05/06/2025
     Description: The JobScamManager class is used to handle all the functions related to the job scam scenario
 */
+using Ink.Parsed;
+using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Ink.Runtime;
-using TMPro;
-using System;
-using Ink.Parsed;
+using UnityEngine.Video;
 
 public class JobScamManager : InkManager
 {
@@ -18,6 +19,10 @@ public class JobScamManager : InkManager
 
     private TextMeshProUGUI currentInputFieldText;
     private Button currentChoiceButton;
+
+    public AudioClip cryingClip;
+    public VideoClip loseVideoClip;
+    public VideoClip winVideoClip;
 
     [Header("Account creation")]
     public int inputCount;
@@ -78,23 +83,26 @@ public class JobScamManager : InkManager
                 StartCoroutine(WaitForReply());
                 break;
             case "lose_ending":
-                jobScamUIManager.loseScreen.SetActive(true);
-                ClearChoices();
-                Destroy(scamshieldButton);
-                GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
-                TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = "Proceed to video recap";
-
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-                    ClearChoices();
-                });
+                StartCoroutine(CryAudio());
                 break;
             default:
                 base.PlayerAction(action, index); 
                 break;
         }
     }
-
+    private IEnumerator CryAudio()
+    {
+        jobScamUIManager.audioSource.clip = cryingClip;
+        jobScamUIManager.audioSource.Play();
+        yield return new WaitForSeconds(cryingClip.length);
+        jobScamUIManager.scenarioController.canvas.SetActive(false);
+        jobScamUIManager.loseScreen.SetActive(true);
+        jobScamUIManager.audioSource.clip = jobScamUIManager.loseClip;
+        jobScamUIManager.audioSource.Play();
+        ClearChoices();
+        Destroy(scamshieldButton);
+        ProceedToVideo(loseVideoClip);
+    }
     public override void SenderAction(string action, string dialogue)
     {
         switch(action)
@@ -198,7 +206,6 @@ public class JobScamManager : InkManager
         jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
         jobScamUIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
-        //jobScamUIManager.loadingScreenReturnText.SetActive(true);
         jobScamUIManager.returnText.SetActive(true);
         jobScamUIManager.loadingScreenHomeButton.SetActive(true);
         knotName = "job_task_2_loading_error";
@@ -248,14 +255,9 @@ public class JobScamManager : InkManager
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
-        choiceContainer.gameObject.SetActive(true);
+        jobScamUIManager.audioSource.clip = jobScamUIManager.winClip;
+        jobScamUIManager.audioSource.Play();
         jobScamUIManager.winScreen.SetActive(true);
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Proceed to video recap";
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-            ClearChoices();
-        });
+        ProceedToVideo(winVideoClip);
     }
 }
