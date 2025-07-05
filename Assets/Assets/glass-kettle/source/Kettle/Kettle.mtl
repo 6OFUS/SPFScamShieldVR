@@ -1,0 +1,55 @@
+newmtl Others
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd Kettle_Others_Albedo.jpg
+map_Ks Kettle_Others_Glossiness.jpg
+map_bump Kettle_Others_Normal.jpg
+newmtl Body
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd Kettle_Body_Albedo.jpg
+map_Ks Kettle_Body_Glossiness.jpg
+map_bump Kettle_Body_Normal.jpg
+newmtl StandCap
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd Kettle_StandCap_Albedo.jpg
+map_Ks Kettle_StandCap_Glossiness.jpg
+map_bump Kettle_StandCap_Normal.jpg
+newmtl Floor
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd Kettle_Floor_Albedo.jpg
+map_Ks Kettle_Floor_Glossiness.jpg
+map_bump Kettle_Floor_Normal.jpg
+newmtl Glass
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd Kettle_Glass_Albedo.jpg
+map_Ks Kettle_Glass_Glossiness.jpg
+map_bump Kettle_Glass_Normal.jpg
