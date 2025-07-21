@@ -2,7 +2,7 @@
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
-Hi Fei Yang! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
+Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
 
 
 //OPEN AMAIL 
@@ -107,7 +107,7 @@ Don't worry, everyone experiences this. Once 3 tasks are done, the system proces
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_5 ===
-I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your payout when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
+I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
 
 + [Player:message_complete_task Okay, I'll continue with the next task group.] -> END //go to job_task_2_loading_error
 + [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6

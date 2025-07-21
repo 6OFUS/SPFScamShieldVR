@@ -23,7 +23,7 @@ public class ScenarioController : MonoBehaviour
 
     public Transform whatsupContent;
 
-    public GameObject canvas;
+    public GameObject scenarioCanvas;
 
     /// <summary>
     /// Function to randomise the scam scenario player will go through
@@ -33,8 +33,8 @@ public class ScenarioController : MonoBehaviour
         int index = Random.Range(0, inkJsonFiles.Length);
 
         TextAsset selectedInk = inkJsonFiles[index];
-        canvas = uiCanvas[index];
-        canvas.SetActive(true);
+        scenarioCanvas = uiCanvas[index];
+        scenarioCanvas.SetActive(true);
         scenarioManagers[index].gameObject.SetActive(true);
         uiManagers[index].gameObject.SetActive(true);
         whatsupContent = messagesContent[index];

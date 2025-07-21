@@ -95,7 +95,7 @@ public class JobScamManager : InkManager
         jobScamUIManager.audioSource.clip = cryingClip;
         jobScamUIManager.audioSource.Play();
         yield return new WaitForSeconds(cryingClip.length);
-        jobScamUIManager.scenarioController.canvas.SetActive(false);
+        jobScamUIManager.scenarioController.scenarioCanvas.SetActive(false);
         jobScamUIManager.loseScreen.SetActive(true);
         jobScamUIManager.audioSource.clip = jobScamUIManager.loseClip;
         jobScamUIManager.audioSource.Play();

@@ -1,3 +1,8 @@
+/*
+    Author: Kevin Heng
+    Date: 9/07/2025
+    Description: The Fade class is used to manage the functions for transitions between scenes
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

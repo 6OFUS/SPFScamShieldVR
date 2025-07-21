@@ -2,7 +2,7 @@
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
-Hello Feiyang, this is Lucia from the Talent Acquisition team at T Commerce.<br><br>We've reviewed your application for the <b>Customer Support & Operations</b> role and would love to connect to learn more about you and your experience.<br><br>T-Commerce is a digital solutions company focused on building smart, user-centric platforms for businesses across Southeast Asia.<br><br>Would you be available for a short WhatsApp call today? Just about 10 minutes #Sender:message
+Hello Taylor, this is Lucia from the Talent Acquisition team at T Commerce.<br><br>We've reviewed your application for the <b>Customer Support & Operations</b> role and would love to connect to learn more about you and your experience.<br><br>T-Commerce is a digital solutions company focused on building smart, user-centric platforms for businesses across Southeast Asia.<br><br>Would you be available for a short WhatsApp call today? Just about 10 minutes. #Sender:message
 
 + [Player:message Is this job legit?] -> job_offer_dialogue_1
 + [Player:message Can I ask more about the role first before the call?] -> job_offer_dialogue_2
@@ -27,20 +27,20 @@ The Customer Support & Operations Executive role is full-time and mostly remote.
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_offer_dialogue_3 ===
-hey feiyang... not sure if that was meant as a joke, but just to clarify, I'm a legit recruiter from T-Commerce Asia.<br><br>We reached out because you applied on LinkedIn, and we really liked your profile.<br><br>It's okay to double-check things but calling someone a scammer without confirming first isn't very respectful.<br><br>I'll withdraw your application for now. best of luck with your job search. #Sender:message
+Hey Taylor... not sure if that was meant as a joke, but just to clarify, I'm a legitimate recruiter from T-Commerce Asia.<br><br>We reached out because you applied on LinkedIn, and we really liked your profile.<br><br>It's okay to double-check things but calling someone a scammer without confirming first isn't very respectful.<br><br>I'll withdraw your application for now. Best of luck with your job search. #Sender:message
 
 + [Player:jobless_lose_ending Ok, I'm really sorry.]-> lose_ending
 
 === job_verification_dialogue_1 ===
 //OPEN WEBSITE THEN REPLY
-+ [Player:win_ending Just checked the site. Looks okay, let's proceed] -> win_ending
++ [Player:win_ending Just checked the site. Looks okay, let's proceed.] -> win_ending
 + [Player:message Found your site but can't find your name there. Are you really part of HR?] -> job_verification_dialogue_2
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_verification_dialogue_2 === 
 No worries at all! My email is listed on the Careers page, easy to miss sometimes.<br><br>I'm with the onboarding team under HR and totally understand the need to double check.<br><br>Let me know if you'd like me to loop in a colleague or resend a formal email for peace of mind! #Sender:message
 
-+ [Player:message Appreciate the clarification. Could you send a formal intro email again?] -> job_verification_email_dialogue_1
++ [Player:message Appreciate the clarification. Could you send a formal intro email?] -> job_verification_email_dialogue_1
 + [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_verification_email_dialogue_1 ===

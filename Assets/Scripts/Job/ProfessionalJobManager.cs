@@ -40,10 +40,10 @@ public class ProfessionalJobManager : InkManager
                 ProceedToVideo(winVideoClip);
                 break;
             case "jobless_lose_ending":
-                uIManager.scenarioController.canvas.SetActive(false);
+                uIManager.scenarioController.scenarioCanvas.SetActive(false);
                 uIManager.audioSource.clip = uIManager.loseClip;
                 uIManager.audioSource.Play();
-                uIManager.loseJoblessScreen.SetActive(true);
+                uIManager.loseScreen.SetActive(true);
                 ProceedToVideo(loseVideoClip);
                 break;
             default:
@@ -89,11 +89,11 @@ public class ProfessionalJobManager : InkManager
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
-        uIManager.scenarioController.canvas.SetActive(false);
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
 
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
-        uIManager.mightNotBeScamScreen.SetActive(true);
+        uIManager.loseScreen.SetActive(true);
         ProceedToVideo(loseVideoClip);
     }
 }

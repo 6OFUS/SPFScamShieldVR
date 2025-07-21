@@ -256,6 +256,7 @@ public class InkManager : MonoBehaviour
 
     protected void ProceedToVideo(VideoClip videoClip)
     {
+        Destroy(scamshieldButton);
         choiceContainer.gameObject.SetActive(true);
         GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();

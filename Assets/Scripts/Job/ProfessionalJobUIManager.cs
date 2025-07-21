@@ -22,8 +22,7 @@ public class ProfessionalJobUIManager : UIManager
     public GameObject amailScreen;
 
     public GameObject winScreen;
-    public GameObject loseJoblessScreen;
-    public GameObject mightNotBeScamScreen;
+    public GameObject loseScreen;
 
     private GameObject uiCanvas;
 

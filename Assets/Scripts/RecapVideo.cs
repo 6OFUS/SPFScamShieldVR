@@ -1,3 +1,9 @@
+/*
+    Author: Kevin Heng
+    Date: 9/07/2025
+    Description: The RecapVideo class is used to manage the functions for the ending recap videos
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
