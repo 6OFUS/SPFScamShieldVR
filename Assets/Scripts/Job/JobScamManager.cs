@@ -255,6 +255,7 @@ public class JobScamManager : InkManager
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
+        jobScamUIManager.scenarioController.scenarioCanvas.SetActive(false);
         jobScamUIManager.audioSource.clip = jobScamUIManager.winClip;
         jobScamUIManager.audioSource.Play();
         jobScamUIManager.winScreen.SetActive(true);

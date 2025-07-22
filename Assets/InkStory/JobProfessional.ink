@@ -20,7 +20,7 @@ Totally understand the concern. Yes, this is a legitimate role.<br><br>You appli
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_offer_dialogue_2 ===
-The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! 
+The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! #Sender:message
 
 + [Player:win_ending Sounds good! I'm okay to take the call today.] -> win_ending
 + [Player:message Is this job legit?] -> job_offer_dialogue_1
@@ -29,7 +29,7 @@ The Customer Support & Operations Executive role is full-time and mostly remote.
 === job_offer_dialogue_3 ===
 Hey Taylor... not sure if that was meant as a joke, but just to clarify, I'm a legitimate recruiter from T-Commerce Asia.<br><br>We reached out because you applied on LinkedIn, and we really liked your profile.<br><br>It's okay to double-check things but calling someone a scammer without confirming first isn't very respectful.<br><br>I'll withdraw your application for now. Best of luck with your job search. #Sender:message
 
-+ [Player:jobless_lose_ending Ok, I'm really sorry.]-> lose_ending
++ [Player:lose_ending Ok, I'm really sorry.]-> lose_ending
 
 === job_verification_dialogue_1 ===
 //OPEN WEBSITE THEN REPLY
@@ -41,14 +41,15 @@ Hey Taylor... not sure if that was meant as a joke, but just to clarify, I'm a l
 No worries at all! My email is listed on the Careers page, easy to miss sometimes.<br><br>I'm with the onboarding team under HR and totally understand the need to double check.<br><br>Let me know if you'd like me to loop in a colleague or resend a formal email for peace of mind! #Sender:message
 
 + [Player:message Appreciate the clarification. Could you send a formal intro email?] -> job_verification_email_dialogue_1
-+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
+//+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 
 === job_verification_email_dialogue_1 ===
 Alright email sent! #Sender:message
 //OPEN EMAIL 
 
-+ [Player:open_amail Check Amail] -> win_ending
++ [Player:open_amail Check Amail] -> END
 
+=== return_from_email ===
 + [Player:win_ending Thank you. Let's proceed.] -> win_ending
 //+ [Player:submit_scamshield Screenshot and submit to Scamshield] -> report_scamshield
 

@@ -34,24 +34,34 @@ public class ProfessionalJobManager : InkManager
                 knotName = "return_from_email";
                 break;
             case "win_ending":
-                uIManager.audioSource.clip = uIManager.winClip;
-                uIManager.audioSource.Play();
-                uIManager.winScreen.SetActive(true);
-                ProceedToVideo(winVideoClip);
+                StartCoroutine(HandleWinEnding());
                 break;
-            case "jobless_lose_ending":
-                uIManager.scenarioController.scenarioCanvas.SetActive(false);
-                uIManager.audioSource.clip = uIManager.loseClip;
-                uIManager.audioSource.Play();
-                uIManager.loseScreen.SetActive(true);
-                ProceedToVideo(loseVideoClip);
+            case "lose_ending":
+                StartCoroutine(HandleLoseEnding());
                 break;
             default:
                 base.PlayerAction(action, index);
                 break;
         }
     }
-
+    private IEnumerator HandleLoseEnding()
+    {
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.audioSource.clip = uIManager.loseClip;
+        uIManager.audioSource.Play();
+        uIManager.loseScreen.SetActive(true);
+        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
+        ProceedToVideo(loseVideoClip);
+    }
+    private IEnumerator HandleWinEnding()
+    {
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.audioSource.clip = uIManager.winClip;
+        uIManager.audioSource.Play();
+        uIManager.winScreen.SetActive(true);
+        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
+        ProceedToVideo(winVideoClip);
+    }
     public override void DisplayChoices()
     {
         //IMAGE OPTIONS HERE
@@ -90,7 +100,6 @@ public class ProfessionalJobManager : InkManager
     {
         yield return base.ReportToScamShield();
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
-
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
