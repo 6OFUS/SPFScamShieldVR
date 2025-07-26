@@ -105,6 +105,16 @@ public class InkManager : MonoBehaviour
             ShuffleChoices(playerChoices);
             DisplayChoices();
         }
+        else
+        {
+            LoadStoryPoint(knotName);
+        }
+    }
+
+    public virtual void LoadStoryPoint(string knotName)
+    {
+        story.ChoosePathString(knotName);
+        StartCoroutine(ContinueStory());
     }
 
     /// <summary>

@@ -1,3 +1,8 @@
+/*
+    Author: Kevin Heng
+    Date: 01/07/2025
+    Description: The ScenarioController class is used to pick a scenario within each scam after selecting it
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

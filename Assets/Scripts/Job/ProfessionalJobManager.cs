@@ -14,7 +14,8 @@ public class ProfessionalJobManager : InkManager
 {
     public ProfessionalJobUIManager uIManager;
 
-    public VideoClip loseVideoClip;
+    [Header("Educational videos")]
+    public VideoClip gameOverTryAgainVideoClip;
     public VideoClip winVideoClip;
 
     public override void PlayerAction(string action, int index)
@@ -51,7 +52,7 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
         yield return new WaitForEndOfFrame(); // Wait for UI to fully update
-        ProceedToVideo(loseVideoClip);
+        ProceedToVideo(gameOverTryAgainVideoClip);
     }
     private IEnumerator HandleWinEnding()
     {
@@ -103,6 +104,6 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
-        ProceedToVideo(loseVideoClip);
+        ProceedToVideo(gameOverTryAgainVideoClip);
     }
 }

@@ -20,6 +20,7 @@ You will complete simple tasks directly from your mobile device - each takes und
 
 + [Player:message_register_account Okay, I'll register and try a few tasks.] -> register_account
 + [Player:message Do I need to spend money to start?] -> job_verification_payout_dialogue_1
++ [Player:ignore_ending I think I'll pass, this sounds like a scam.] -> END
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_offer_dialogue_3 ===
@@ -27,6 +28,7 @@ That's a good question! This is a freelance contractor role - you'll be classifi
 
 //PLAYER CHOICES
 + [Player:message Sounds good, I'd like to know how the tasks work.] -> job_offer_dialogue_2
++ [Player:ignore_ending I think I'll pass, this sounds like a scam.] -> END
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ JOB VERIFICATION ------------------------------

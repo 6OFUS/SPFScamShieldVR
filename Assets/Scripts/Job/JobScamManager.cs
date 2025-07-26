@@ -15,13 +15,14 @@ using UnityEngine.Video;
 
 public class JobScamManager : InkManager
 {
-    public JobScamUIManager jobScamUIManager;
+    public JobScamUIManager uIManager;
 
     private TextMeshProUGUI currentInputFieldText;
     private Button currentChoiceButton;
 
     public AudioClip cryingClip;
-    public VideoClip loseVideoClip;
+    [Header("Educational videos")]
+    public VideoClip gameOverVideoClip;
     public VideoClip winVideoClip;
 
     [Header("Account creation")]
@@ -40,7 +41,7 @@ public class JobScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                jobScamUIManager.Screenshot();
+                uIManager.Screenshot();
                 ClearChoices();
                 Destroy(scamshieldButton);
             });
@@ -52,30 +53,30 @@ public class JobScamManager : InkManager
         switch (action)
         {
             case "open_amail":
-                jobScamUIManager.amailScreen.SetActive(true);
+                uIManager.amailScreen.SetActive(true);
                 break;
             case "message_register_account":
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                jobScamUIManager.websiteHomeScreen.SetActive(true);
+                uIManager.websiteHomeScreen.SetActive(true);
                 break;
             case "message_complete_task":
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                jobScamUIManager.whatsupScreen.SetActive(false);
+                uIManager.whatsupScreen.SetActive(false);
                 if (!firstTaskCompleted)
                 {
-                    jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
-                    jobScamUIManager.returnText.SetActive(false);
-                    jobScamUIManager.websiteHomeSilverTierButton.SetActive(true);
+                    uIManager.websiteHomeLoggedInScreen.SetActive(true);
+                    uIManager.returnText.SetActive(false);
+                    uIManager.websiteHomeSilverTierButton.SetActive(true);
                 }
                 else
                 {
-                    jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                    jobScamUIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
+                    uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                    uIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
                 }
                     break;
             case "message_withdraw":
-                jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                jobScamUIManager.withdrawButton.SetActive(true);
+                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                uIManager.withdrawButton.SetActive(true);
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 break;
             case "error_message":
@@ -83,32 +84,46 @@ public class JobScamManager : InkManager
                 StartCoroutine(WaitForReply());
                 break;
             case "lose_ending":
-                StartCoroutine(CryAudio());
+                StartCoroutine(HandleLoseEnding());
+                break;
+            case "ignore_ending":
+                StartCoroutine(HandleIgnoreOfferEnding());
                 break;
             default:
                 base.PlayerAction(action, index); 
                 break;
         }
     }
-    private IEnumerator CryAudio()
+    private IEnumerator HandleLoseEnding()
     {
-        jobScamUIManager.audioSource.clip = cryingClip;
-        jobScamUIManager.audioSource.Play();
+        uIManager.audioSource.clip = cryingClip;
+        uIManager.audioSource.Play();
         yield return new WaitForSeconds(cryingClip.length);
-        jobScamUIManager.scenarioController.scenarioCanvas.SetActive(false);
-        jobScamUIManager.loseScreen.SetActive(true);
-        jobScamUIManager.audioSource.clip = jobScamUIManager.loseClip;
-        jobScamUIManager.audioSource.Play();
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.loseScreen.SetActive(true);
+        uIManager.audioSource.clip = uIManager.loseClip;
+        uIManager.audioSource.Play();
         ClearChoices();
         Destroy(scamshieldButton);
-        ProceedToVideo(loseVideoClip);
+        ProceedToVideo(gameOverVideoClip);
     }
+
+    private IEnumerator HandleIgnoreOfferEnding()
+    {
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.audioSource.clip = uIManager.winClip;
+        uIManager.audioSource.Play();
+        uIManager.ignoreOfferScreen.SetActive(true);
+        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
+        ProceedToVideo(winVideoClip);
+    }
+
     public override void SenderAction(string action, string dialogue)
     {
         switch(action)
         {
             case "image":
-                messagingSystem.SenderImage(jobScamUIManager.scamPayoutImage);
+                messagingSystem.SenderImage(uIManager.scamPayoutImage);
                 break;
             default:
                 base.SenderAction(action, dialogue);
@@ -151,15 +166,15 @@ public class JobScamManager : InkManager
     {
         if(inputCount == 4)
         {
-            jobScamUIManager.loadingScreen.SetActive(true);
+            uIManager.loadingScreen.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
-            jobScamUIManager.websiteHomeLoggedInScreen.SetActive(true);
-            jobScamUIManager.returnText.SetActive(true);
+            uIManager.websiteHomeLoggedInScreen.SetActive(true);
+            uIManager.returnText.SetActive(true);
 
-            jobScamUIManager.loadingScreen.SetActive(false);
-            jobScamUIManager.websiteHomeScreen.SetActive(false);
-            jobScamUIManager.whatsupScreen.SetActive(false);
-            jobScamUIManager.websiteCreateAccountScreen.SetActive(false);
+            uIManager.loadingScreen.SetActive(false);
+            uIManager.websiteHomeScreen.SetActive(false);
+            uIManager.whatsupScreen.SetActive(false);
+            uIManager.websiteCreateAccountScreen.SetActive(false);
 
             knotName = "job_task_2_dialogue_1";
         }
@@ -184,12 +199,12 @@ public class JobScamManager : InkManager
 
     private IEnumerator LoadFirstTaskGroup()
     {
-        jobScamUIManager.websiteHomeLoggedInScreen.SetActive(false);
-        jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
-        jobScamUIManager.loadingScreen.SetActive(true);
+        uIManager.websiteHomeLoggedInScreen.SetActive(false);
+        uIManager.websiteSelectTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
-        jobScamUIManager.loadingScreen.SetActive(false);
-        jobScamUIManager.taskScreen.SetActive(true);
+        uIManager.loadingScreen.SetActive(false);
+        uIManager.taskScreen.SetActive(true);
         firstTaskCompleted = true;
     }
 
@@ -203,11 +218,11 @@ public class JobScamManager : InkManager
 
     private IEnumerator LoadingError()
     {
-        jobScamUIManager.websiteSelectTaskScreen.SetActive(false);
-        jobScamUIManager.loadingScreen.SetActive(true);
+        uIManager.websiteSelectTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
-        jobScamUIManager.returnText.SetActive(true);
-        jobScamUIManager.loadingScreenHomeButton.SetActive(true);
+        uIManager.returnText.SetActive(true);
+        uIManager.loadingScreenHomeButton.SetActive(true);
         knotName = "job_task_2_loading_error";
     }
 
@@ -215,18 +230,18 @@ public class JobScamManager : InkManager
     {
         if(numItemsAdded < 3)
         {
-            jobScamUIManager.itemNumUI[numItemsAdded].SetActive(true);
+            uIManager.itemNumUI[numItemsAdded].SetActive(true);
             numItemsAdded++;
         }
     }
 
     private IEnumerator LoadCheckOut()
     {
-        jobScamUIManager.taskScreen.SetActive(false);
-        jobScamUIManager.loadingBackToDashboardScreen.SetActive(true);
+        uIManager.taskScreen.SetActive(false);
+        uIManager.loadingBackToDashboardScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
-        jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-        jobScamUIManager.returnText.SetActive(true);
+        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+        uIManager.returnText.SetActive(true);
         knotName = "job_task_2_dialogue_2";
     }
 
@@ -245,20 +260,31 @@ public class JobScamManager : InkManager
 
     private IEnumerator WithdrawCoroutine()
     {
-        jobScamUIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
-        jobScamUIManager.loadingScreen.SetActive(true);
+        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
-        jobScamUIManager.loadingScreen.SetActive(false);
-        jobScamUIManager.websiteWithdrawErrorScreen.SetActive(true);
+        uIManager.loadingScreen.SetActive(false);
+        uIManager.websiteWithdrawErrorScreen.SetActive(true);
     }
 
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
-        jobScamUIManager.scenarioController.scenarioCanvas.SetActive(false);
-        jobScamUIManager.audioSource.clip = jobScamUIManager.winClip;
-        jobScamUIManager.audioSource.Play();
-        jobScamUIManager.winScreen.SetActive(true);
-        ProceedToVideo(winVideoClip);
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        if (!firstTaskCompleted)
+        {
+            uIManager.audioSource.clip = uIManager.winClip;
+            uIManager.audioSource.Play();
+            uIManager.winScreen.SetActive(true);
+            ProceedToVideo(winVideoClip);
+        }
+        else
+        {
+            uIManager.audioSource.clip = uIManager.loseClip;
+            uIManager.audioSource.Play();
+            uIManager.reportAfterScammedScreen.SetActive(true);
+
+            ProceedToVideo(gameOverVideoClip);
+        }
     }
 }

@@ -48,6 +48,8 @@ public class JobScamUIManager : UIManager
     [Header("End screen UI")]
     public GameObject loseScreen;
     public GameObject winScreen;
+    public GameObject ignoreOfferScreen;
+    public GameObject reportAfterScammedScreen;
     private GameObject uiCanvas;
 
     public override IEnumerator FlashEffect()
