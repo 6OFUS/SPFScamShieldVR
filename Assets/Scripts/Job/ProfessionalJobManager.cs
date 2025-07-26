@@ -44,6 +44,8 @@ public class ProfessionalJobManager : InkManager
     }
     private IEnumerator HandleLoseEnding()
     {
+        ClearChoices();
+        Destroy(scamshieldButton);
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
@@ -54,6 +56,8 @@ public class ProfessionalJobManager : InkManager
     }
     private IEnumerator HandleWinEnding()
     {
+        ClearChoices();
+        Destroy(scamshieldButton);
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
         uIManager.audioSource.clip = uIManager.winClip;
         uIManager.audioSource.Play();
@@ -106,7 +110,6 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
-
         ProceedToVideo(gameOverVideoClip);
     }
 }
