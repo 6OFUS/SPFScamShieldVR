@@ -11,6 +11,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 
 public class InkManager : MonoBehaviour 
@@ -30,6 +31,11 @@ public class InkManager : MonoBehaviour
     public AnimationClip scamshieldLoading;
 
     public Fade fadeScript;
+    public RecapVideo recapVideoScript;
+
+    public GameObject xrMove;
+    public GameObject leftControllerNearFar;
+    public GameObject rightControllerNearFar;
 
     [Header("Messaging")]
     /// <summary>
@@ -60,7 +66,11 @@ public class InkManager : MonoBehaviour
     /// </summary>
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
 
-
+    [Header("Educational videos")]
+    public VideoClip gameOverVideoClip;
+    public VideoClip winVideoClip;
+    public VideoClip whatHappenWinClip;
+    public VideoClip whatHappenLoseClip;
 
     /// <summary>
     /// Function to start the story via messages
@@ -266,6 +276,9 @@ public class InkManager : MonoBehaviour
         {
             ClearChoices();
             StartCoroutine(fadeScript.FadeTeleport(videoClip));
+            xrMove.SetActive(false);
+            leftControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;
+            rightControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;
         });
     }
 }

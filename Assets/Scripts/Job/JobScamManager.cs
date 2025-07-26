@@ -21,9 +21,6 @@ public class JobScamManager : InkManager
     private Button currentChoiceButton;
 
     public AudioClip cryingClip;
-    [Header("Educational videos")]
-    public VideoClip gameOverVideoClip;
-    public VideoClip winVideoClip;
 
     [Header("Account creation")]
     public int inputCount;
@@ -105,6 +102,10 @@ public class JobScamManager : InkManager
         uIManager.audioSource.Play();
         ClearChoices();
         Destroy(scamshieldButton);
+        uIManager.whatHappenButton.onClick.AddListener(() =>
+        {
+            recapVideoScript.PlayVideo(whatHappenLoseClip);
+        });
         ProceedToVideo(gameOverVideoClip);
     }
 
@@ -115,6 +116,12 @@ public class JobScamManager : InkManager
         uIManager.audioSource.Play();
         uIManager.ignoreOfferScreen.SetActive(true);
         yield return new WaitForEndOfFrame(); // Wait for UI to fully update
+        ClearChoices();
+        Destroy(scamshieldButton);
+        uIManager.whatHappenButton.onClick.AddListener(() =>
+        {
+            recapVideoScript.PlayVideo(whatHappenWinClip);
+        });
         ProceedToVideo(winVideoClip);
     }
 
@@ -276,6 +283,10 @@ public class JobScamManager : InkManager
             uIManager.audioSource.clip = uIManager.winClip;
             uIManager.audioSource.Play();
             uIManager.winScreen.SetActive(true);
+            uIManager.whatHappenButton.onClick.AddListener(() =>
+            {
+                recapVideoScript.PlayVideo(whatHappenLoseClip);
+            });
             ProceedToVideo(winVideoClip);
         }
         else
@@ -283,7 +294,10 @@ public class JobScamManager : InkManager
             uIManager.audioSource.clip = uIManager.loseClip;
             uIManager.audioSource.Play();
             uIManager.reportAfterScammedScreen.SetActive(true);
-
+            uIManager.whatHappenButton.onClick.AddListener(() =>
+            {
+                recapVideoScript.PlayVideo(whatHappenWinClip);
+            });
             ProceedToVideo(gameOverVideoClip);
         }
     }

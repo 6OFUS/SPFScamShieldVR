@@ -38,6 +38,8 @@ public class UIManager : MonoBehaviour
     [Header("App UI")]
     public Button whatsupAppButton;
 
+    public Button whatHappenButton;
+
 
     public void Screenshot()
     {
