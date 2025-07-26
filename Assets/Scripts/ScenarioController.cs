@@ -3,10 +3,11 @@
     Date: 01/07/2025
     Description: The ScenarioController class is used to pick a scenario within each scam after selecting it
 */
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ink.Runtime;
+using UnityEngine.SceneManagement;
 
 public class ScenarioController : MonoBehaviour
 {
@@ -32,13 +33,39 @@ public class ScenarioController : MonoBehaviour
 
     public GameObject scenarioCanvas;
 
+
     /// <summary>
     /// Function to randomise the scam scenario player will go through
     /// </summary>
     public void RandomiseScenario()
     {
-        int index = Random.Range(0, inkJsonFiles.Length);
 
+        int index;
+
+        if (GameManager.Instance.isRestart)
+        {
+            index = GameManager.Instance.prevSceneIndexNum;
+            GameManager.Instance.isRestart = false; // reset flag
+        }
+        else
+        {
+            int max = inkJsonFiles.Length;
+            index = Random.Range(0, max);
+
+            // Avoid repeating the last scenario
+            while (index == GameManager.Instance.prevSceneIndexNum)
+            {
+                index = Random.Range(0, max);
+            }
+
+            GameManager.Instance.prevSceneIndexNum = index;
+        }
+
+        LoadScenario(index);
+    }
+
+    private void LoadScenario(int index)
+    {
         TextAsset selectedInk = inkJsonFiles[index];
         scenarioCanvas = uiCanvas[index];
         scamOrNotEndingUI[index].SetActive(true);

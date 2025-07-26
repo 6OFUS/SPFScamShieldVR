@@ -6,7 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int prevSceneIndexNum;
+    public int prevSceneIndexNum = -1;
+
+    public int prevScenario = -1;
+
+    public bool isRestart;
 
     private void Awake()
     {

@@ -33,6 +33,12 @@ public class SceneChanger : MonoBehaviour
         StartCoroutine(FadeThenChange());
     }
 
+    public void RestartScene()
+    {
+        GameManager.Instance.isRestart = true;
+        StartCoroutine(FadeThenChange());
+
+    }
     // Start is called before the first frame update
     void Start()
     {

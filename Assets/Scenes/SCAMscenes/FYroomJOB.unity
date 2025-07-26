@@ -3636,6 +3636,7 @@ GameObject:
   - component: {fileID: 380537254}
   - component: {fileID: 380537253}
   - component: {fileID: 380537252}
+  - component: {fileID: 380537255}
   m_Layer: 5
   m_Name: What happen button
   m_TagString: Untagged
@@ -3744,6 +3745,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380537250}
   m_CullTransparentMesh: 1
+--- !u!114 &380537255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380537250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea50d365e637fe41b88b5cbe876f8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 0.0014, y: 0.0014, z: 0.0014}
+  scaleSpeed: 10
 --- !u!43 &391094806
 Mesh:
   m_ObjectHideFlags: 0
@@ -22924,6 +22939,7 @@ GameObject:
   - component: {fileID: 573206054}
   - component: {fileID: 573206053}
   - component: {fileID: 573206056}
+  - component: {fileID: 573206057}
   m_Layer: 5
   m_Name: Back to menu button
   m_TagString: Untagged
@@ -23058,6 +23074,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 1387297153}
   sceneIndexNum: 0
+--- !u!114 &573206057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573206051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea50d365e637fe41b88b5cbe876f8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 0.003687179, y: 0.003687179, z: 0.003687179}
+  scaleSpeed: 10
 --- !u!1001 &574796531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25658,7 +25688,7 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 1761303878}
   returnText: {fileID: 1761303877}
   whatsupAppButton: {fileID: 1761303876}
-  whatHappenButton: {fileID: 0}
+  whatHappenButton: {fileID: 380537252}
   stickers:
   - {fileID: 21300000, guid: af64d6da4dab43644b3cb499bc784fee, type: 3}
   - {fileID: 21300000, guid: 287ec40ab5f7b424dbd0f0afe7b62015, type: 3}
@@ -34332,6 +34362,7 @@ GameObject:
   - component: {fileID: 1126770764}
   - component: {fileID: 1126770763}
   - component: {fileID: 1126770762}
+  - component: {fileID: 1126770765}
   m_Layer: 5
   m_Name: What should you do button
   m_TagString: Untagged
@@ -34452,6 +34483,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126770760}
   m_CullTransparentMesh: 1
+--- !u!114 &1126770765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126770760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea50d365e637fe41b88b5cbe876f8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 0.0014, y: 0.0014, z: 0.0014}
+  scaleSpeed: 10
 --- !u!1 &1132525991
 GameObject:
   m_ObjectHideFlags: 0
@@ -35422,7 +35467,7 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 1761303867}
   returnText: {fileID: 1761303831}
   whatsupAppButton: {fileID: 1761303852}
-  whatHappenButton: {fileID: 0}
+  whatHappenButton: {fileID: 380537252}
   whatsupScreen: {fileID: 1761303851}
   whatsupHomeButton: {fileID: 1761303850}
   amailScreen: {fileID: 1761303849}
@@ -35862,6 +35907,10 @@ PrefabInstance:
       propertyPath: m_EnableFarCasting
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2432040751937822340, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: m_EnableNearCasting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2514763898625931400, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: videoPlayer
       value: 
@@ -35877,6 +35926,10 @@ PrefabInstance:
     - target: {fileID: 4670472044995149851, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: m_EnableFarCasting
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4670472044995149851, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: m_EnableNearCasting
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5558898693603716733, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: m_Name
@@ -35921,6 +35974,10 @@ PrefabInstance:
     - target: {fileID: 5558898693603716734, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502610546254952668, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6553382299751234388, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: m_IsActive
@@ -36761,6 +36818,8 @@ GameObject:
   - component: {fileID: 1430406691}
   - component: {fileID: 1430406690}
   - component: {fileID: 1430406689}
+  - component: {fileID: 1430406692}
+  - component: {fileID: 1430406693}
   m_Layer: 5
   m_Name: Restart button
   m_TagString: Untagged
@@ -36869,6 +36928,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430406687}
   m_CullTransparentMesh: 1
+--- !u!114 &1430406692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430406687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea50d365e637fe41b88b5cbe876f8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverScale: {x: 0.003687179, y: 0.003687179, z: 0.003687179}
+  scaleSpeed: 10
+--- !u!114 &1430406693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430406687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6671bcf41a88f4c84d6d0426f98683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: {fileID: 1387297153}
+  sceneIndexNum: 1
 --- !u!1 &1433794877
 GameObject:
   m_ObjectHideFlags: 0
@@ -45437,6 +45524,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 398172843}
+    - target: {fileID: 1089190418892491746, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.004315827
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089190418892491746, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50.342773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089190418892491746, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.6975098
+      objectReference: {fileID: 0}
     - target: {fileID: 1430679989086502879, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
