@@ -16,6 +16,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class InkManager : MonoBehaviour 
 {
+    [Header("Ink story")]
     /// <summary>
     /// The active Ink story instance used for dialogue control.
     /// </summary>
@@ -27,12 +28,9 @@ public class InkManager : MonoBehaviour
 
     public string knotName;
     public bool stopStory;
+    
 
-    public AnimationClip scamshieldLoading;
-
-    public Fade fadeScript;
-    public RecapVideo recapVideoScript;
-
+    [Header("Player controls")]
     public GameObject xrMove;
     public GameObject leftControllerNearFar;
     public GameObject rightControllerNearFar;
@@ -49,14 +47,9 @@ public class InkManager : MonoBehaviour
 
     [Header("Player choice")]
     /// <summary>
-    /// Prefab for choice button UI 
+    /// Prefab for dialogue choice button UI 
     /// </summary>
-    public GameObject choiceButtonPrefab;
-
-    public GameObject scamshieldChoiceButtonPrefab;
-
-    public GameObject scamshieldButton;
-
+    public GameObject dialogueChoiceButtonPrefab;
     /// <summary>
     /// Parent transform where choice buttons will be instantiated
     /// </summary>
@@ -66,11 +59,22 @@ public class InkManager : MonoBehaviour
     /// </summary>
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
 
+    public GameObject actionChoiceButtonPrefab;
+
+    [Header("Scamshield")]
+    public GameObject scamshieldChoiceButtonPrefab;
+    public GameObject scamshieldButton;
+    public AnimationClip scamshieldLoading;
+
     [Header("Educational videos")]
     public VideoClip gameOverVideoClip;
     public VideoClip winVideoClip;
-    public VideoClip whatHappenWinClip;
-    public VideoClip whatHappenLoseClip;
+    public VideoClip whatHappenWinVideoClip;
+    public VideoClip whatHappenLoseVideoClip;
+
+    [Header("Script references")]
+    public Fade fadeScript;
+    public RecapVideo recapVideoScript;
 
     /// <summary>
     /// Function to start the story via messages
@@ -108,8 +112,6 @@ public class InkManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
-                Debug.Log(playerChoices[i].choiceName);
-                Debug.Log(playerChoices[i].choiceIndex);
             }
 
             ShuffleChoices(playerChoices);
@@ -143,7 +145,6 @@ public class InkManager : MonoBehaviour
     /// <param name="index">Index of the selected choice from choices given</param>
     public void ChooseOption(int index)
     {
-        Debug.Log(index);
         string action = playerChoices[index].choiceAction;
         PlayerAction(action, index);
         story.ChooseChoiceIndex(playerChoices[index].choiceIndex);
@@ -156,21 +157,36 @@ public class InkManager : MonoBehaviour
     {
         foreach (var choice in playerChoices)
         {
-            if(choice.choiceAction == "sticker")
+            if (choice.choiceAction.Contains("action"))
+            {
+                GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+                TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = choice.choiceName;
+
+                // Capture the correct index in a local variable to avoid closure issue
+                int capturedIndex = playerChoices.IndexOf(choice);
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+                    ChooseOption(capturedIndex);
+                    ClearChoices();
+                });
+            }
+            else if(choice.choiceAction.Contains("message"))
+            {
+                GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
+                TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = choice.choiceName;
+
+                // Capture the correct index in a local variable to avoid closure issue
+                int capturedIndex = playerChoices.IndexOf(choice);
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+                    ChooseOption(capturedIndex);
+                    ClearChoices();
+                });
+            }
+            else
             {
                 continue;
             }
-
-            GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
-            TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = choice.choiceName;
-
-            // Capture the correct index in a local variable to avoid closure issue
-            int capturedIndex = playerChoices.IndexOf(choice);
-            buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-                ChooseOption(capturedIndex);
-                ClearChoices();
-                });
         }
     }
 
@@ -268,7 +284,7 @@ public class InkManager : MonoBehaviour
     {
         Destroy(scamshieldButton);
         choiceContainer.gameObject.SetActive(true);
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
+        GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = "Proceed to video recap";
 
@@ -281,4 +297,11 @@ public class InkManager : MonoBehaviour
             rightControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;
         });
     }
+
+    private void Start()
+    {
+        StartStory();
+    }
+
+
 }

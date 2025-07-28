@@ -20,7 +20,10 @@ public class JobScamManager : InkManager
     private TextMeshProUGUI currentInputFieldText;
     private Button currentChoiceButton;
 
+    [Header("Audio")]
     public AudioClip cryingClip;
+    public AudioClip checkOutClip;
+    public AudioClip errorClip;
 
     [Header("Account creation")]
     public int inputCount;
@@ -62,7 +65,6 @@ public class JobScamManager : InkManager
                 if (!firstTaskCompleted)
                 {
                     uIManager.websiteHomeLoggedInScreen.SetActive(true);
-                    uIManager.returnText.SetActive(false);
                     uIManager.websiteHomeSilverTierButton.SetActive(true);
                 }
                 else
@@ -104,7 +106,7 @@ public class JobScamManager : InkManager
         Destroy(scamshieldButton);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
-            recapVideoScript.PlayVideo(whatHappenLoseClip);
+            recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
         });
         ProceedToVideo(gameOverVideoClip);
     }
@@ -120,7 +122,7 @@ public class JobScamManager : InkManager
         Destroy(scamshieldButton);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
-            recapVideoScript.PlayVideo(whatHappenWinClip);
+            recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
         ProceedToVideo(winVideoClip);
     }
@@ -148,7 +150,7 @@ public class JobScamManager : InkManager
 
     public void InputChoice(string inputName)
     {
-        GameObject buttonObj = Instantiate(choiceButtonPrefab, choiceContainer);
+        GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = inputName;
 
@@ -176,7 +178,6 @@ public class JobScamManager : InkManager
             uIManager.loadingScreen.SetActive(true);
             yield return new WaitForSeconds(loadingTime);
             uIManager.websiteHomeLoggedInScreen.SetActive(true);
-            uIManager.returnText.SetActive(true);
 
             uIManager.loadingScreen.SetActive(false);
             uIManager.websiteHomeScreen.SetActive(false);
@@ -188,6 +189,8 @@ public class JobScamManager : InkManager
         else
         {
             //ERROR AUDIO
+            uIManager.audioSource.clip = errorClip;
+            uIManager.audioSource.Play();
         }
     }
 
@@ -228,7 +231,6 @@ public class JobScamManager : InkManager
         uIManager.websiteSelectTaskScreen.SetActive(false);
         uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
-        uIManager.returnText.SetActive(true);
         uIManager.loadingScreenHomeButton.SetActive(true);
         knotName = "job_task_2_loading_error";
     }
@@ -248,7 +250,6 @@ public class JobScamManager : InkManager
         uIManager.loadingBackToDashboardScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-        uIManager.returnText.SetActive(true);
         knotName = "job_task_2_dialogue_2";
     }
 
@@ -256,7 +257,14 @@ public class JobScamManager : InkManager
     {
         if(numItemsAdded == 3)
         {
+            uIManager.audioSource.clip = checkOutClip;
+            uIManager.audioSource.Play();
             StartCoroutine(LoadCheckOut());
+        }
+        else
+        {
+            uIManager.audioSource.clip = errorClip;
+            uIManager.audioSource.Play();
         }
     }
 
@@ -272,20 +280,22 @@ public class JobScamManager : InkManager
         yield return new WaitForSeconds(loadingTime);
         uIManager.loadingScreen.SetActive(false);
         uIManager.websiteWithdrawErrorScreen.SetActive(true);
+        uIManager.audioSource.clip = errorClip;
+        uIManager.audioSource.Play();
     }
 
     protected override IEnumerator ReportToScamShield()
     {
         yield return base.ReportToScamShield();
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        if (!firstTaskCompleted)
+        if (firstTaskCompleted)
         {
             uIManager.audioSource.clip = uIManager.winClip;
             uIManager.audioSource.Play();
             uIManager.winScreen.SetActive(true);
             uIManager.whatHappenButton.onClick.AddListener(() =>
             {
-                recapVideoScript.PlayVideo(whatHappenLoseClip);
+                recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
             });
             ProceedToVideo(winVideoClip);
         }
@@ -296,7 +306,7 @@ public class JobScamManager : InkManager
             uIManager.reportAfterScammedScreen.SetActive(true);
             uIManager.whatHappenButton.onClick.AddListener(() =>
             {
-                recapVideoScript.PlayVideo(whatHappenWinClip);
+                recapVideoScript.PlayVideo(whatHappenWinVideoClip);
             });
             ProceedToVideo(gameOverVideoClip);
         }

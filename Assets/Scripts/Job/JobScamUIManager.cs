@@ -13,7 +13,6 @@ public class JobScamUIManager : UIManager
 {
     [Header("WhatsUp UI")]
     public GameObject whatsupScreen;
-    public GameObject whatsupHomeButton;
 
     [Header("Amail UI")]
     public GameObject amailScreen;
@@ -38,7 +37,6 @@ public class JobScamUIManager : UIManager
 
     [Header("Loading screen UI")]
     public GameObject loadingScreen;
-    //public GameObject loadingScreenReturnText;
     public GameObject loadingScreenHomeButton;
     public GameObject loadingBackToDashboardScreen;
 
@@ -50,52 +48,14 @@ public class JobScamUIManager : UIManager
     public GameObject winScreen;
     public GameObject ignoreOfferScreen;
     public GameObject reportAfterScammedScreen;
-    private GameObject uiCanvas;
 
     public override IEnumerator FlashEffect()
     {
         yield return base.FlashEffect();
-        whatsupHomeButton.SetActive(true);
-        returnText.SetActive(true);
-
-
-        ResetHomeButtons();
-    }
-
-    public override void ResetHomeButtons()
-    {
-        foreach (Button homeButton in homeButtons)
-        {
-            homeButton.gameObject.SetActive(true);
-            homeButton.onClick.RemoveAllListeners();
-            homeButton.onClick.AddListener(() =>
-            {
-                foreach (GameObject canvas in scenarioController.uiCanvas)
-                {
-                    if (canvas.activeInHierarchy)
-                    {
-                        uiCanvas = canvas;
-                        break;
-                    }
-                }
-                DisableAllCanvasChildren(uiCanvas);
-                homeScreen.SetActive(true);
-                returnText.SetActive(false);
-            });
-        }
     }
 
     private void Start()
     {
-        foreach (Button homeButton in homeButtons)
-        {
-            homeButton.onClick.AddListener(() =>
-            {
-                if (homeScreen.activeInHierarchy)
-                {
-                    inkManager.choiceContainer.gameObject.SetActive(false);
-                }
-            });
-        }
+
     }
 }

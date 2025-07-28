@@ -44,7 +44,7 @@ public class ScenarioController : MonoBehaviour
 
         if (GameManager.Instance.isRestart)
         {
-            index = GameManager.Instance.prevSceneIndexNum;
+            index = GameManager.Instance.prevScenario;
             GameManager.Instance.isRestart = false; // reset flag
         }
         else
@@ -53,12 +53,12 @@ public class ScenarioController : MonoBehaviour
             index = Random.Range(0, max);
 
             // Avoid repeating the last scenario
-            while (index == GameManager.Instance.prevSceneIndexNum)
+            while (index == GameManager.Instance.prevScenario)
             {
                 index = Random.Range(0, max);
             }
 
-            GameManager.Instance.prevSceneIndexNum = index;
+            GameManager.Instance.prevScenario = index;
         }
 
         LoadScenario(index);

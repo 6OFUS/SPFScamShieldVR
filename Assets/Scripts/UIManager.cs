@@ -12,16 +12,15 @@ using UnityEngine.Video;
 
 public class UIManager : MonoBehaviour
 {
-    public bool screenshotTaken;
-
-    public Image flashImage; 
-    public float flashDuration;
-
+    [Header("Script references")]
     public InkManager inkManager;
     public ScenarioController scenarioController;
 
+    [Header("Screenshot")]
+    public bool screenshotTaken;
+    public Image flashImage; 
+    public float flashDuration;
 
-    public List<Button> homeButtons = new List<Button>();
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -32,18 +31,12 @@ public class UIManager : MonoBehaviour
     [Header("Scamshield UI")]
     public GameObject scamshieldScreen;
 
-    [Header("Instructions UI")]
-    public GameObject returnText;
-
-    [Header("App UI")]
-    public Button whatsupAppButton;
-
+    [Header("End screen UI")]
     public Button whatHappenButton;
 
 
     public void Screenshot()
     {
-        Debug.Log("Screenshot");
         if (!screenshotTaken)
         {
             inkManager.stopStory = true;
@@ -52,7 +45,6 @@ public class UIManager : MonoBehaviour
             audioSource.Play();
             flashImage.gameObject.SetActive(true);
             StartCoroutine(FlashEffect());
-            whatsupAppButton.enabled = false;
         }
     }
 
@@ -88,19 +80,5 @@ public class UIManager : MonoBehaviour
 
         flashImage.color = new Color(1, 1, 1, 0);
         flashImage.gameObject.SetActive(false);
-    }
-
-    public void DisableAllCanvasChildren(GameObject parent)
-    {
-        foreach (Transform child in parent.transform)
-        {
-            Debug.Log(child.name);
-            child.gameObject.SetActive(false);
-        }
-    }
-
-    public virtual void ResetHomeButtons()
-    {
-
     }
 }

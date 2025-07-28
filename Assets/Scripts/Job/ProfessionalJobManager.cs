@@ -12,6 +12,7 @@ using UnityEngine.Video;
 
 public class ProfessionalJobManager : InkManager
 {
+    
     public ProfessionalJobUIManager uIManager;
 
 
@@ -65,7 +66,7 @@ public class ProfessionalJobManager : InkManager
         yield return new WaitForEndOfFrame(); // Wait for UI to fully update
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
-            recapVideoScript.PlayVideo(whatHappenWinClip);
+            recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
         ProceedToVideo(winVideoClip);
     }

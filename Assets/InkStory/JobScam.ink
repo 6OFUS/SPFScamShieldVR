@@ -1,9 +1,10 @@
--> job_offer_intro
+-> open_notification
+=== open_notification ===
++ [Player:action_open_notification Open the notification] -> job_offer_intro
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
 Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
-
 
 //OPEN AMAIL 
 + [Player:open_amail Check Amail] -> job_offer_dialogue_1
