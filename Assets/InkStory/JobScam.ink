@@ -7,7 +7,10 @@
 Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
 
 //OPEN AMAIL 
-+ [Player:open_amail Check Amail] -> job_offer_dialogue_1
++ [Player:action_open_amail Check Amail] -> open_jason_email
+
+=== open_jason_email ===
++ [Player:action_open_jason_email Open Jason's email] -> job_offer_dialogue_1
 
 === job_offer_dialogue_1 ===
 //SHOW THIS ONLY WHEN GO BACK TO WHATSUP
@@ -22,7 +25,6 @@ You will complete simple tasks directly from your mobile device - each takes und
 + [Player:message_register_account Okay, I'll register and try a few tasks.] -> register_account
 + [Player:message Do I need to spend money to start?] -> job_verification_payout_dialogue_1
 + [Player:ignore_ending I think I'll pass, this sounds like a scam.] -> END
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_offer_dialogue_3 ===
 That's a good question! This is a freelance contractor role - you'll be classified under our remote contributor program. <br><br>We work with part-timers and freelancers who want to earn flexible income on their own time. No long-term commitment is required, and we process payouts daily via PayNow. #Sender:message
@@ -30,7 +32,6 @@ That's a good question! This is a freelance contractor role - you'll be classifi
 //PLAYER CHOICES
 + [Player:message Sounds good, I'd like to know how the tasks work.] -> job_offer_dialogue_2
 + [Player:ignore_ending I think I'll pass, this sounds like a scam.] -> END
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ JOB VERIFICATION ------------------------------
 === job_verification_payout_dialogue_1 ===
@@ -39,7 +40,6 @@ That's a great question and totally understandable. You're not paying us anythin
 //PLAYER CHOICES
 + [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
 + [Player:message Can I start without doing a purchase cycle?] -> job_verification_payout_dialogue_2
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_2 === 
 I totally understand your concern. Unfortunately, the purchase cycle is a required step to unlock task access - it's part of the portal's anti-bot and fraud prevention system. I's not a payment to us, and it's not a fee - it's just a simulation of an actual task. <br><br>Once you complete it, your full amount plus 8-12% commission is immediately reflected in your dashboard, and you'll be eligible to withdraw after completing three groups. We've had thousands of users go through the same process smoothly. #Sender:message
@@ -47,7 +47,6 @@ I totally understand your concern. Unfortunately, the purchase cycle is a requir
 //PLAYER CHOICES
 + [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
 + [Player:message Can you guarantee I'll get the money back after the task?] -> job_verification_payout_dialogue_3
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_3 === 
 Yes, absolutely. The system is automated and built to credit both your task amount and commission immediately after each completed group. <br><br>For example, if your task cycle involves $28, your balance will show $28 right after. We've processed over 2,000 contributor payouts this month alone, and all successful applicants receive their earnings as long as tasks are completed correctly. <br><Br>If you face any delay, our support team is available 24/7 to help. #Sender:message
@@ -69,7 +68,8 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 === register_account ===
 //PLAYER TO REGISTER FOR ACCOUNT ON WEBSITE LINK
 //PAUSE HERE THEN GO TO job_task_2_dialogue_1
--> END 
++ [Player:action_create_account Create account] -> job_task_2_dialogue_1
+
 
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message

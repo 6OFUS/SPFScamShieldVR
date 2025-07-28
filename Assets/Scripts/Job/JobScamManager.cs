@@ -17,8 +17,7 @@ public class JobScamManager : InkManager
 {
     public JobScamUIManager uIManager;
 
-    private TextMeshProUGUI currentInputFieldText;
-    private Button currentChoiceButton;
+    private bool isOnHomeScreen;
 
     [Header("Audio")]
     public AudioClip cryingClip;
@@ -36,7 +35,7 @@ public class JobScamManager : InkManager
     public override void DisplayChoices()
     {
         base.DisplayChoices();
-        if (scamshieldButton == null)
+        if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
@@ -52,13 +51,29 @@ public class JobScamManager : InkManager
     {
         switch (action)
         {
-            case "open_amail":
+            case "action_open_notification":
+                uIManager.whatsupScreen.SetActive(true);
+                StartCoroutine(WaitForReply(0));
+                break;
+            case "action_open_amail":
                 uIManager.amailScreen.SetActive(true);
+                StartCoroutine(WaitForReply(2));
+                break;
+            case "action_open_jason_email":
+                uIManager.jasonEmailScreen.SetActive(true);
+                StartCoroutine(SpawnHomeButton(5));
                 break;
             case "message_register_account":
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 uIManager.websiteHomeScreen.SetActive(true);
+                StartCoroutine(WaitForReply(1));
                 break;
+
+            case "action_create_account":
+                uIManager.websiteCreateAccountScreen.SetActive(true);
+                StartCoroutine(SpawnEnterDetailsButton());
+                break;
+
             case "message_complete_task":
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 uIManager.whatsupScreen.SetActive(false);
@@ -72,7 +87,7 @@ public class JobScamManager : InkManager
                     uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                     uIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
                 }
-                    break;
+                break;
             case "message_withdraw":
                 uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                 uIManager.withdrawButton.SetActive(true);
@@ -80,7 +95,7 @@ public class JobScamManager : InkManager
                 break;
             case "error_message":
                 messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
-                StartCoroutine(WaitForReply());
+                StartCoroutine(WaitForReply(messageTime));
                 break;
             case "lose_ending":
                 StartCoroutine(HandleLoseEnding());
@@ -93,6 +108,87 @@ public class JobScamManager : InkManager
                 break;
         }
     }
+
+    private IEnumerator SpawnHomeButton(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = "Go to home screen";
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            isOnHomeScreen = true;
+            uIManager.DisableAllCanvasChildren();
+            uIManager.homeScreen.SetActive(true);
+            Destroy(scamshieldButton);
+            StartCoroutine(SpawnOpenWhatsUpButton(1));
+            Destroy(buttonObj);
+        });
+        scamshieldButton.transform.SetAsLastSibling();
+    }
+    private IEnumerator SpawnOpenWhatsUpButton(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = "Open WhatsUp";
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            uIManager.whatsupScreen.SetActive(true);
+            StartCoroutine(WaitForReply(0));
+            isOnHomeScreen = false;
+            Destroy(buttonObj);
+        });
+        scamshieldButton.transform.SetAsLastSibling();
+    }
+
+    private IEnumerator SpawnEnterDetailsButton()
+    {
+        yield return new WaitForSeconds(1);
+
+        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = "Enter details";
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            for(int i = 0; i < uIManager.detailsInputText.Length; i++)
+            {
+                uIManager.detailsInputText[i].color = Color.black;
+                uIManager.detailsInputText[i].text = uIManager.detailsTextContent[i];
+            }
+            Destroy(buttonObj);
+            //spawn create account button
+            StartCoroutine(SpawnCreateAccountButton());
+        });
+        scamshieldButton.transform.SetAsLastSibling();
+    }
+
+    private IEnumerator SpawnCreateAccountButton()
+    {
+        yield return new WaitForSeconds(1);
+
+        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = "Submit and create account";
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            StartCoroutine(CreatingAccount());
+            Destroy(buttonObj);
+
+        });
+        scamshieldButton.transform.SetAsLastSibling();
+    }
+
+    private IEnumerator CreatingAccount()
+    {
+        uIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uIManager.websiteHomeLoggedInScreen.SetActive(true);
+        StartCoroutine(SpawnHomeButton(1));
+    }
+
     private IEnumerator HandleLoseEnding()
     {
         uIManager.audioSource.clip = cryingClip;
@@ -139,59 +235,15 @@ public class JobScamManager : InkManager
                 break;
         }
     }
-    public void SetCurrentInputField(TextMeshProUGUI inputField)
-    {
-        currentInputFieldText = inputField;
-    }
-    public void SetCurrentChoiceButton(Button choiceButton)
-    {
-        currentChoiceButton = choiceButton;
-    }
-
-    public void InputChoice(string inputName)
-    {
-        GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = inputName;
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-            if (currentChoiceButton != null)
-            {
-                currentChoiceButton.interactable = false;
-            }
-            currentInputFieldText.text = inputName;
-            currentInputFieldText.color = Color.black;
-            ClearChoices();
-            inputCount++;
-        });
-
-        if (scamshieldButton != null && scamshieldButton.transform.IsChildOf(choiceContainer))
-        {
-            scamshieldButton.transform.SetAsLastSibling();
-        }
-    }
 
     private IEnumerator RegisterAccountCoroutine()
     {
-        if(inputCount == 4)
-        {
-            uIManager.loadingScreen.SetActive(true);
-            yield return new WaitForSeconds(loadingTime);
-            uIManager.websiteHomeLoggedInScreen.SetActive(true);
+        uIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uIManager.websiteHomeLoggedInScreen.SetActive(true);
 
-            uIManager.loadingScreen.SetActive(false);
-            uIManager.websiteHomeScreen.SetActive(false);
-            uIManager.whatsupScreen.SetActive(false);
-            uIManager.websiteCreateAccountScreen.SetActive(false);
 
-            knotName = "job_task_2_dialogue_1";
-        }
-        else
-        {
-            //ERROR AUDIO
-            uIManager.audioSource.clip = errorClip;
-            uIManager.audioSource.Play();
-        }
+        knotName = "job_task_2_dialogue_1";
     }
 
     public void RegisterAccount()

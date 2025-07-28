@@ -133,9 +133,9 @@ public class InkManager : MonoBehaviour
     /// Coroutine to wait for next message to send
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public IEnumerator WaitForReply()
+    public IEnumerator WaitForReply(float replyTime)
     {
-        yield return new WaitForSeconds(messageTime);
+        yield return new WaitForSeconds(replyTime);
         yield return StartCoroutine(ContinueStory());
     }
 
@@ -170,7 +170,7 @@ public class InkManager : MonoBehaviour
                     ClearChoices();
                 });
             }
-            else if(choice.choiceAction.Contains("message"))
+            else if(choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
             {
                 GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
                 TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
@@ -243,18 +243,6 @@ public class InkManager : MonoBehaviour
     /// Executes actions triggered by the player's choice selection
     /// </summary>
     /// <param name="action"> Action name </param>
-    public virtual void PlayerAction(string action,int index)
-    {
-        switch (action)
-        {
-            case "message":
-                string selectedText = playerChoices[index].choiceName;
-                messagingSystem.PlayerNextMessage(selectedText);
-                StartCoroutine(WaitForReply());
-                break;
-        }
-    }
-
     /// <summary>
     /// Execute actions triggered by the sender based on the tag
     /// </summary>
@@ -269,6 +257,19 @@ public class InkManager : MonoBehaviour
                 break;
         }
     }
+
+    public virtual void PlayerAction(string action,int index)
+    {
+        switch (action)
+        {
+            case "message":
+                string selectedText = playerChoices[index].choiceName;
+                messagingSystem.PlayerNextMessage(selectedText);
+                StartCoroutine(WaitForReply(messageTime));
+                break;
+        }
+    }
+
 
     protected virtual IEnumerator ReportToScamShield()
     {

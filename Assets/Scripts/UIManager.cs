@@ -81,4 +81,13 @@ public class UIManager : MonoBehaviour
         flashImage.color = new Color(1, 1, 1, 0);
         flashImage.gameObject.SetActive(false);
     }
+
+    public void DisableAllCanvasChildren()
+    {
+        foreach (Transform child in scenarioController.scenarioCanvas.transform)
+        {
+            Debug.Log(child.name);
+            child.gameObject.SetActive(false);
+        }
+    }
 }

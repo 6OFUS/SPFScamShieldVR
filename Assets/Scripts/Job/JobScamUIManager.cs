@@ -11,11 +11,17 @@ using UnityEngine.UI;
 
 public class JobScamUIManager : UIManager
 {
+    public GameObject loseScreen;
+    public GameObject winScreen;
+    public GameObject ignoreOfferScreen;
+    public GameObject reportAfterScammedScreen;
+
     [Header("WhatsUp UI")]
     public GameObject whatsupScreen;
 
     [Header("Amail UI")]
     public GameObject amailScreen;
+    public GameObject jasonEmailScreen;
 
     [Header("Home UI")]
     public GameObject homeScreen;
@@ -23,11 +29,17 @@ public class JobScamUIManager : UIManager
     [Header("Scam website UI")]
     public GameObject websiteHomeScreen;
     public GameObject websiteCreateAccountScreen;
+
+    public TextMeshProUGUI[] detailsInputText;
+    public string[] detailsTextContent;
+
     public GameObject websiteHomeLoggedInScreen;
+
     public GameObject websiteHomeSilverTierButton;
     public GameObject websiteSelectTaskScreen;
     public GameObject websiteHomeAfterFirstTaskScreen;
     public GameObject websiteHomeAfterFirstTaskSilverTierButton;
+
     public GameObject withdrawButton;
     public GameObject websiteWithdrawErrorScreen;
 
@@ -43,11 +55,6 @@ public class JobScamUIManager : UIManager
     [Header("Images")]
     public Sprite scamPayoutImage;
 
-    [Header("End screen UI")]
-    public GameObject loseScreen;
-    public GameObject winScreen;
-    public GameObject ignoreOfferScreen;
-    public GameObject reportAfterScammedScreen;
 
     public override IEnumerator FlashEffect()
     {

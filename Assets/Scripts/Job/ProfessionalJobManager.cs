@@ -22,7 +22,7 @@ public class ProfessionalJobManager : InkManager
         {
             case "sticker":
                 messagingSystem.PlayerSendSticker(uIManager.stickers[index]);
-                StartCoroutine(WaitForReply());
+                StartCoroutine(WaitForReply(messageTime));
                 break;
             case "check_website":
                 uIManager.websiteHomeScreen.SetActive(true);
