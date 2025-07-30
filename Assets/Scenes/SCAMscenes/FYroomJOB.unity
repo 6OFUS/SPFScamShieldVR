@@ -25448,7 +25448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkManager: {fileID: 1373964406}
-  scenarioController: {fileID: 2090522961}
+  scenarioController: {fileID: 1942447315}
   screenshotTaken: 0
   flashImage: {fileID: 1761303885}
   flashDuration: 1
@@ -25471,6 +25471,8 @@ MonoBehaviour:
   whatsupScreen: {fileID: 1817903042}
   websiteHomeScreen: {fileID: 1761303873}
   amailScreen: {fileID: 1761303872}
+  luciaEmailScreen: {fileID: 1081885906}
+  websiteCareersScreen: {fileID: 1856553074}
 --- !u!1001 &781297896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26495,7 +26497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &874756804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29710,6 +29712,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2258264507269881142, guid: 05977c3a799757249802e4ecbd49ded1, type: 3}
   m_PrefabInstance: {fileID: 5168321289694530835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1081885906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8174676204073449784, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+  m_PrefabInstance: {fileID: 1761303826}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1104491520
 GameObject:
@@ -47178,12 +47185,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800582152946051677, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8831213994392613455, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: scenarioController
       value: 
-      objectReference: {fileID: 2090522961}
+      objectReference: {fileID: 1942447315}
     - target: {fileID: 8837561637771313290, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -87174,6 +87181,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ccbb67fcc5eb0a44a38dc9e8ce8e597, type: 3}
   m_PrefabInstance: {fileID: 1849137344}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1856553074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7456654872606653852, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+  m_PrefabInstance: {fileID: 1761303826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1859170979 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2888966144615252073, guid: e493492c7e1687e49a056547034f8e39, type: 3}
@@ -87566,7 +87578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1942447315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87581,16 +87593,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJsonFiles:
   - {fileID: 4900000, guid: 43a4f95412307794896389752cef210f, type: 3}
+  - {fileID: 4900000, guid: 9a8309a642729514dbc005718541b194, type: 3}
   uiCanvas:
   - {fileID: 1761303869}
+  - {fileID: 1761303829}
   scenarioManagers:
   - {fileID: 398172843}
+  - {fileID: 1373964406}
   uiManagers:
   - {fileID: 1328289315}
+  - {fileID: 777099823}
   messagesContent:
   - {fileID: 1761303868}
+  - {fileID: 1761303828}
   scamOrNotEndingUI:
   - {fileID: 850761594}
+  - {fileID: 689101208}
   whatsupContent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!4 &1942447316
@@ -88777,7 +88795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2090522960
 Transform:
   m_ObjectHideFlags: 0
