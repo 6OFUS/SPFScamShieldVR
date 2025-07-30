@@ -270,6 +270,21 @@ public class InkManager : MonoBehaviour
         }
     }
 
+    protected IEnumerator SpawnActionButton(string buttonText, float delay, UnityEngine.Events.UnityAction onClickAction)
+    {
+        yield return new WaitForSeconds(delay);
+
+        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
+        TextMeshProUGUI textComponent = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        textComponent.text = buttonText;
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            onClickAction.Invoke();
+            Destroy(buttonObj);
+        });
+
+        scamshieldButton.transform.SetAsLastSibling();
+    }
 
     protected virtual IEnumerator ReportToScamShield()
     {

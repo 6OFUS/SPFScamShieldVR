@@ -35,21 +35,20 @@ public class JobScamUIManager : UIManager
 
     public GameObject websiteHomeLoggedInScreen;
 
-    public GameObject websiteHomeSilverTierButton;
     public GameObject websiteSelectTaskScreen;
-    public GameObject websiteHomeAfterFirstTaskScreen;
-    public GameObject websiteHomeAfterFirstTaskSilverTierButton;
 
-    public GameObject withdrawButton;
+    public GameObject websiteHomeAfterFirstTaskScreen;
+    
+    public GameObject websiteFirstTaskGroup;
+
     public GameObject websiteWithdrawErrorScreen;
 
     [Header("Scam website task UI")]
     public GameObject taskScreen;
-    public List<GameObject> itemNumUI = new List<GameObject>();
+    public GameObject itemNumThree;
 
     [Header("Loading screen UI")]
     public GameObject loadingScreen;
-    public GameObject loadingScreenHomeButton;
     public GameObject loadingBackToDashboardScreen;
 
     [Header("Images")]

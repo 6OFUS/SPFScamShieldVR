@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public Image flashImage; 
     public float flashDuration;
 
+    public GameObject frontFacingCamera;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Scamshield UI")]
     public GameObject scamshieldScreen;
+    public GameObject scamshieldLoadingScreen;
 
     [Header("End screen UI")]
     public Button whatHappenButton;
@@ -86,8 +88,14 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in scenarioController.scenarioCanvas.transform)
         {
-            Debug.Log(child.name);
-            child.gameObject.SetActive(false);
+            if(child.name == frontFacingCamera.name)
+            {
+                continue;
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
 }

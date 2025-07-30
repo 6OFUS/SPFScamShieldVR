@@ -43,6 +43,7 @@ public class JobScamManager : InkManager
                 uIManager.Screenshot();
                 ClearChoices();
                 Destroy(scamshieldButton);
+                StartCoroutine(SpawnHomeButton(1));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -57,7 +58,7 @@ public class JobScamManager : InkManager
                 break;
             case "action_open_amail":
                 uIManager.amailScreen.SetActive(true);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitForReply(1));
                 break;
             case "action_open_jason_email":
                 uIManager.jasonEmailScreen.SetActive(true);
@@ -80,18 +81,17 @@ public class JobScamManager : InkManager
                 if (!firstTaskCompleted)
                 {
                     uIManager.websiteHomeLoggedInScreen.SetActive(true);
-                    uIManager.websiteHomeSilverTierButton.SetActive(true);
                 }
                 else
                 {
                     uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                    uIManager.websiteHomeAfterFirstTaskSilverTierButton.SetActive(true);
                 }
+                StartCoroutine(SpawnSelectSilverTierButton());
                 break;
             case "message_withdraw":
                 uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                uIManager.withdrawButton.SetActive(true);
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
+                StartCoroutine(SpawnWithdrawButton());
                 break;
             case "error_message":
                 messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
@@ -111,74 +111,96 @@ public class JobScamManager : InkManager
 
     private IEnumerator SpawnHomeButton(float time)
     {
-        yield return new WaitForSeconds(time);
-
-        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Go to home screen";
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+        yield return SpawnActionButton("Go to home screen", time, () => {
             isOnHomeScreen = true;
             uIManager.DisableAllCanvasChildren();
             uIManager.homeScreen.SetActive(true);
-            Destroy(scamshieldButton);
-            StartCoroutine(SpawnOpenWhatsUpButton(1));
-            Destroy(buttonObj);
+            if(scamshieldButton != null)
+            {
+                Destroy(scamshieldButton);
+            }
+            if (uIManager.screenshotTaken)
+            {
+                StartCoroutine(SpawnOpenScamshieldButton());
+            }
+            else
+            {
+                StartCoroutine(SpawnOpenWhatsUpButton(1));
+            }
         });
-        scamshieldButton.transform.SetAsLastSibling();
     }
+
     private IEnumerator SpawnOpenWhatsUpButton(float time)
     {
-        yield return new WaitForSeconds(time);
-
-        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Open WhatsUp";
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+        yield return SpawnActionButton("Open WhatsUp", time, () => {
             uIManager.whatsupScreen.SetActive(true);
             StartCoroutine(WaitForReply(0));
             isOnHomeScreen = false;
-            Destroy(buttonObj);
         });
-        scamshieldButton.transform.SetAsLastSibling();
+    }
+
+    private IEnumerator SpawnOpenScamshieldButton()
+    {
+        yield return SpawnActionButton("Open Scamshield", 1f, () => {
+            uIManager.scamshieldScreen.SetActive(true);
+            isOnHomeScreen = false;
+            StartCoroutine(SpawnReportButton());
+        });
+    }
+
+    private IEnumerator SpawnReportButton()
+    {
+        yield return SpawnActionButton("Report", 1f, () => {
+            Report();
+        });
+    }
+
+    protected override IEnumerator ReportToScamShield()
+    {
+        uIManager.scamshieldLoadingScreen.SetActive(true);
+        yield return base.ReportToScamShield();
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        if (!firstTaskCompleted)
+        {
+            uIManager.audioSource.clip = uIManager.winClip;
+            uIManager.audioSource.Play();
+            uIManager.winScreen.SetActive(true);
+            uIManager.whatHappenButton.onClick.AddListener(() =>
+            {
+                recapVideoScript.PlayVideo(whatHappenWinVideoClip);
+            });
+            ProceedToVideo(winVideoClip);
+        }
+        else
+        {
+            uIManager.audioSource.clip = uIManager.loseClip;
+            uIManager.audioSource.Play();
+            uIManager.reportAfterScammedScreen.SetActive(true);
+            uIManager.whatHappenButton.onClick.AddListener(() =>
+            {
+                recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
+            });
+            ProceedToVideo(gameOverVideoClip);
+        }
     }
 
     private IEnumerator SpawnEnterDetailsButton()
     {
-        yield return new WaitForSeconds(1);
-
-        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Enter details";
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-            for(int i = 0; i < uIManager.detailsInputText.Length; i++)
+        yield return SpawnActionButton("Enter details", 1f, () => {
+            for (int i = 0; i < uIManager.detailsInputText.Length; i++)
             {
                 uIManager.detailsInputText[i].color = Color.black;
                 uIManager.detailsInputText[i].text = uIManager.detailsTextContent[i];
             }
-            Destroy(buttonObj);
-            //spawn create account button
             StartCoroutine(SpawnCreateAccountButton());
         });
-        scamshieldButton.transform.SetAsLastSibling();
     }
 
     private IEnumerator SpawnCreateAccountButton()
     {
-        yield return new WaitForSeconds(1);
-
-        GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
-        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-        buttonText.text = "Submit and create account";
-
-        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+        yield return SpawnActionButton("Submit and create account", 1f, () => {
             StartCoroutine(CreatingAccount());
-            Destroy(buttonObj);
-
         });
-        scamshieldButton.transform.SetAsLastSibling();
     }
 
     private IEnumerator CreatingAccount()
@@ -186,6 +208,101 @@ public class JobScamManager : InkManager
         uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         uIManager.websiteHomeLoggedInScreen.SetActive(true);
+        StartCoroutine(SpawnHomeButton(1));
+    }
+
+    private IEnumerator SpawnSelectSilverTierButton()
+    {
+        yield return SpawnActionButton("Select silver tier", 1f, () => {
+            uIManager.websiteSelectTaskScreen.SetActive(true);
+            if (!firstTaskCompleted)
+            {
+                StartCoroutine(LoadFirstTaskGroup());
+            }
+            else
+            {
+                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
+                StartCoroutine(LoadingError());
+            }
+        });
+    }
+
+    private IEnumerator LoadFirstTaskGroup()
+    {
+        yield return SpawnActionButton("Select task 1", 1f, () => {
+            StartCoroutine(HandleFirstTaskGroupSelection());
+        });
+    }
+
+    private IEnumerator HandleFirstTaskGroupSelection()
+    {
+        uIManager.websiteHomeLoggedInScreen.SetActive(false);
+        uIManager.websiteSelectTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uIManager.loadingScreen.SetActive(false);
+        uIManager.taskScreen.SetActive(true);
+        StartCoroutine(AddItems());
+    }
+
+    private IEnumerator HandleSecondTaskGroupSelection()
+    {
+        uIManager.websiteSelectTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime * 2);
+        StartCoroutine(SpawnHomeButton(0));
+        knotName = "job_task_2_loading_error";
+    }
+
+    private IEnumerator LoadingError()
+    {
+        yield return SpawnActionButton("Select task 2", 1f, () => {
+            StartCoroutine(HandleSecondTaskGroupSelection());
+        });
+    }
+
+    private IEnumerator AddItems()
+    {
+        yield return SpawnActionButton("Add items to cart", 1f, () => {
+            uIManager.itemNumThree.SetActive(true);
+            StartCoroutine(LoadCheckOut());
+        });
+    }
+    private IEnumerator LoadCheckOut()
+    {
+        yield return SpawnActionButton("Check out", 1f, () => {
+            StartCoroutine(HandleCheckOut());
+        });
+    }
+
+    private IEnumerator HandleCheckOut()
+    {
+        uIManager.taskScreen.SetActive(false);
+        uIManager.loadingBackToDashboardScreen.SetActive(true);
+        firstTaskCompleted = true;
+        uIManager.websiteFirstTaskGroup.SetActive(false);
+        //CHECK OUT AUDIO PUT HERE
+        yield return new WaitForSeconds(loadingTime);
+        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+        knotName = "job_task_2_dialogue_2";
+        StartCoroutine(SpawnHomeButton(1));
+    }
+
+    private IEnumerator SpawnWithdrawButton()
+    {
+        yield return SpawnActionButton("Withdraw", 1f, () => {
+            StartCoroutine(Withdraw());
+        });
+    }
+    private IEnumerator Withdraw()
+    {
+        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
+        uIManager.loadingScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        uIManager.loadingScreen.SetActive(false);
+        uIManager.websiteWithdrawErrorScreen.SetActive(true);
+        uIManager.audioSource.clip = errorClip;
+        uIManager.audioSource.Play();
         StartCoroutine(SpawnHomeButton(1));
     }
 
@@ -233,134 +350,6 @@ public class JobScamManager : InkManager
             default:
                 base.SenderAction(action, dialogue);
                 break;
-        }
-    }
-
-    private IEnumerator RegisterAccountCoroutine()
-    {
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.websiteHomeLoggedInScreen.SetActive(true);
-
-
-        knotName = "job_task_2_dialogue_1";
-    }
-
-    public void RegisterAccount()
-    {
-        StartCoroutine(RegisterAccountCoroutine());
-    }
-
-    public void FirstTaskGroup()
-    {
-        if (!firstTaskCompleted)
-        {
-            StartCoroutine(LoadFirstTaskGroup());
-        }
-    }
-
-    private IEnumerator LoadFirstTaskGroup()
-    {
-        uIManager.websiteHomeLoggedInScreen.SetActive(false);
-        uIManager.websiteSelectTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.loadingScreen.SetActive(false);
-        uIManager.taskScreen.SetActive(true);
-        firstTaskCompleted = true;
-    }
-
-    public void FollowingTaskGroups()
-    {
-        if (firstTaskCompleted)
-        {
-            StartCoroutine(LoadingError());
-        }
-    }
-
-    private IEnumerator LoadingError()
-    {
-        uIManager.websiteSelectTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime * 2);
-        uIManager.loadingScreenHomeButton.SetActive(true);
-        knotName = "job_task_2_loading_error";
-    }
-
-    public void AddItemsToCart()
-    {
-        if(numItemsAdded < 3)
-        {
-            uIManager.itemNumUI[numItemsAdded].SetActive(true);
-            numItemsAdded++;
-        }
-    }
-
-    private IEnumerator LoadCheckOut()
-    {
-        uIManager.taskScreen.SetActive(false);
-        uIManager.loadingBackToDashboardScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-        knotName = "job_task_2_dialogue_2";
-    }
-
-    public void CheckOut()
-    {
-        if(numItemsAdded == 3)
-        {
-            uIManager.audioSource.clip = checkOutClip;
-            uIManager.audioSource.Play();
-            StartCoroutine(LoadCheckOut());
-        }
-        else
-        {
-            uIManager.audioSource.clip = errorClip;
-            uIManager.audioSource.Play();
-        }
-    }
-
-    public void Withdraw()
-    {
-        StartCoroutine(WithdrawCoroutine());
-    }
-
-    private IEnumerator WithdrawCoroutine()
-    {
-        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.loadingScreen.SetActive(false);
-        uIManager.websiteWithdrawErrorScreen.SetActive(true);
-        uIManager.audioSource.clip = errorClip;
-        uIManager.audioSource.Play();
-    }
-
-    protected override IEnumerator ReportToScamShield()
-    {
-        yield return base.ReportToScamShield();
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        if (firstTaskCompleted)
-        {
-            uIManager.audioSource.clip = uIManager.winClip;
-            uIManager.audioSource.Play();
-            uIManager.winScreen.SetActive(true);
-            uIManager.whatHappenButton.onClick.AddListener(() =>
-            {
-                recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
-            });
-            ProceedToVideo(winVideoClip);
-        }
-        else
-        {
-            uIManager.audioSource.clip = uIManager.loseClip;
-            uIManager.audioSource.Play();
-            uIManager.reportAfterScammedScreen.SetActive(true);
-            uIManager.whatHappenButton.onClick.AddListener(() =>
-            {
-                recapVideoScript.PlayVideo(whatHappenWinVideoClip);
-            });
-            ProceedToVideo(gameOverVideoClip);
         }
     }
 }

@@ -110,14 +110,14 @@ Don't worry, everyone experiences this. Once 3 tasks are done, the system proces
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_5 ===
-I totally understand where you're coming from, Feiyang. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
+I totally understand where you're coming from, Taylor. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
 
 + [Player:message_complete_task Okay, I'll continue with the next task group.] -> END //go to job_task_2_loading_error
 + [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_6 ===
-I totally get it, Feiyang. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message
+I totally get it, Taylor. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message
 
 + [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
 //+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
