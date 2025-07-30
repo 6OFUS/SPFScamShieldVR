@@ -15,22 +15,33 @@ public class ProfessionalJobManager : InkManager
     
     public ProfessionalJobUIManager uIManager;
 
+    private bool isOnHomeScreen;
+
 
     public override void PlayerAction(string action, int index)
     {
         switch (action)
         {
+            case "action_open_notification":
+                uIManager.whatsupScreen.SetActive(true);
+                StartCoroutine(WaitForReply(0));
+                break;
             case "sticker":
                 messagingSystem.PlayerSendSticker(uIManager.stickers[index]);
                 StartCoroutine(WaitForReply(messageTime));
                 break;
-            case "check_website":
+            case "action_check_website":
                 uIManager.websiteHomeScreen.SetActive(true);
+                StartCoroutine(SpawnViewCareersButton());
                 knotName = "job_verification_dialogue_1";
                 break;
-            case "open_amail":
+            case "action_open_amail":
                 uIManager.amailScreen.SetActive(true);
-                knotName = "return_from_email";
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_open_lucia_email":
+                uIManager.luciaEmailScreen.SetActive(true);
+                StartCoroutine(SpawnHomeButton(5));
                 break;
             case "win_ending":
                 StartCoroutine(HandleWinEnding());
@@ -43,6 +54,61 @@ public class ProfessionalJobManager : InkManager
                 break;
         }
     }
+
+    private IEnumerator SpawnHomeButton(float time)
+    {
+        yield return SpawnActionButton("Go to home screen", time, () => {
+            isOnHomeScreen = true;
+            uIManager.DisableAllCanvasChildren();
+            uIManager.homeScreen.SetActive(true);
+            if (scamshieldButton != null)
+            {
+                Destroy(scamshieldButton);
+            }
+            if (uIManager.screenshotTaken)
+            {
+                StartCoroutine(SpawnOpenScamshieldButton());
+            }
+            else
+            {
+                StartCoroutine(SpawnOpenWhatsUpButton(1));
+            }
+        });
+    }
+
+    private IEnumerator SpawnOpenWhatsUpButton(float time)
+    {
+        yield return SpawnActionButton("Open WhatsUp", time, () => {
+            uIManager.whatsupScreen.SetActive(true);
+            StartCoroutine(WaitForReply(0));
+            isOnHomeScreen = false;
+        });
+    }
+
+    private IEnumerator SpawnOpenScamshieldButton()
+    {
+        yield return SpawnActionButton("Open Scamshield", 1f, () => {
+            uIManager.scamshieldScreen.SetActive(true);
+            isOnHomeScreen = false;
+            StartCoroutine(SpawnReportButton());
+        });
+    }
+
+    private IEnumerator SpawnReportButton()
+    {
+        yield return SpawnActionButton("Report", 1f, () => {
+            Report();
+        });
+    }
+
+    private IEnumerator SpawnViewCareersButton()
+    {
+        yield return SpawnActionButton("Click on Careers", 5f, () => {
+            uIManager.websiteCareersScreen.SetActive(true);
+            StartCoroutine(SpawnHomeButton(5));
+        });
+    }
+
     private IEnumerator HandleLoseEnding()
     {
         ClearChoices();
@@ -91,7 +157,7 @@ public class ProfessionalJobManager : InkManager
             }
         }
         base.DisplayChoices();
-        if (scamshieldButton == null)
+        if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
@@ -99,6 +165,7 @@ public class ProfessionalJobManager : InkManager
                 uIManager.Screenshot();
                 ClearChoices();
                 Destroy(scamshieldButton);
+                StartCoroutine(SpawnHomeButton(1));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -106,6 +173,7 @@ public class ProfessionalJobManager : InkManager
 
     protected override IEnumerator ReportToScamShield()
     {
+        uIManager.scamshieldLoadingScreen.SetActive(true);
         yield return base.ReportToScamShield();
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
         uIManager.audioSource.clip = uIManager.loseClip;

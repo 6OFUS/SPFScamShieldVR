@@ -20,8 +20,11 @@ public class ProfessionalJobUIManager : UIManager
 
     [Header("Phone screens")]
     public GameObject homeScreen;
+    public GameObject whatsupScreen;
     public GameObject websiteHomeScreen;
     public GameObject amailScreen;
+    public GameObject luciaEmailScreen;
+    public GameObject websiteCareersScreen;
 
 
 
