@@ -59,9 +59,4 @@ public class JobScamUIManager : UIManager
     {
         yield return base.FlashEffect();
     }
-
-    private void Start()
-    {
-
-    }
 }

@@ -1,6 +1,6 @@
 ﻿-> open_notification
 === open_notification ===
-+ [Player:action_open_notification Open the notification] -> job_offer_intro
++ [Player:action_tap_notification Tap the notification] -> job_offer_intro
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
@@ -18,7 +18,10 @@ Hello Taylor, this is Lucia from the Talent Acquisition team at T Commerce.<br><
 === job_offer_dialogue_1 ===
 Totally understand the concern. Yes, this is a legitimate role.<br><br>You applied via Linkedin, and I'm reaching out on behalf of T Commerce's HR team.<br><br>You can also check us out at:<br><color=blue><u>www.t-commerce.com</u></color> #Sender:message
 
-+ [Player:action_check_website Check the site] -> END //job_verification_dialogue_1
++ [Player:action_check_website Check the site] -> website_career_section
+
+=== website_career_section ===
++ [Player:action_check_website_careers Tap on Careers] -> job_verification_dialogue_1
 
 === job_offer_dialogue_2 ===
 The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! #Sender:message

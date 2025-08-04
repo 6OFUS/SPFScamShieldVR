@@ -21,13 +21,15 @@ public class ScenarioController : MonoBehaviour
     /// </summary>
     public GameObject[] uiCanvas;
 
-    public InkManager[] scenarioManagers;
+    public InkManager[] inkManagers;
 
     public UIManager[] uiManagers;
 
     public Transform[] messagesContent;
 
     public GameObject[] scamOrNotEndingUI;
+
+    public GameObject[] endingVideoUI;
 
     public Transform whatsupContent;
 
@@ -69,11 +71,12 @@ public class ScenarioController : MonoBehaviour
         TextAsset selectedInk = inkJsonFiles[index];
         scenarioCanvas = uiCanvas[index];
         scamOrNotEndingUI[index].SetActive(true);
+        endingVideoUI[index].SetActive(true);
         scenarioCanvas.SetActive(true);
-        scenarioManagers[index].gameObject.SetActive(true);
+        inkManagers[index].gameObject.SetActive(true);
         uiManagers[index].gameObject.SetActive(true);
         whatsupContent = messagesContent[index];
-        scenarioManagers[index].story = new Story(selectedInk.text);
+        inkManagers[index].story = new Story(selectedInk.text);
     }
 
     // Start is called before the first frame update

@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SCAMscenes/FYroomJOB.unity
     guid: 68922ce3396dc514cb4a837fbcccfeba
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SCAMscenes/ECommerce.unity
     guid: fc1b023df8ec87445a33950f808ef12e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SCAMscenes/InvestmentScam.unity
     guid: 005f4229e47c56544bfb843332c4fd11
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SCAMscenes/phisingScam.unity
     guid: 4f62b74397c40114b9c4f661e9cac8e6
   m_configObjects:

@@ -1,6 +1,6 @@
 -> open_notification
 === open_notification ===
-+ [Player:action_open_notification Open the notification] -> job_offer_intro
++ [Player:action_tap_notification Tap on notification] -> job_offer_intro
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
@@ -54,7 +54,6 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 //PLAYER CHOICES
 + [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
 + [Player:message Can I see a sample payout proof before I continue?] -> job_verification_payout_dialogue_4
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_verification_payout_dialogue_4 === 
 //SCAMMER SENDS PAYOUT IMAGE
@@ -62,35 +61,52 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 
 //PLAYER CHOICES
 + [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 //------------------------------ TASK FLOW ------------------------------
 === register_account ===
 //PLAYER TO REGISTER FOR ACCOUNT ON WEBSITE LINK
 //PAUSE HERE THEN GO TO job_task_2_dialogue_1
-+ [Player:action_create_account Create account] -> job_task_2_dialogue_1
++ [Player:action_create_account Create account] -> enter_details
 
+=== enter_details ===
++ [Player:action_enter_details Enter details] -> create_account
+
+=== create_account ===
++ [Player:action_submit_and_create Submit and create account] -> job_task_2_dialogue_1
 
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
 
-+ [Player:message_complete_task Okay, I'll complete the first task.] -> END //go to job_task_2_dialogue_2
++ [Player:message_complete_task Okay, I'll complete the first task.] -> select_silver_tier
 + [Player:message Can I withdraw after the first task group?] -> job_task_2_dialogue_3
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_2 ===
 //PLAYER TO DO FIRST TASK GROUPS BEFORE SENDER SENDS MESSAGE
 You've completed 1 task, great job! Just two more group needed. It will be returned with your full commission: $84. Most partners do this in 10 minutes. #Sender:message
 
-+ [Player:message_complete_task Okay, I'll do the next group.] -> END //go to job_task_2_loading_error
-+ [Player:message_withdraw I think I will withdraw now.] ->  job_task_2_withdrawal_error //Player attempt to withdraw the money ACTUAL ACTION
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message_complete_task_2 Okay, I'll do the next group.] -> select_silver_tier_2
++ [Player:message_withdraw I think I will withdraw now.] ->  withdraw
+
+=== withdraw ===
++ [Player:action_withdraw Withdraw] ->  job_task_2_withdrawal_error
 
 === job_task_2_dialogue_3 ===
 That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
 
-+ [Player:message_complete_task Okay, I'll complete the first task.] -> END //go to job_task_2_dialogue_2
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
++ [Player:message_complete_task Okay, I'll complete the first task.] -> select_silver_tier
+
+=== select_silver_tier === 
++ [Player:action_select_silver_tier Select silver tier] -> select_task_1
+
+=== select_task_1 ===
++ [Player:action_select_task_1 Select task 1] -> add_items
+
+=== add_items ===
++ [Player:action_add_items Add items to cart] -> check_out
+
+=== check_out ===
++ [Player:action_check_out Check out] -> job_task_2_dialogue_2
+
 
 === job_task_2_withdrawal_error ===
 //SYSTEM ERROR NEED COMPLETE BONUS TASK
@@ -99,35 +115,36 @@ That's a great question! For new users, the system requires a minimum of 3 compl
 === job_task_2_dialogue_4 ===
 Don't worry, everyone experiences this. Once 3 tasks are done, the system processes all balances instantly. You're so close! #Sender:message
 
-+ [Player:message_complete_task Okay, I'll continue with the next task group.] -> END //go to job_task_2_loading_error
++ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> select_silver_tier_2 
 + [Player:message I want to withdraw now.] -> job_task_2_dialogue_5
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_loading_error ===
 //PLAYER ATTEMPT TO DO LAST TASK GROUP -> ERROR MESSAGE ON WEBSITE
 
 + [Player:message Hi, I clicked on the next task but it kept on loading. Is this normal?] -> job_cannot_send_message
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_dialogue_5 ===
 I totally understand where you're coming from, Taylor. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
 
-+ [Player:message_complete_task Okay, I'll continue with the next task group.] -> END //go to job_task_2_loading_error
++ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> select_silver_tier_2 
 + [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
+
+=== select_silver_tier_2 === 
++ [Player:action_select_silver_tier Select silver tier] -> select_task_2
+
+=== select_task_2 ===
++ [Player:action_select_task_2 Select task 2] -> job_task_2_loading_error
 
 === job_task_2_dialogue_6 ===
 I totally get it, Taylor. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message
 
 + [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === job_task_2_after_waiting ===
 + [Player:message Hello? Just checking if there's any update...] -> job_cannot_send_message
 
 === job_cannot_send_message === 
 + [Player:error_message HELLO] -> end_message
-//+ [Player:submit_scamshield Screenshot and submit to ScamShield] -> report_scamshield
 
 === end_message ===
 + [Player:lose_ending WHAT] -> END //GAME ENDS HERE

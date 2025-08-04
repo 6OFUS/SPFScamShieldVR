@@ -15,14 +15,13 @@ public class ProfessionalJobManager : InkManager
     
     public ProfessionalJobUIManager uIManager;
 
-    private bool isOnHomeScreen;
 
 
     public override void PlayerAction(string action, int index)
     {
         switch (action)
         {
-            case "action_open_notification":
+            case "action_tap_notification":
                 uIManager.whatsupScreen.SetActive(true);
                 StartCoroutine(WaitForReply(0));
                 break;
@@ -32,8 +31,11 @@ public class ProfessionalJobManager : InkManager
                 break;
             case "action_check_website":
                 uIManager.websiteHomeScreen.SetActive(true);
-                StartCoroutine(SpawnViewCareersButton());
-                knotName = "job_verification_dialogue_1";
+                StartCoroutine(WaitForReply(5));
+                break;
+            case "action_check_website_careers":
+                uIManager.websiteCareersScreen.SetActive(true);
+                StartCoroutine(SpawnHomeButton(5));
                 break;
             case "action_open_amail":
                 uIManager.amailScreen.SetActive(true);
@@ -78,7 +80,7 @@ public class ProfessionalJobManager : InkManager
 
     private IEnumerator SpawnOpenWhatsUpButton(float time)
     {
-        yield return SpawnActionButton("Open WhatsUp", time, () => {
+        yield return SpawnActionButton("Open WhatsUp app", time, () => {
             uIManager.whatsupScreen.SetActive(true);
             StartCoroutine(WaitForReply(0));
             isOnHomeScreen = false;
@@ -87,7 +89,7 @@ public class ProfessionalJobManager : InkManager
 
     private IEnumerator SpawnOpenScamshieldButton()
     {
-        yield return SpawnActionButton("Open Scamshield", 1f, () => {
+        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
             uIManager.scamshieldScreen.SetActive(true);
             isOnHomeScreen = false;
             StartCoroutine(SpawnReportButton());
@@ -101,13 +103,6 @@ public class ProfessionalJobManager : InkManager
         });
     }
 
-    private IEnumerator SpawnViewCareersButton()
-    {
-        yield return SpawnActionButton("Click on Careers", 5f, () => {
-            uIManager.websiteCareersScreen.SetActive(true);
-            StartCoroutine(SpawnHomeButton(5));
-        });
-    }
 
     private IEnumerator HandleLoseEnding()
     {
@@ -118,7 +113,7 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
         yield return new WaitForEndOfFrame(); // Wait for UI to fully update
-
+        yield return new WaitForSeconds(uIManager.loseClip.length);
         ProceedToVideo(gameOverVideoClip);
     }
     private IEnumerator HandleWinEnding()
@@ -134,6 +129,7 @@ public class ProfessionalJobManager : InkManager
         {
             recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
+        yield return new WaitForSeconds(uIManager.winClip.length);
         ProceedToVideo(winVideoClip);
     }
     public override void DisplayChoices()
@@ -179,6 +175,7 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
+        yield return new WaitForSeconds(uIManager.loseClip.length);
         ProceedToVideo(gameOverVideoClip);
     }
 }

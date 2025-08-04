@@ -17,8 +17,6 @@ public class JobScamManager : InkManager
 {
     public JobScamUIManager uIManager;
 
-    private bool isOnHomeScreen;
-
     [Header("Audio")]
     public AudioClip cryingClip;
     public AudioClip checkOutClip;
@@ -52,7 +50,7 @@ public class JobScamManager : InkManager
     {
         switch (action)
         {
-            case "action_open_notification":
+            case "action_tap_notification":
                 uIManager.whatsupScreen.SetActive(true);
                 StartCoroutine(WaitForReply(0));
                 break;
@@ -72,26 +70,55 @@ public class JobScamManager : InkManager
 
             case "action_create_account":
                 uIManager.websiteCreateAccountScreen.SetActive(true);
-                StartCoroutine(SpawnEnterDetailsButton());
+                StartCoroutine(WaitForReply(1));
                 break;
-
+            case "action_enter_details":
+                for (int i = 0; i < uIManager.detailsInputText.Length; i++)
+                {
+                    uIManager.detailsInputText[i].color = Color.black;
+                    uIManager.detailsInputText[i].text = uIManager.detailsTextContent[i];
+                }
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_submit_and_create":
+                StartCoroutine(CreatingAccount());
+                break;
             case "message_complete_task":
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
                 uIManager.whatsupScreen.SetActive(false);
-                if (!firstTaskCompleted)
-                {
-                    uIManager.websiteHomeLoggedInScreen.SetActive(true);
-                }
-                else
-                {
-                    uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                }
-                StartCoroutine(SpawnSelectSilverTierButton());
+                uIManager.websiteHomeLoggedInScreen.SetActive(true);
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_select_silver_tier":
+                uIManager.websiteSelectTaskScreen.SetActive(true);
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_select_task_1":
+                StartCoroutine(HandleFirstTaskGroupSelection());
+                break;
+            case "action_add_items":
+                uIManager.itemNumThree.SetActive(true);
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_check_out":
+                StartCoroutine(HandleCheckOut());
+                break;
+            case "message_complete_task_2":
+                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
+                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
+                uIManager.whatsupScreen.SetActive(false);
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_select_task_2":
+                StartCoroutine(HandleSecondTaskGroupSelection());
                 break;
             case "message_withdraw":
                 uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
                 messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                StartCoroutine(SpawnWithdrawButton());
+                StartCoroutine(WaitForReply(1));
+                break;
+            case "action_withdraw":
+                StartCoroutine(Withdraw());
                 break;
             case "error_message":
                 messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
@@ -132,7 +159,7 @@ public class JobScamManager : InkManager
 
     private IEnumerator SpawnOpenWhatsUpButton(float time)
     {
-        yield return SpawnActionButton("Open WhatsUp", time, () => {
+        yield return SpawnActionButton("Open WhatsUp app", time, () => {
             uIManager.whatsupScreen.SetActive(true);
             StartCoroutine(WaitForReply(0));
             isOnHomeScreen = false;
@@ -141,7 +168,7 @@ public class JobScamManager : InkManager
 
     private IEnumerator SpawnOpenScamshieldButton()
     {
-        yield return SpawnActionButton("Open Scamshield", 1f, () => {
+        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
             uIManager.scamshieldScreen.SetActive(true);
             isOnHomeScreen = false;
             StartCoroutine(SpawnReportButton());
@@ -169,6 +196,7 @@ public class JobScamManager : InkManager
             {
                 recapVideoScript.PlayVideo(whatHappenWinVideoClip);
             });
+            yield return new WaitForSeconds(uIManager.winClip.length);
             ProceedToVideo(winVideoClip);
         }
         else
@@ -180,27 +208,9 @@ public class JobScamManager : InkManager
             {
                 recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
             });
+            yield return new WaitForSeconds(uIManager.loseClip.length);
             ProceedToVideo(gameOverVideoClip);
         }
-    }
-
-    private IEnumerator SpawnEnterDetailsButton()
-    {
-        yield return SpawnActionButton("Enter details", 1f, () => {
-            for (int i = 0; i < uIManager.detailsInputText.Length; i++)
-            {
-                uIManager.detailsInputText[i].color = Color.black;
-                uIManager.detailsInputText[i].text = uIManager.detailsTextContent[i];
-            }
-            StartCoroutine(SpawnCreateAccountButton());
-        });
-    }
-
-    private IEnumerator SpawnCreateAccountButton()
-    {
-        yield return SpawnActionButton("Submit and create account", 1f, () => {
-            StartCoroutine(CreatingAccount());
-        });
     }
 
     private IEnumerator CreatingAccount()
@@ -211,29 +221,6 @@ public class JobScamManager : InkManager
         StartCoroutine(SpawnHomeButton(1));
     }
 
-    private IEnumerator SpawnSelectSilverTierButton()
-    {
-        yield return SpawnActionButton("Select silver tier", 1f, () => {
-            uIManager.websiteSelectTaskScreen.SetActive(true);
-            if (!firstTaskCompleted)
-            {
-                StartCoroutine(LoadFirstTaskGroup());
-            }
-            else
-            {
-                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
-                StartCoroutine(LoadingError());
-            }
-        });
-    }
-
-    private IEnumerator LoadFirstTaskGroup()
-    {
-        yield return SpawnActionButton("Select task 1", 1f, () => {
-            StartCoroutine(HandleFirstTaskGroupSelection());
-        });
-    }
-
     private IEnumerator HandleFirstTaskGroupSelection()
     {
         uIManager.websiteHomeLoggedInScreen.SetActive(false);
@@ -242,37 +229,16 @@ public class JobScamManager : InkManager
         yield return new WaitForSeconds(loadingTime);
         uIManager.loadingScreen.SetActive(false);
         uIManager.taskScreen.SetActive(true);
-        StartCoroutine(AddItems());
+        StartCoroutine(WaitForReply(1));
     }
 
     private IEnumerator HandleSecondTaskGroupSelection()
     {
+        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
         uIManager.websiteSelectTaskScreen.SetActive(false);
         uIManager.loadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime * 2);
         StartCoroutine(SpawnHomeButton(0));
-        knotName = "job_task_2_loading_error";
-    }
-
-    private IEnumerator LoadingError()
-    {
-        yield return SpawnActionButton("Select task 2", 1f, () => {
-            StartCoroutine(HandleSecondTaskGroupSelection());
-        });
-    }
-
-    private IEnumerator AddItems()
-    {
-        yield return SpawnActionButton("Add items to cart", 1f, () => {
-            uIManager.itemNumThree.SetActive(true);
-            StartCoroutine(LoadCheckOut());
-        });
-    }
-    private IEnumerator LoadCheckOut()
-    {
-        yield return SpawnActionButton("Check out", 1f, () => {
-            StartCoroutine(HandleCheckOut());
-        });
     }
 
     private IEnumerator HandleCheckOut()
@@ -284,16 +250,9 @@ public class JobScamManager : InkManager
         //CHECK OUT AUDIO PUT HERE
         yield return new WaitForSeconds(loadingTime);
         uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-        knotName = "job_task_2_dialogue_2";
         StartCoroutine(SpawnHomeButton(1));
     }
 
-    private IEnumerator SpawnWithdrawButton()
-    {
-        yield return SpawnActionButton("Withdraw", 1f, () => {
-            StartCoroutine(Withdraw());
-        });
-    }
     private IEnumerator Withdraw()
     {
         uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
@@ -321,6 +280,7 @@ public class JobScamManager : InkManager
         {
             recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
         });
+        yield return new WaitForSeconds(uIManager.loseClip.length);
         ProceedToVideo(gameOverVideoClip);
     }
 
@@ -337,6 +297,7 @@ public class JobScamManager : InkManager
         {
             recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
+        yield return new WaitForSeconds(uIManager.winClip.length);
         ProceedToVideo(winVideoClip);
     }
 

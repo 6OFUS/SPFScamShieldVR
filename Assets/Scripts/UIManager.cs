@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public float flashDuration;
 
     public GameObject frontFacingCamera;
+    public GameObject homeButtonLine;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -88,7 +89,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in scenarioController.scenarioCanvas.transform)
         {
-            if(child.name == frontFacingCamera.name)
+            if(child.name == frontFacingCamera.name || child.name == homeButtonLine.name)
             {
                 continue;
             }

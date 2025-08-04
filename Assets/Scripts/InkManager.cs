@@ -28,7 +28,8 @@ public class InkManager : MonoBehaviour
 
     public string knotName;
     public bool stopStory;
-    
+
+    protected bool isOnHomeScreen;
 
     [Header("Player controls")]
     public GameObject xrMove;
@@ -60,6 +61,8 @@ public class InkManager : MonoBehaviour
     public List<ChoiceData> playerChoices = new List<ChoiceData>();
 
     public GameObject actionChoiceButtonPrefab;
+
+    public GameObject phone;
 
     [Header("Scamshield")]
     public GameObject scamshieldChoiceButtonPrefab;
@@ -105,13 +108,15 @@ public class InkManager : MonoBehaviour
             }
         }
 
-        if (story.currentChoices.Count > 0)
+        if (story.currentChoices.Count > 0 && !stopStory)
         {
             playerChoices.Clear();
 
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
+                Debug.Log(playerChoices[i].choiceName);
+                Debug.Log(playerChoices[i].choiceIndex);
             }
 
             ShuffleChoices(playerChoices);
@@ -311,6 +316,7 @@ public class InkManager : MonoBehaviour
             xrMove.SetActive(false);
             leftControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;
             rightControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;
+            Destroy(phone);
         });
     }
 
