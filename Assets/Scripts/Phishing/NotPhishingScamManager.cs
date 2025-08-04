@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
-    Date: 03/08/2025
-    Description: The PhishingScamManager class is used to handle all the functions related to the phishing scam scenario
+    Date: 04/08/2025
+    Description: The NotPhishingScamUIManager class is used to manage all UI related to the non phishing scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -10,10 +10,9 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class PhishingScamManager : InkManager
+public class NotPhishingScamManager : InkManager
 {
-    public PhishingScamUIManager uIManager;
-
+    public NotPhishingScamUIManager uIManager;
     private bool cdcClaimed;
 
     public override void DisplayChoices()
@@ -36,20 +35,24 @@ public class PhishingScamManager : InkManager
     {
         switch (action)
         {
-            case "action_scammer_notification":
-                uIManager.smsScammerScreen.SetActive(true);
+            case "action_real_notification":
+                uIManager.smsScreen.SetActive(true);
                 StartCoroutine(WaitForReply(2));
                 break;
             case "action_tap_link":
                 uIManager.websiteHomeScreen.SetActive(true);
                 StartCoroutine(WaitForReply(2));
                 break;
-            case "action_fill_up_details":
-                uIManager.userDetails.SetActive(true);
-                StartCoroutine(WaitForReply(1));
-                break;
             case "action_claim":
-                uIManager.loadingScreen.SetActive(true);
+                uIManager.redeemScreen.SetActive(true);
+                StartCoroutine(WaitForReply(2));
+                break;
+            case "action_login_singpass":             
+                uIManager.singPassLoginScreen.SetActive(true);
+                StartCoroutine(WaitForReply(2));
+                break;
+            case "action_passcode":
+                uIManager.singPassLoginSuccessScreen.SetActive(true);
                 cdcClaimed = true;
                 StartCoroutine(BankSMS());
                 break;
@@ -58,22 +61,10 @@ public class PhishingScamManager : InkManager
                 Destroy(scamshieldButton);
                 StartCoroutine(WaitForReply(2));
                 break;
-            case "action_screenshot":
-                uIManager.Screenshot();
-                StartCoroutine(WaitForReply(2));
-                break;
-            case "action_home_screen":
-                uIManager.DisableAllCanvasChildren();
-                uIManager.homeScreen.SetActive(true);
-                StartCoroutine(WaitForReply(1));
-                break;
-            case "action_open_scamshield":
-                uIManager.scamshieldScreen.SetActive(true);
-                StartCoroutine(WaitForReply(1));
-                break;
-            case "action_report_lose":
-                uIManager.scamshieldLoadingScreen.SetActive(true);
-                StartCoroutine(HandleLoseEnding());
+            case "action_tap_link_bank":
+                uIManager.vouchersClaimedScreen.SetActive(true);
+                //win ending
+                StartCoroutine(HandleWinEnding());
                 break;
             default:
                 base.PlayerAction(action, index);
@@ -126,22 +117,6 @@ public class PhishingScamManager : InkManager
         uIManager.scamshieldLoadingScreen.SetActive(true);
         yield return base.ReportToScamShield();
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = uIManager.winClip;
-        uIManager.audioSource.Play();
-        uIManager.winScreen.SetActive(true);
-        yield return new WaitForSeconds(uIManager.winClip.length);
-        uIManager.whatHappenButton.onClick.AddListener(() =>
-        {
-            recapVideoScript.PlayVideo(whatHappenWinVideoClip);
-        });
-        ProceedToVideo(winVideoClip);
-    }
-
-    private IEnumerator HandleLoseEnding()
-    {
-        ClearChoices();
-        Destroy(scamshieldButton);
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
@@ -151,5 +126,22 @@ public class PhishingScamManager : InkManager
             recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
         });
         ProceedToVideo(gameOverVideoClip);
+    }
+
+    private IEnumerator HandleWinEnding()
+    {
+        yield return new WaitForSeconds(2);
+        ClearChoices();
+        Destroy(scamshieldButton);
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.audioSource.clip = uIManager.winClip;
+        uIManager.audioSource.Play();
+        uIManager.winScreen.SetActive(true);
+        yield return new WaitForSeconds(uIManager.winClip.length);
+        uIManager.whatHappenButton.onClick.AddListener(() =>
+        {
+            recapVideoScript.PlayVideo(whatHappenWinVideoClip);
+        });
+        ProceedToVideo(winVideoClip);
     }
 }

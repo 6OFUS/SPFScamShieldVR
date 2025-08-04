@@ -36,9 +36,12 @@ public class UIManager : MonoBehaviour
 
     [Header("End screen UI")]
     public Button whatHappenButton;
+    public GameObject winScreen;
+    public GameObject loseScreen;
+    public GameObject reportAfterScammedScreen;
 
 
-    public void Screenshot()
+    public virtual void Screenshot()
     {
         if (!screenshotTaken)
         {
@@ -48,14 +51,6 @@ public class UIManager : MonoBehaviour
             audioSource.Play();
             flashImage.gameObject.SetActive(true);
             StartCoroutine(FlashEffect());
-        }
-    }
-
-    public void OpenScamShieldApp()
-    {
-        if (screenshotTaken)
-        {
-            scamshieldScreen.SetActive(true);
         }
     }
 

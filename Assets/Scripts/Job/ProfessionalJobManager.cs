@@ -15,7 +15,7 @@ public class ProfessionalJobManager : InkManager
     
     public ProfessionalJobUIManager uIManager;
 
-
+    public Transform whatShouldYouDoButtonPos;
 
     public override void PlayerAction(string action, int index)
     {
@@ -112,8 +112,9 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.clip = uIManager.loseClip;
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
-        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
         yield return new WaitForSeconds(uIManager.loseClip.length);
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = whatShouldYouDoButtonPos.position;
         ProceedToVideo(gameOverVideoClip);
     }
     private IEnumerator HandleWinEnding()
@@ -124,12 +125,11 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.clip = uIManager.winClip;
         uIManager.audioSource.Play();
         uIManager.winScreen.SetActive(true);
-        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
+        yield return new WaitForSeconds(uIManager.winClip.length);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
             recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
-        yield return new WaitForSeconds(uIManager.winClip.length);
         ProceedToVideo(winVideoClip);
     }
     public override void DisplayChoices()
@@ -176,6 +176,8 @@ public class ProfessionalJobManager : InkManager
         uIManager.audioSource.Play();
         uIManager.loseScreen.SetActive(true);
         yield return new WaitForSeconds(uIManager.loseClip.length);
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = whatShouldYouDoButtonPos.position;
         ProceedToVideo(gameOverVideoClip);
     }
 }

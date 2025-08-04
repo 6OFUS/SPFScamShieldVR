@@ -58877,43 +58877,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60b94d60a07824d4080f0e3ebe8fd7f3, type: 3}
   m_PrefabInstance: {fileID: 282517147}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &283932233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 283932234}
-  m_Layer: 5
-  m_Name: Scam
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &283932234
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 283932233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 380537251}
-  - {fileID: 1126770761}
-  m_Father: {fileID: 997144096}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0069999695, y: 3.010001}
-  m_SizeDelta: {x: 4.241268, y: 1.1178403}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286106701 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8432752550863470545, guid: e493492c7e1687e49a056547034f8e39, type: 3}
@@ -60539,11 +60502,11 @@ RectTransform:
   m_LocalScale: {x: 0.0010350355, y: 0.0010350355, z: 0.0010350355}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 283932234}
+  m_Father: {fileID: 997144096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.127, y: -0}
+  m_AnchoredPosition: {x: -1.12, y: 3.0100002}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &380537252
@@ -73706,6 +73669,8 @@ MonoBehaviour:
   whatHappenButton: {fileID: 380537252}
   winScreen: {fileID: 1761303871}
   loseScreen: {fileID: 1761303827}
+  reportAfterScammedScreen: {fileID: 0}
+  whatShouldYouDoButton: {fileID: 1126770760}
   stickers:
   - {fileID: 21300000, guid: af64d6da4dab43644b3cb499bc784fee, type: 3}
   - {fileID: 21300000, guid: 287ec40ab5f7b424dbd0f0afe7b62015, type: 3}
@@ -79475,7 +79440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &982936779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79488,11 +79453,11 @@ RectTransform:
   m_LocalScale: {x: 0.0010350355, y: 0.0010350355, z: 0.0010350355}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1438298590}
+  m_Father: {fileID: 997144096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.00005531311, y: 3.0100002}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982936780
@@ -79721,8 +79686,9 @@ RectTransform:
   - {fileID: 689101209}
   - {fileID: 573206052}
   - {fileID: 1430406688}
-  - {fileID: 283932234}
-  - {fileID: 1438298590}
+  - {fileID: 380537251}
+  - {fileID: 1126770761}
+  - {fileID: 982936779}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -85900,11 +85866,11 @@ RectTransform:
   m_LocalScale: {x: 0.0010350355, y: 0.0010350355, z: 0.0010350355}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 283932234}
+  m_Father: {fileID: 997144096}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.127, y: -0}
+  m_AnchoredPosition: {x: 1.134, y: 3.0100002}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1126770762
@@ -88681,10 +88647,10 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 1761303867}
   scamshieldLoadingScreen: {fileID: 91297079}
   whatHappenButton: {fileID: 380537252}
-  loseScreen: {fileID: 1761303827}
   winScreen: {fileID: 1761303871}
-  ignoreOfferScreen: {fileID: 1621467191}
+  loseScreen: {fileID: 1761303827}
   reportAfterScammedScreen: {fileID: 1621467190}
+  ignoreOfferScreen: {fileID: 1621467191}
   whatsupScreen: {fileID: 1761303851}
   amailScreen: {fileID: 1761303849}
   jasonEmailScreen: {fileID: 1761303831}
@@ -92266,6 +92232,7 @@ MonoBehaviour:
   fadeScript: {fileID: 1387297153}
   recapVideoScript: {fileID: 997144092}
   uIManager: {fileID: 777099823}
+  whatShouldYouDoButtonPos: {fileID: 982936779}
 --- !u!4 &1373964407
 Transform:
   m_ObjectHideFlags: 0
@@ -93752,42 +93719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1427806209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -51.525}
---- !u!1 &1438298589
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1438298590}
-  m_Layer: 5
-  m_Name: Professional
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1438298590
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438298589}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 982936779}
-  m_Father: {fileID: 997144096}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00005531311, y: 3.01}
-  m_SizeDelta: {x: 1.9872681, y: 1.1178384}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1438639918
 GameObject:
   m_ObjectHideFlags: 0
@@ -158210,9 +158141,6 @@ MonoBehaviour:
   scamOrNotEndingUI:
   - {fileID: 850761594}
   - {fileID: 689101208}
-  endingVideoUI:
-  - {fileID: 283932233}
-  - {fileID: 1438298589}
   whatsupContent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!4 &1942447316
@@ -159843,7 +159771,6 @@ MonoBehaviour:
   - {fileID: 1761303828}
   scamOrNotEndingUI:
   - {fileID: 689101208}
-  endingVideoUI: []
   whatsupContent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!1 &2092139007

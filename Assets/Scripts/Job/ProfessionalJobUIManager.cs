@@ -11,8 +11,7 @@ using UnityEngine.Video;
 
 public class ProfessionalJobUIManager : UIManager
 {
-    public GameObject winScreen;
-    public GameObject loseScreen;
+    public GameObject whatShouldYouDoButton;
 
     [Header("Stickers")]
     public Sprite[] stickers;

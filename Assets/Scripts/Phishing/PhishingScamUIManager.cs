@@ -16,4 +16,16 @@ public class PhishingScamUIManager : UIManager
     public GameObject bankMessage;
     public GameObject smsBankScreen;
     public GameObject homeScreen;
+
+    public override void Screenshot()
+    {
+        if (!screenshotTaken)
+        {
+            screenshotTaken = true;
+            audioSource.clip = screenshotClip;
+            audioSource.Play();
+            flashImage.gameObject.SetActive(true);
+            StartCoroutine(FlashEffect());
+        }
+    }
 }

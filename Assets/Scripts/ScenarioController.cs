@@ -29,8 +29,6 @@ public class ScenarioController : MonoBehaviour
 
     public GameObject[] scamOrNotEndingUI;
 
-    public GameObject[] endingVideoUI;
-
     public Transform whatsupContent;
 
     public GameObject scenarioCanvas;
@@ -71,7 +69,6 @@ public class ScenarioController : MonoBehaviour
         TextAsset selectedInk = inkJsonFiles[index];
         scenarioCanvas = uiCanvas[index];
         scamOrNotEndingUI[index].SetActive(true);
-        endingVideoUI[index].SetActive(true);
         scenarioCanvas.SetActive(true);
         inkManagers[index].gameObject.SetActive(true);
         uiManagers[index].gameObject.SetActive(true);

@@ -276,11 +276,11 @@ public class JobScamManager : InkManager
         uIManager.audioSource.Play();
         ClearChoices();
         Destroy(scamshieldButton);
+        yield return new WaitForSeconds(uIManager.loseClip.length);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
             recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
         });
-        yield return new WaitForSeconds(uIManager.loseClip.length);
         ProceedToVideo(gameOverVideoClip);
     }
 
@@ -290,14 +290,13 @@ public class JobScamManager : InkManager
         uIManager.audioSource.clip = uIManager.winClip;
         uIManager.audioSource.Play();
         uIManager.ignoreOfferScreen.SetActive(true);
-        yield return new WaitForEndOfFrame(); // Wait for UI to fully update
         ClearChoices();
         Destroy(scamshieldButton);
+        yield return new WaitForSeconds(uIManager.winClip.length);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
             recapVideoScript.PlayVideo(whatHappenWinVideoClip);
         });
-        yield return new WaitForSeconds(uIManager.winClip.length);
         ProceedToVideo(winVideoClip);
     }
 

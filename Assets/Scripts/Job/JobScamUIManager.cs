@@ -11,10 +11,7 @@ using UnityEngine.UI;
 
 public class JobScamUIManager : UIManager
 {
-    public GameObject loseScreen;
-    public GameObject winScreen;
     public GameObject ignoreOfferScreen;
-    public GameObject reportAfterScammedScreen;
 
     [Header("WhatsUp UI")]
     public GameObject whatsupScreen;
