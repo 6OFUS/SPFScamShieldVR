@@ -11,13 +11,13 @@ public class SceneChanger : MonoBehaviour
     public void ChangeScene()
     {
         Debug.Log("Changing scene...");
-        StartCoroutine(FadeThenChange());
+        StartCoroutine(FadeThenChange(sceneIndexNum));
     }
 
-    private IEnumerator FadeThenChange()
+    private IEnumerator FadeThenChange(int index)
     {
         yield return fade.Transition(1f); // Wait for fade to complete
-        SceneManager.LoadScene(sceneIndexNum); // Load scene AFTER fade
+        SceneManager.LoadScene(index); // Load scene AFTER fade
     }
 
     public void RandomScene()
@@ -30,13 +30,13 @@ public class SceneChanger : MonoBehaviour
         }
 
         GameManager.Instance.prevSceneIndexNum = randomIndex;
-        StartCoroutine(FadeThenChange());
+        StartCoroutine(FadeThenChange(randomIndex));
     }
 
     public void RestartScene()
     {
         GameManager.Instance.isRestart = true;
-        StartCoroutine(FadeThenChange());
+        StartCoroutine(FadeThenChange(sceneIndexNum));
 
     }
     // Start is called before the first frame update
