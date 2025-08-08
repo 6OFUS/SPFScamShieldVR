@@ -16710,7 +16710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &275770316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36794,9 +36794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f146b66c68f73b40bdbc10d469bbc1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyTags: []
   knotName: 
   stopStory: 0
+  isOnHomeScreen: 0
   xrMove: {fileID: 1969465926}
   leftControllerNearFar: {fileID: 1969465925}
   rightControllerNearFar: {fileID: 1969465924}
@@ -38209,7 +38209,7 @@ MonoBehaviour:
   - {fileID: 859947181}
   scamOrNotEndingUI:
   - {fileID: 2023348044}
-  whatsupContent: {fileID: 0}
+  messageContentParent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!4 &888909076
 Transform:
@@ -41791,8 +41791,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832b1d9c497aeef4ba627ad2e8237d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkManager: {fileID: 1368885621}
-  scenarioController: {fileID: 888909075}
+  loadingTime: 3
+  homeScreen: {fileID: 1673574715}
   screenshotTaken: 0
   flashImage: {fileID: 6040814721440844533}
   flashDuration: 1
@@ -41808,13 +41808,15 @@ MonoBehaviour:
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
+  inkManager: {fileID: 1368885621}
+  scenarioController: {fileID: 888909075}
+  scamManager: {fileID: 1368885621}
   smsScammerScreen: {fileID: 6040814721440844536}
   websiteHomeScreen: {fileID: 6040814721440844535}
   userDetails: {fileID: 1772033269}
   loadingScreen: {fileID: 609390276}
   bankMessage: {fileID: 1715674591}
   smsBankScreen: {fileID: 352309178}
-  homeScreen: {fileID: 1673574715}
 --- !u!1 &1135856921
 GameObject:
   m_ObjectHideFlags: 0
@@ -47494,9 +47496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd5a154cd3e03343accac9291e692e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyTags: []
   knotName: 
   stopStory: 0
+  isOnHomeScreen: 0
   xrMove: {fileID: 1969465926}
   leftControllerNearFar: {fileID: 1969465925}
   rightControllerNearFar: {fileID: 1969465924}
@@ -47516,6 +47518,7 @@ MonoBehaviour:
   fadeScript: {fileID: 1969465927}
   recapVideoScript: {fileID: 908757555}
   uIManager: {fileID: 1133671891}
+  cdcClaimed: 0
 --- !u!43 &1376479606
 Mesh:
   m_ObjectHideFlags: 0
@@ -52684,8 +52687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172befa09eaed7b42999656a0accc41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkManager: {fileID: 780273069}
-  scenarioController: {fileID: 888909075}
+  loadingTime: 0
+  homeScreen: {fileID: 558620816}
   screenshotTaken: 0
   flashImage: {fileID: 124743900}
   flashDuration: 1
@@ -52701,7 +52704,8 @@ MonoBehaviour:
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
-  homeScreen: {fileID: 558620816}
+  inkManager: {fileID: 780273069}
+  scenarioController: {fileID: 888909075}
   smsScreen: {fileID: 473814313}
   websiteHomeScreen: {fileID: 1395436174}
   redeemScreen: {fileID: 428838666}
@@ -124077,7 +124081,7 @@ PrefabInstance:
       objectReference: {fileID: 1011287244}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.272
+      value: 6.2690196
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -124085,23 +124089,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.38
+      value: 4.378008
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071076
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.707106
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -124109,7 +124113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6547606416748314091, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

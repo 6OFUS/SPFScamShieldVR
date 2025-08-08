@@ -78,15 +78,13 @@ my phone's dying, i can't call. go download the app called "EZProfit" and create
 === investment_scam_instruction_1 ===
 You just need to make a small deposit. Most people start with $300 or $500 but it's up to you. #Sender:message
 
-+ [Player:action_open_ezprofit Return to "EZProfit"] -> tap_bao_bei
++ [Player:action_open_ezprofit Return to "EZProfit"] -> tap_bei_bei
 
-=== tap_bao_bei ===
-+ [Player:action_tap_bao_bei Tap on "Bao Bei"] -> tap_on_invest
+=== tap_bei_bei ===
++ [Player:action_tap_bao_bei Tap on "Bei Bei"] -> tap_on_invest
 
 === tap_on_invest ===
 + [Player:action_tap_on_invest Tap on "Invest"] -> invest_amount
-
-
 
 === invest_amount === 
 + [Player:action_invest_$300 Key in $300] -> invest_confirmation
@@ -108,6 +106,8 @@ You just need to make a small deposit. Most people start with $300 or $500 but i
 
 === close_investment_confirmation === 
 + [Player:action_close_investment_confirmation Tap on "Close"] -> withdraw_money
+
+
 
 === withdraw_money === 
 + [Player:action_withdraw_money Try to withdraw] -> withdraw_error

@@ -266,16 +266,19 @@ public class InkManager : MonoBehaviour
         }
     }
 
-    public virtual void PlayerAction(string action,int index)
+    public void PlayerAction(string action,int index)
     {
-        switch (action)
+        if (actionHandlers.TryGetValue(action, out var handler))
         {
-            case "message":
-                string selectedText = playerChoices[index].choiceName;
-                messagingSystem.PlayerNextMessage(selectedText);
-                StartCoroutine(WaitAndContinueStory(messageTime));
-                break;
+            handler(index);
         }
+        else if(action == "message")
+        {
+            string selectedText = playerChoices[index].choiceName;
+            messagingSystem.PlayerNextMessage(selectedText);
+            StartCoroutine(WaitAndContinueStory(messageTime));                  
+        }
+
     }
 
     protected IEnumerator SpawnActionButton(string buttonText, float delay, UnityEngine.Events.UnityAction onClickAction)
@@ -329,7 +332,7 @@ public class InkManager : MonoBehaviour
         });
     }
 
-    protected IEnumerator ReportToScamShield(UIManager uIManager, AudioClip endingAudioClip, GameObject endingScreen, VideoClip whatHappenVideoClip, VideoClip endingVideoClip)
+    public IEnumerator ReportToScamShield(UIManager uIManager, AudioClip endingAudioClip, GameObject endingScreen, VideoClip whatHappenVideoClip, VideoClip endingVideoClip)
     {
         uIManager.scamshieldLoadingScreen.SetActive(true);
         yield return new WaitForSeconds(scamshieldLoading.length);

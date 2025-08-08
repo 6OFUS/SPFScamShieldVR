@@ -3,10 +3,11 @@
     Date: 03/08/2025
     Description: The PhishingScamManager class is used to handle all the functions related to the phishing scam scenario
 */
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -14,7 +15,7 @@ public class PhishingScamManager : InkManager
 {
     public PhishingScamUIManager uIManager;
 
-    private bool cdcClaimed;
+    public bool cdcClaimed;
 
     public override void DisplayChoices()
     {
@@ -32,81 +33,33 @@ public class PhishingScamManager : InkManager
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
-    public override void PlayerAction(string action, int index)
+
+    private void Awake()
     {
-        switch (action)
+        actionHandlers = new Dictionary<string, Action<int>>
         {
-            case "action_scammer_notification":
-                uIManager.smsScammerScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(2));
-                break;
-            case "action_tap_link":
-                uIManager.websiteHomeScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(2));
-                break;
-            case "action_fill_up_details":
-                uIManager.userDetails.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_claim":
-                uIManager.loadingScreen.SetActive(true);
-                cdcClaimed = true;
-                StartCoroutine(BankSMS());
-                break;
-            case "action_tap_bank_notification":
-                uIManager.smsBankScreen.SetActive(true);
-                Destroy(scamshieldButton);
-                StartCoroutine(WaitAndContinueStory(2));
-                break;
-            case "action_screenshot":
-                uIManager.Screenshot();
-                StartCoroutine(WaitAndContinueStory(2));
-                break;
-            case "action_home_screen":
-                uIManager.DisableAllCanvasChildren();
-                uIManager.homeScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_open_scamshield":
-                uIManager.scamshieldScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_report_lose":
-                uIManager.scamshieldLoadingScreen.SetActive(true);
-                StartCoroutine(HandleLoseEnding());
-                break;
-            default:
-                base.PlayerAction(action, index);
-                break;
-        }
-    }
+            { "action_scammer_notification", _ => uIManager.ScammerNotification()},
+            { "action_tap_link", _ => uIManager.TapLink()},
+            { "action_fill_up_details", _ => uIManager.FillUpDetails()},
+            { "action_claim", _ => uIManager.ClaimCDC()},
+            { "action_tap_bank_notification", _ => uIManager.TapBankSMSNotification()},
+            { "action_screenshot", _ => uIManager.TakeScreenshot()},
+            { "action_home_screen", _ => uIManager.HomeScreen()},
+            { "action_open_scamshield", _ => uIManager.OpenScamShield()},
+            { "action_report_lose", _ => uIManager.ReportLose()},
 
-    private IEnumerator BankSMS()
-    {
-        yield return new WaitForSeconds(3);
-        StartCoroutine(WaitAndContinueStory(0));
-        uIManager.bankMessage.SetActive(true);
+        };
     }
-
 
     protected override void Report()
     {
-        StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
-    }
-
-    private IEnumerator HandleLoseEnding()
-    {
-        ClearChoices();
-        Destroy(scamshieldButton);
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = uIManager.loseClip;
-        uIManager.audioSource.Play();
-        uIManager.reportAfterScammedScreen.SetActive(true);
-        yield return new WaitForSeconds(uIManager.loseClip.length);
-        uIManager.whatHappenButton.onClick.AddListener(() =>
+        if (!cdcClaimed)
         {
-            recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
-        });
-        ProceedToVideo(gameOverVideoClip);
+            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
+        }
+        else
+        {
+            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        }
     }
 }

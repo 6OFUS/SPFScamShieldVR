@@ -46,6 +46,7 @@ public class JobScamManager : InkManager
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
+    /*
     public override void PlayerAction(string action, int index)
     {
         switch (action)
@@ -135,6 +136,7 @@ public class JobScamManager : InkManager
                 break;
         }
     }
+    */
 
     protected override void Report()
     {

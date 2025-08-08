@@ -9,7 +9,6 @@ using UnityEngine;
 
 public class NotPhishingScamUIManager : UIManager
 {
-    public GameObject homeScreen;
     public GameObject smsScreen;
     public GameObject websiteHomeScreen;
     public GameObject redeemScreen;

@@ -16,6 +16,7 @@ public class ProfessionalJobManager : InkManager
     public ProfessionalJobUIManager uIManager;
 
     public Transform whatShouldYouDoButtonPos;
+    /*
 
     public override void PlayerAction(string action, int index)
     {
@@ -56,6 +57,7 @@ public class ProfessionalJobManager : InkManager
                 break;
         }
     }
+    */
 
     private IEnumerator SpawnHomeButton(float time)
     {

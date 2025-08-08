@@ -12004,6 +12004,7 @@ MonoBehaviour:
   uIManager: {fileID: 1683142414}
   eZProfitAccountCreated: 0
   isInvestAmountEntered: 0
+  isMoneyInvested: 0
 --- !u!1 &373197703
 GameObject:
   m_ObjectHideFlags: 0
@@ -51428,7 +51429,7 @@ MonoBehaviour:
   eZProfitSignUpScreen: {fileID: 1532011890}
   eZProfitAccountDetailsScreen: {fileID: 1481957533}
   eZProfitHomeScreen: {fileID: 588909231}
-  eZProfitBaoBeiScreen: {fileID: 926893416}
+  eZProfitBeiBeiScreen: {fileID: 926893416}
   eZProfitInvestScreen: {fileID: 1134335578}
   eZProfitAmountInputScreen: {fileID: 79068973}
   eZProfitAddPaymentMethodScreen: {fileID: 2056018993}
@@ -114767,6 +114768,10 @@ PrefabInstance:
     - target: {fileID: 4169182049820628320, guid: 06a5a8fa9af007a43b6722a23e3b0159, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268522222908808589, guid: 06a5a8fa9af007a43b6722a23e3b0159, type: 3}
+      propertyPath: m_Name
+      value: EZProfit bei bei screen
       objectReference: {fileID: 0}
     - target: {fileID: 4325931490957246400, guid: 06a5a8fa9af007a43b6722a23e3b0159, type: 3}
       propertyPath: m_AnchorMax.y

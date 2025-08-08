@@ -31,6 +31,7 @@ public class NotPhishingScamManager : InkManager
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
+    /*
     public override void PlayerAction(string action, int index)
     {
         switch (action)
@@ -71,6 +72,7 @@ public class NotPhishingScamManager : InkManager
                 break;
         }
     }
+    */
 
     private IEnumerator BankSMS()
     {

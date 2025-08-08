@@ -29,7 +29,7 @@ public class InvestmentScamUIManager : UIManager
     public GameObject eZProfitHomeScreen;
 
     [Header("EZProfit Investing")]
-    public GameObject eZProfitBaoBeiScreen;
+    public GameObject eZProfitBeiBeiScreen;
     public GameObject eZProfitInvestScreen;
     public GameObject eZProfitAmountInputScreen;
 
@@ -47,7 +47,6 @@ public class InvestmentScamUIManager : UIManager
     public GameObject eZProfitWithdrawLoadingScreen;
     public GameObject eZProfitWithdrawDeniedScreen;
 
-    public float loadingTime;
 
     public void ScammerNotification()
     {
@@ -131,9 +130,9 @@ public class InvestmentScamUIManager : UIManager
         kachagramScreen.SetActive(true);
         StartCoroutine(scamManager.WaitAndContinueStory(1));
     }
-    public void TapOnBaoBei()
+    public void TapOnBeiBei()
     {
-        eZProfitBaoBeiScreen.SetActive(true);
+        eZProfitBeiBeiScreen.SetActive(true);
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 

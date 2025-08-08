@@ -34,7 +34,7 @@ public class InvestmentScamManager : InkManager
             { "action_fill_details_ezprofit", _ => uIManager.FillUpAccountDetails()},
             { "action_signup_ezprofit", _ => uIManager.SignUpEZProfitAccount()},
             { "action_open_kachagram", _ => uIManager.OpenKachagram()},
-            { "action_tap_bao_bei", _ => uIManager.TapOnBaoBei()},
+            { "action_tap_bei_bei", _ => uIManager.TapOnBeiBei()},
             { "action_tap_on_invest", _ => uIManager.InvestInBaoBei()},
             { "action_invest_$300", _ => uIManager.InvestAmount()},
             { "action_add_payment_method", _ => uIManager.AddNewPaymentMethod()},
@@ -72,23 +72,8 @@ public class InvestmentScamManager : InkManager
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
         }
 
-    }
-
-
-    public override void PlayerAction(string action, int index)
-    {
-        if (actionHandlers.TryGetValue(action, out var handler))
-        {
-            handler(index); 
-        }
-        else
-        {
-            base.PlayerAction(action, index); 
-        }
-    }
-
-    
+    }   
 }

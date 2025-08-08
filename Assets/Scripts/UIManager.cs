@@ -12,6 +12,8 @@ using UnityEngine.Video;
 
 public class UIManager : MonoBehaviour
 {
+    public float loadingTime;
+
     [Header("Home")]
     public GameObject homeScreen;
 
