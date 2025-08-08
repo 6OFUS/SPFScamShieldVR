@@ -52687,7 +52687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172befa09eaed7b42999656a0accc41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingTime: 0
+  loadingTime: 3
   homeScreen: {fileID: 558620816}
   screenshotTaken: 0
   flashImage: {fileID: 124743900}
@@ -52706,6 +52706,7 @@ MonoBehaviour:
   reportAfterScammedScreen: {fileID: 1092385113}
   inkManager: {fileID: 780273069}
   scenarioController: {fileID: 888909075}
+  notScamManager: {fileID: 780273069}
   smsScreen: {fileID: 473814313}
   websiteHomeScreen: {fileID: 1395436174}
   redeemScreen: {fileID: 428838666}

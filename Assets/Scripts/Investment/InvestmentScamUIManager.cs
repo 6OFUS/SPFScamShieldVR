@@ -173,7 +173,7 @@ public class InvestmentScamUIManager : UIManager
     public void AddCreditCard()
     {
         eZProfitExistingCardScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public IEnumerator PickCard()
@@ -182,7 +182,7 @@ public class InvestmentScamUIManager : UIManager
         yield return new WaitForSeconds(loadingTime);
         eZProfitInvestmentSuccessScreen.SetActive(true);
         scamManager.isMoneyInvested = true;
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public void EarningsScreen()

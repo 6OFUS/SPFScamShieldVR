@@ -353,7 +353,7 @@ public class InkManager : MonoBehaviour
 
     }
 
-    protected void ProceedToVideo(VideoClip videoClip)
+    public void ProceedToVideo(VideoClip videoClip)
     {
         Destroy(scamshieldButton);
         choiceContainer.gameObject.SetActive(true);
