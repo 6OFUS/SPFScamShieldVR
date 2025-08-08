@@ -23,15 +23,15 @@ public class ProfessionalJobManager : InkManager
         {
             case "action_tap_notification":
                 uIManager.whatsupScreen.SetActive(true);
-                StartCoroutine(WaitForReply(0));
+                StartCoroutine(WaitAndContinueStory(0));
                 break;
             case "sticker":
                 messagingSystem.PlayerSendSticker(uIManager.stickers[index]);
-                StartCoroutine(WaitForReply(messageTime));
+                StartCoroutine(WaitAndContinueStory(messageTime));
                 break;
             case "action_check_website":
                 uIManager.websiteHomeScreen.SetActive(true);
-                StartCoroutine(WaitForReply(5));
+                StartCoroutine(WaitAndContinueStory(5));
                 break;
             case "action_check_website_careers":
                 uIManager.websiteCareersScreen.SetActive(true);
@@ -39,7 +39,7 @@ public class ProfessionalJobManager : InkManager
                 break;
             case "action_open_amail":
                 uIManager.amailScreen.SetActive(true);
-                StartCoroutine(WaitForReply(1));
+                StartCoroutine(WaitAndContinueStory(1));
                 break;
             case "action_open_lucia_email":
                 uIManager.luciaEmailScreen.SetActive(true);
@@ -69,7 +69,7 @@ public class ProfessionalJobManager : InkManager
             }
             if (uIManager.screenshotTaken)
             {
-                StartCoroutine(SpawnOpenScamshieldButton());
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager));
             }
             else
             {
@@ -82,27 +82,10 @@ public class ProfessionalJobManager : InkManager
     {
         yield return SpawnActionButton("Open WhatsUp app", time, () => {
             uIManager.whatsupScreen.SetActive(true);
-            StartCoroutine(WaitForReply(0));
+            StartCoroutine(WaitAndContinueStory(0));
             isOnHomeScreen = false;
         });
     }
-
-    private IEnumerator SpawnOpenScamshieldButton()
-    {
-        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
-            uIManager.scamshieldScreen.SetActive(true);
-            isOnHomeScreen = false;
-            StartCoroutine(SpawnReportButton());
-        });
-    }
-
-    private IEnumerator SpawnReportButton()
-    {
-        yield return SpawnActionButton("Report", 1f, () => {
-            Report();
-        });
-    }
-
 
     private IEnumerator HandleLoseEnding()
     {
@@ -167,17 +150,8 @@ public class ProfessionalJobManager : InkManager
         scamshieldButton.transform.SetAsLastSibling();
     }
 
-    protected override IEnumerator ReportToScamShield()
+    protected override void Report()
     {
-        uIManager.scamshieldLoadingScreen.SetActive(true);
-        yield return base.ReportToScamShield();
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = uIManager.loseClip;
-        uIManager.audioSource.Play();
-        uIManager.loseScreen.SetActive(true);
-        yield return new WaitForSeconds(uIManager.loseClip.length);
-        uIManager.whatHappenButton.gameObject.SetActive(false);
-        uIManager.whatShouldYouDoButton.transform.position = whatShouldYouDoButtonPos.position;
-        ProceedToVideo(gameOverVideoClip);
+        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
     }
 }

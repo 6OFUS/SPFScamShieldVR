@@ -26,7 +26,7 @@ public class NotPhishingScamManager : InkManager
                 uIManager.Screenshot();
                 ClearChoices();
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(1));
+                StartCoroutine(SpawnHomeButton(uIManager,1));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -37,19 +37,19 @@ public class NotPhishingScamManager : InkManager
         {
             case "action_real_notification":
                 uIManager.smsScreen.SetActive(true);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitAndContinueStory(2));
                 break;
             case "action_tap_link":
                 uIManager.websiteHomeScreen.SetActive(true);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitAndContinueStory(2));
                 break;
             case "action_claim":
                 uIManager.redeemScreen.SetActive(true);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitAndContinueStory(2));
                 break;
             case "action_login_singpass":             
                 uIManager.singPassLoginScreen.SetActive(true);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitAndContinueStory(2));
                 break;
             case "action_passcode":
                 uIManager.singPassLoginSuccessScreen.SetActive(true);
@@ -59,7 +59,7 @@ public class NotPhishingScamManager : InkManager
             case "action_tap_bank_notification":
                 uIManager.smsBankScreen.SetActive(true);
                 Destroy(scamshieldButton);
-                StartCoroutine(WaitForReply(2));
+                StartCoroutine(WaitAndContinueStory(2));
                 break;
             case "action_tap_link_bank":
                 uIManager.vouchersClaimedScreen.SetActive(true);
@@ -75,58 +75,15 @@ public class NotPhishingScamManager : InkManager
     private IEnumerator BankSMS()
     {
         yield return new WaitForSeconds(3);
-        StartCoroutine(WaitForReply(0));
+        StartCoroutine(WaitAndContinueStory(0));
         uIManager.bankMessage.SetActive(true);
     }
 
-    private IEnumerator SpawnHomeButton(float time)
+    protected override void Report()
     {
-        yield return SpawnActionButton("Go to home screen", time, () => {
-            isOnHomeScreen = true;
-            uIManager.DisableAllCanvasChildren();
-            uIManager.homeScreen.SetActive(true);
-            if (scamshieldButton != null)
-            {
-                Destroy(scamshieldButton);
-            }
-            if (uIManager.screenshotTaken)
-            {
-                StartCoroutine(SpawnOpenScamshieldButton());
-            }
-        });
+        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
     }
 
-    private IEnumerator SpawnOpenScamshieldButton()
-    {
-        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
-            uIManager.scamshieldScreen.SetActive(true);
-            isOnHomeScreen = false;
-            StartCoroutine(SpawnReportButton());
-        });
-    }
-
-    private IEnumerator SpawnReportButton()
-    {
-        yield return SpawnActionButton("Report", 1f, () => {
-            Report();
-        });
-    }
-
-    protected override IEnumerator ReportToScamShield()
-    {
-        uIManager.scamshieldLoadingScreen.SetActive(true);
-        yield return base.ReportToScamShield();
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = uIManager.loseClip;
-        uIManager.audioSource.Play();
-        uIManager.loseScreen.SetActive(true);
-        yield return new WaitForSeconds(uIManager.loseClip.length);
-        uIManager.whatHappenButton.onClick.AddListener(() =>
-        {
-            recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
-        });
-        ProceedToVideo(gameOverVideoClip);
-    }
 
     private IEnumerator HandleWinEnding()
     {

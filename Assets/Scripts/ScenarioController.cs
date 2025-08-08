@@ -29,7 +29,7 @@ public class ScenarioController : MonoBehaviour
 
     public GameObject[] scamOrNotEndingUI;
 
-    public Transform whatsupContent;
+    public Transform messageContentParent;
 
     public GameObject scenarioCanvas;
 
@@ -72,7 +72,7 @@ public class ScenarioController : MonoBehaviour
         scenarioCanvas.SetActive(true);
         inkManagers[index].gameObject.SetActive(true);
         uiManagers[index].gameObject.SetActive(true);
-        whatsupContent = messagesContent[index];
+        messageContentParent = messagesContent[index];
         inkManagers[index].story = new Story(selectedInk.text);
     }
 

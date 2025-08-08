@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 358.75, y: -0}
+  m_AnchoredPosition: {x: 396.25, y: -0}
   m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3878550235247255677
@@ -151,11 +151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hi Fei Yang! I'm Jason from LUX Commerce Asia, and I saw your resume online.
-    <br><br>We're hiring part-time E-Commerce Task Partners to assist with product
-    engagement for brands like Shopee, Lazada, and Tiktok Shop. <br><br>Tasks are
-    done remotely via your phone and take under 10 minutes each. You'll earn up to
-    $80-$180 per day, paid out every evening via PayNow. Interested?
+  m_text: hellllo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -261,7 +257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 36.25, y: -0}
+  m_AnchoredPosition: {x: 48.75, y: -0}
   m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6562982653823700333
@@ -371,7 +367,7 @@ RectTransform:
   m_GameObject: {fileID: 8753159873717465455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8321793, y: 0.36623448, z: 0.3662345}
+  m_LocalScale: {x: 0.71718466, y: 0.3156264, z: 0.3156264}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7643217144318807908}
@@ -380,7 +376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &756487364041090966
@@ -439,7 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: 0
+    m_Right: -50
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1

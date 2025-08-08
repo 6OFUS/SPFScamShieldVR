@@ -12,9 +12,8 @@ using UnityEngine.Video;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("Script references")]
-    public InkManager inkManager;
-    public ScenarioController scenarioController;
+    [Header("Home")]
+    public GameObject homeScreen;
 
     [Header("Screenshot")]
     public bool screenshotTaken;
@@ -40,6 +39,9 @@ public class UIManager : MonoBehaviour
     public GameObject loseScreen;
     public GameObject reportAfterScammedScreen;
 
+    [Header("Script references")]
+    public InkManager inkManager;
+    public ScenarioController scenarioController;
 
     public virtual void Screenshot()
     {

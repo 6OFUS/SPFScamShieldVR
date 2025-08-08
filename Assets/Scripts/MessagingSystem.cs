@@ -37,7 +37,7 @@ public class MessagingSystem : MonoBehaviour
     /// </summary>
     public void SenderNextMessage(string message)
     {
-        GameObject newMessage = Instantiate(senderMessagePrefab, scenarioController.whatsupContent);
+        GameObject newMessage = Instantiate(senderMessagePrefab, scenarioController.messageContentParent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -50,7 +50,7 @@ public class MessagingSystem : MonoBehaviour
     }
     public void SenderImage(Sprite image)
     {
-        GameObject newImage = Instantiate(senderImagePrefab, scenarioController.whatsupContent);
+        GameObject newImage = Instantiate(senderImagePrefab, scenarioController.messageContentParent);
         Transform imageTransform = newImage.transform.Find("bg/Image");
         if (imageTransform == null)
         {
@@ -75,7 +75,7 @@ public class MessagingSystem : MonoBehaviour
 
     public void PlayerNextMessage(string message)
     {
-        GameObject newMessage = Instantiate(playerMessagePrefab, scenarioController.whatsupContent);
+        GameObject newMessage = Instantiate(playerMessagePrefab, scenarioController.messageContentParent);
 
         TextMeshProUGUI textComponent = newMessage.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -89,7 +89,7 @@ public class MessagingSystem : MonoBehaviour
 
     public void PlayerSendSticker(Sprite image)
     {
-        GameObject newSticker = Instantiate(playerStickerPrefab, scenarioController.whatsupContent);
+        GameObject newSticker = Instantiate(playerStickerPrefab, scenarioController.messageContentParent);
         Transform imageTransform = newSticker.transform.Find("bg/sticker");
         if (imageTransform == null)
         {

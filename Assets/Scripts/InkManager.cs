@@ -3,12 +3,13 @@
     Date: 05/06/2025
     Description: The InkManager class is used to handle the functions for Ink
 */
+using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Ink.Runtime;
-using TMPro;
 using System.Linq;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
@@ -24,12 +25,12 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Tags extracted from the current point in the story
     /// </summary>v
-    public List<string> storyTags = new List<string>();
+    private List<string> storyTags = new List<string>();
 
     public string knotName;
     public bool stopStory;
 
-    protected bool isOnHomeScreen;
+    public bool isOnHomeScreen;
 
     [Header("Player controls")]
     public GameObject xrMove;
@@ -47,6 +48,8 @@ public class InkManager : MonoBehaviour
     public MessagingSystem messagingSystem;
 
     [Header("Player choice")]
+    protected Dictionary<string, Action<int>> actionHandlers;
+
     /// <summary>
     /// Prefab for dialogue choice button UI 
     /// </summary>
@@ -138,7 +141,7 @@ public class InkManager : MonoBehaviour
     /// Coroutine to wait for next message to send
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public IEnumerator WaitForReply(float replyTime)
+    public IEnumerator WaitAndContinueStory(float replyTime)
     {
         yield return new WaitForSeconds(replyTime);
         yield return StartCoroutine(ContinueStory());
@@ -218,7 +221,7 @@ public class InkManager : MonoBehaviour
     {
         for (int i = 0; i < choices.Count; i++)
         {
-            int randomIndex = Random.Range(i, choices.Count);
+            int randomIndex = UnityEngine.Random.Range(i, choices.Count);
             ChoiceData temp = choices[i];
             choices[i] = choices[randomIndex];
             choices[randomIndex] = temp;
@@ -270,7 +273,7 @@ public class InkManager : MonoBehaviour
             case "message":
                 string selectedText = playerChoices[index].choiceName;
                 messagingSystem.PlayerNextMessage(selectedText);
-                StartCoroutine(WaitForReply(messageTime));
+                StartCoroutine(WaitAndContinueStory(messageTime));
                 break;
         }
     }
@@ -291,14 +294,60 @@ public class InkManager : MonoBehaviour
         scamshieldButton.transform.SetAsLastSibling();
     }
 
-    protected virtual IEnumerator ReportToScamShield()
+    protected IEnumerator SpawnHomeButton(UIManager uIManager, float time)
     {
-        yield return new WaitForSeconds(scamshieldLoading.length);
+        yield return SpawnActionButton("Go to home screen", time, () => {
+            isOnHomeScreen = true;
+            uIManager.DisableAllCanvasChildren();
+
+            uIManager.homeScreen.SetActive(true);
+
+            if (scamshieldButton != null)
+            {
+                Destroy(scamshieldButton);
+            }
+            if (uIManager.screenshotTaken)
+            {
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager));
+            }
+        });
     }
 
-    public void Report()
+    protected IEnumerator SpawnOpenScamshieldButton(UIManager uIManager)
     {
-        StartCoroutine(ReportToScamShield());
+        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
+            uIManager.scamshieldScreen.SetActive(true);
+            isOnHomeScreen = false;
+            StartCoroutine(SpawnReportButton());
+        });
+    }
+
+    protected IEnumerator SpawnReportButton()
+    {
+        yield return SpawnActionButton("Report", 1f, () => {
+            Report();
+        });
+    }
+
+    protected IEnumerator ReportToScamShield(UIManager uIManager, AudioClip endingAudioClip, GameObject endingScreen, VideoClip whatHappenVideoClip, VideoClip endingVideoClip)
+    {
+        uIManager.scamshieldLoadingScreen.SetActive(true);
+        yield return new WaitForSeconds(scamshieldLoading.length);
+        uIManager.scenarioController.scenarioCanvas.SetActive(false);
+        uIManager.audioSource.clip = endingAudioClip;
+        uIManager.audioSource.Play();
+        endingScreen.SetActive(true);
+        yield return new WaitForSeconds(endingAudioClip.length);
+        uIManager.whatHappenButton.onClick.AddListener(() =>
+        {
+            recapVideoScript.PlayVideo(whatHappenVideoClip);
+        });
+        ProceedToVideo(endingVideoClip);
+    }
+
+    protected virtual void Report()
+    {
+
     }
 
     protected void ProceedToVideo(VideoClip videoClip)

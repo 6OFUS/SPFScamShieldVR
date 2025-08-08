@@ -36811,7 +36811,7 @@ MonoBehaviour:
   scamshieldLoading: {fileID: 7400000, guid: a2c7273f12facb442aa005e10030ce31, type: 2}
   gameOverVideoClip: {fileID: 32900000, guid: 7f439b4fcc7cd7540b48a30580e8364e, type: 3}
   winVideoClip: {fileID: 32900000, guid: f756e3440b851124caa7417ff9b41c00, type: 3}
-  whatHappenWinVideoClip: {fileID: 0}
+  whatHappenWinVideoClip: {fileID: 32900000, guid: 2cf0c754628e04a4f923ed8d665c7375, type: 3}
   whatHappenLoseVideoClip: {fileID: 0}
   fadeScript: {fileID: 1969465927}
   recapVideoScript: {fileID: 908757555}
@@ -47511,8 +47511,8 @@ MonoBehaviour:
   scamshieldLoading: {fileID: 7400000, guid: a2c7273f12facb442aa005e10030ce31, type: 2}
   gameOverVideoClip: {fileID: 32900000, guid: 3e152441037199f40becfedfff108f8b, type: 3}
   winVideoClip: {fileID: 32900000, guid: f756e3440b851124caa7417ff9b41c00, type: 3}
-  whatHappenWinVideoClip: {fileID: 32900000, guid: 88fe8ca296af2ff4a9460a988cfe4aa4, type: 3}
-  whatHappenLoseVideoClip: {fileID: 32900000, guid: 439bf6b788ffd7c498d3a392764f36ee, type: 3}
+  whatHappenWinVideoClip: {fileID: 32900000, guid: 8a576eda7acdde84dad0141c623c671c, type: 3}
+  whatHappenLoseVideoClip: {fileID: 32900000, guid: 9b06902090d141e4eb1b1576611a13ca, type: 3}
   fadeScript: {fileID: 1969465927}
   recapVideoScript: {fileID: 908757555}
   uIManager: {fileID: 1133671891}
