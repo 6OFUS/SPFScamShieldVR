@@ -18,7 +18,7 @@ public class PhishingScamUIManager : UIManager
     public GameObject bankMessage;
     public GameObject smsBankScreen;
 
-    public override void Screenshot()
+    public override void Screenshot(InkManager inkManager)
     {
         if (!screenshotTaken)
         {
@@ -71,7 +71,7 @@ public class PhishingScamUIManager : UIManager
 
     public void TakeScreenshot()
     {
-        Screenshot();
+        Screenshot(scamManager);
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 

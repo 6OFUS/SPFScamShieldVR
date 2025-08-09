@@ -38199,16 +38199,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJsonFiles:
   - {fileID: 4900000, guid: 83348b361988c994d944afbf8da03abd, type: 3}
+  - {fileID: 4900000, guid: 33df2972ff8aa4a4e90e3a2760a7f84b, type: 3}
   uiCanvas:
   - {fileID: 522816893}
+  - {fileID: 1593783626}
   inkManagers:
   - {fileID: 1368885621}
+  - {fileID: 780273069}
   uiManagers:
   - {fileID: 1133671891}
+  - {fileID: 1503141304}
   messagesContent:
   - {fileID: 859947181}
+  - {fileID: 1593783625}
   scamOrNotEndingUI:
   - {fileID: 2023348044}
+  - {fileID: 1103784867}
   messageContentParent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!4 &888909076
@@ -41805,6 +41811,8 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 6040814721440844538}
   scamshieldLoadingScreen: {fileID: 6040814721440844537}
   whatHappenButton: {fileID: 1313255594}
+  whatShouldYouDoButton: {fileID: 1601858337}
+  whatShouldYouDoButtonPos: {fileID: 1707646224}
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
@@ -52701,6 +52709,8 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 207326408}
   scamshieldLoadingScreen: {fileID: 284260126}
   whatHappenButton: {fileID: 1313255594}
+  whatShouldYouDoButton: {fileID: 1601858337}
+  whatShouldYouDoButtonPos: {fileID: 1707646224}
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
@@ -57028,6 +57038,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3145389800669900460}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!224 &1593783625 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6451486374722848979, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1593783626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5973445823112795501, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1594120471
 GameObject:
   m_ObjectHideFlags: 0

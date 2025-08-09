@@ -146,20 +146,20 @@ public class InvestmentScamUIManager : UIManager
         {
             eZProfitAddPaymentMethodScreen.SetActive(true);
         }
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public void InvestAmount()
     {
         eZProfitAmountInputScreen.SetActive(true);
         scamManager.isInvestAmountEntered = true;
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public void AddNewPaymentMethod()
     {
         eZProfitCreditCardDetailsScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public IEnumerator ScanCreditCard()
@@ -188,7 +188,7 @@ public class InvestmentScamUIManager : UIManager
     public void EarningsScreen()
     {
         eZProfitEarningsScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public IEnumerator WithdrawEarnings()
@@ -196,7 +196,7 @@ public class InvestmentScamUIManager : UIManager
         eZProfitWithdrawLoadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         eZProfitWithdrawDeniedScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(inkManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
     }
 
     public void AskRachel()

@@ -56,17 +56,10 @@ Alright email sent! #Sender:message
 === return_from_email ===
 + [Player:win_ending Thank you. Let's proceed.] -> win_ending
 
-//------------------------------ SCAMSHIELD PROCEDURE ------------------------------
-=== report_scamshield ===
-//PLAYER GO THROUGH FULL SCAMSHIELD PROCEDURE
--> lose_not_scam_ending
 
 //------------------------------ ENDINGS ------------------------------
 === win_ending ===
 //PLAYER WINS
--> END
-
-=== lose_not_scam_ending ===
 -> END
 
 === lose_ending ===

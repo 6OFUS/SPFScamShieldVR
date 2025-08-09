@@ -297,7 +297,7 @@ public class InkManager : MonoBehaviour
         scamshieldButton.transform.SetAsLastSibling();
     }
 
-    protected IEnumerator SpawnHomeButton(UIManager uIManager, float time)
+    public IEnumerator SpawnHomeButton(UIManager uIManager, float time)
     {
         yield return SpawnActionButton("Go to home screen", time, () => {
             isOnHomeScreen = true;

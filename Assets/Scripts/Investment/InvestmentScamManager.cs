@@ -56,7 +56,7 @@ public class InvestmentScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot();
+                uIManager.Screenshot(this);
                 ClearChoices();
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager,1));

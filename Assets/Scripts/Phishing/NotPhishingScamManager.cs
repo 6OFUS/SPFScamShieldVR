@@ -24,7 +24,7 @@ public class NotPhishingScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot();
+                uIManager.Screenshot(this);
                 ClearChoices();
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager,1));
@@ -32,17 +32,6 @@ public class NotPhishingScamManager : InkManager
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
-    /*
-    public override void PlayerAction(string action, int index)
-    {
-        switch (action)
-        {
-            case "action_tap_link_bank":
-                
-                break;
-        }
-    }
-    */
 
     private void Awake()
     {
@@ -62,6 +51,8 @@ public class NotPhishingScamManager : InkManager
     protected override void Report()
     {
         StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }
 
 

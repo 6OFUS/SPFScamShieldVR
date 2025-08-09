@@ -27,8 +27,7 @@ public class JobScamManager : InkManager
     public float loadingTime;
 
     [Header("Website task")]
-    [SerializeField] private bool firstTaskCompleted;
-    [SerializeField] private int numItemsAdded;
+    public bool firstTaskCompleted;
 
     public override void DisplayChoices()
     {
@@ -38,7 +37,7 @@ public class JobScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot();
+                uIManager.Screenshot(this);
                 ClearChoices();
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager,1));
@@ -46,97 +45,32 @@ public class JobScamManager : InkManager
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
-    /*
-    public override void PlayerAction(string action, int index)
-    {
-        switch (action)
-        {
-            case "action_tap_notification":
-                uIManager.whatsupScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(0));
-                break;
-            case "action_open_amail":
-                uIManager.amailScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_open_jason_email":
-                uIManager.jasonEmailScreen.SetActive(true);
-                StartCoroutine(SpawnHomeButton(uIManager, 5));
-                break;
-            case "message_register_account":
-                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                uIManager.websiteHomeScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
 
-            case "action_create_account":
-                uIManager.websiteCreateAccountScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_enter_details":
-                for (int i = 0; i < uIManager.detailsInputText.Length; i++)
-                {
-                    uIManager.detailsInputText[i].color = Color.black;
-                    uIManager.detailsInputText[i].text = uIManager.detailsTextContent[i];
-                }
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_submit_and_create":
-                StartCoroutine(CreatingAccount());
-                break;
-            case "message_complete_task":
-                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                uIManager.whatsupScreen.SetActive(false);
-                uIManager.websiteHomeLoggedInScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_select_silver_tier":
-                uIManager.websiteSelectTaskScreen.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_select_task_1":
-                StartCoroutine(HandleFirstTaskGroupSelection());
-                break;
-            case "action_add_items":
-                uIManager.itemNumThree.SetActive(true);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_check_out":
-                StartCoroutine(HandleCheckOut());
-                break;
-            case "message_complete_task_2":
-                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                uIManager.whatsupScreen.SetActive(false);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_select_task_2":
-                StartCoroutine(HandleSecondTaskGroupSelection());
-                break;
-            case "message_withdraw":
-                uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-                messagingSystem.PlayerNextMessage(playerChoices[index].choiceName);
-                StartCoroutine(WaitAndContinueStory(1));
-                break;
-            case "action_withdraw":
-                StartCoroutine(Withdraw());
-                break;
-            case "error_message":
-                messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
-                StartCoroutine(WaitAndContinueStory(messageTime));
-                break;
-            case "lose_ending":
-                StartCoroutine(HandleLoseEnding());
-                break;
-            case "ignore_ending":
-                StartCoroutine(HandleIgnoreOfferEnding());
-                break;
-            default:
-                base.PlayerAction(action, index); 
-                break;
-        }
+    private void Awake()
+    {
+        actionHandlers = new Dictionary<string, Action<int>>
+        {
+            { "action_tap_notification", _ => uIManager.TapNotification()},
+            { "action_open_amail", _ => uIManager.OpenAmail()},
+            { "action_open_jason_email", _ => uIManager.OpenJasonEmail()},
+            { "message_register_account", index => uIManager.MessageAndRegisterAccount(index)},
+            { "action_create_account" , _ => uIManager.CreateAccount()},
+            { "action_enter_details", _ => uIManager.EnterAccountDetails()},
+            { "action_submit_and_create", _ => StartCoroutine(uIManager.CreatingAccount())},
+            { "message_complete_task", index => uIManager.MessageAndCompleteFirstTask(index)},
+            { "action_select_silver_tier", _ => uIManager.SelectSilverTier()},
+            { "action_select_task_1", _ => StartCoroutine(uIManager.HandleFirstTaskGroupSelection())},
+            { "action_add_items", _ => uIManager.AddItemsToCart()},
+            { "action_check_out", _ => StartCoroutine(uIManager.HandleCheckOut())},
+            { "message_complete_task_2", index => uIManager.MessageAndCompleteSecondTask(index)},
+            { "action_select_task_2", _ => StartCoroutine(uIManager.HandleSecondTaskGroupSelection())},
+            { "message_withdraw", index => uIManager.MessageAndWithdraw(index)},
+            { "action_withdraw", _ => StartCoroutine(uIManager.Withdraw())},
+            { "error_message", _ => ErrorMessage()},
+            { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
+            { "ignre_ending", _ => StartCoroutine(uIManager.HandleIgnoreOfferEnding())},
+        };
     }
-    */
 
     protected override void Report()
     {
@@ -150,92 +84,10 @@ public class JobScamManager : InkManager
         }
     }
 
-
-    private IEnumerator CreatingAccount()
+    private void ErrorMessage()
     {
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.websiteHomeLoggedInScreen.SetActive(true);
-        StartCoroutine(SpawnHomeButton(uIManager, 1));
-    }
-
-    private IEnumerator HandleFirstTaskGroupSelection()
-    {
-        uIManager.websiteHomeLoggedInScreen.SetActive(false);
-        uIManager.websiteSelectTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.loadingScreen.SetActive(false);
-        uIManager.taskScreen.SetActive(true);
-        StartCoroutine(WaitAndContinueStory(1));
-    }
-
-    private IEnumerator HandleSecondTaskGroupSelection()
-    {
-        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
-        uIManager.websiteSelectTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime * 2);
-        StartCoroutine(SpawnHomeButton(uIManager, 0));
-    }
-
-    private IEnumerator HandleCheckOut()
-    {
-        uIManager.taskScreen.SetActive(false);
-        uIManager.loadingBackToDashboardScreen.SetActive(true);
-        firstTaskCompleted = true;
-        uIManager.websiteFirstTaskGroup.SetActive(false);
-        //CHECK OUT AUDIO PUT HERE
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(true);
-        StartCoroutine(SpawnHomeButton(uIManager, 1));
-    }
-
-    private IEnumerator Withdraw()
-    {
-        uIManager.websiteHomeAfterFirstTaskScreen.SetActive(false);
-        uIManager.loadingScreen.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        uIManager.loadingScreen.SetActive(false);
-        uIManager.websiteWithdrawErrorScreen.SetActive(true);
-        uIManager.audioSource.clip = errorClip;
-        uIManager.audioSource.Play();
-        StartCoroutine(SpawnHomeButton(uIManager, 1));
-    }
-
-    private IEnumerator HandleLoseEnding()
-    {
-        uIManager.audioSource.clip = cryingClip;
-        uIManager.audioSource.Play();
-        yield return new WaitForSeconds(cryingClip.length);
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.loseScreen.SetActive(true);
-        uIManager.audioSource.clip = uIManager.loseClip;
-        uIManager.audioSource.Play();
-        ClearChoices();
-        Destroy(scamshieldButton);
-        yield return new WaitForSeconds(uIManager.loseClip.length);
-        uIManager.whatHappenButton.onClick.AddListener(() =>
-        {
-            recapVideoScript.PlayVideo(whatHappenLoseVideoClip);
-        });
-        ProceedToVideo(gameOverVideoClip);
-    }
-
-    private IEnumerator HandleIgnoreOfferEnding()
-    {
-        uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = uIManager.winClip;
-        uIManager.audioSource.Play();
-        uIManager.ignoreOfferScreen.SetActive(true);
-        ClearChoices();
-        Destroy(scamshieldButton);
-        yield return new WaitForSeconds(uIManager.winClip.length);
-        uIManager.whatHappenButton.onClick.AddListener(() =>
-        {
-            recapVideoScript.PlayVideo(whatHappenWinVideoClip);
-        });
-        ProceedToVideo(winVideoClip);
+        messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
+        StartCoroutine(WaitAndContinueStory(messageTime));
     }
 
     public override void SenderAction(string action, string dialogue)

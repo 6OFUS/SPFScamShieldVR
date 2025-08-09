@@ -60304,9 +60304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848a97699e0b66d4aaefc02ed6d802de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyTags: []
   knotName: 
   stopStory: 0
+  isOnHomeScreen: 0
   xrMove: {fileID: 22154376}
   leftControllerNearFar: {fileID: 1065256375}
   rightControllerNearFar: {fileID: 1834406784}
@@ -60332,7 +60332,6 @@ MonoBehaviour:
   inputCount: 0
   loadingTime: 3
   firstTaskCompleted: 0
-  numItemsAdded: 0
 --- !u!4 &398172844
 Transform:
   m_ObjectHideFlags: 0
@@ -73478,8 +73477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd659feffe6765941939eab2e38588d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkManager: {fileID: 1373964406}
+  loadingTime: 0
   scenarioController: {fileID: 1942447315}
+  homeScreen: {fileID: 1761303874}
   screenshotTaken: 0
   flashImage: {fileID: 1761303885}
   flashDuration: 1
@@ -73492,16 +73492,17 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 1761303878}
   scamshieldLoadingScreen: {fileID: 1554835219}
   whatHappenButton: {fileID: 380537252}
+  whatShouldYouDoButton: {fileID: 1126770760}
+  whatShouldYouDoButtonPos: {fileID: 982936779}
   winScreen: {fileID: 1761303871}
   loseScreen: {fileID: 1761303827}
   reportAfterScammedScreen: {fileID: 0}
-  whatShouldYouDoButton: {fileID: 1126770760}
+  notScamManager: {fileID: 1373964406}
   stickers:
   - {fileID: 21300000, guid: af64d6da4dab43644b3cb499bc784fee, type: 3}
   - {fileID: 21300000, guid: 287ec40ab5f7b424dbd0f0afe7b62015, type: 3}
   - {fileID: 21300000, guid: fd1bad47c1c47314cbc777b99e09d02c, type: 3}
   stickerChoicePrefab: {fileID: 6502705981668516139, guid: 92df3613dda95f6429801989e349f323, type: 3}
-  homeScreen: {fileID: 1761303874}
   whatsupScreen: {fileID: 1817903042}
   websiteHomeScreen: {fileID: 1761303873}
   amailScreen: {fileID: 1761303872}
@@ -89148,8 +89149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6db3d2e511548c44a099b3b58bcfb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkManager: {fileID: 398172843}
+  loadingTime: 0
   scenarioController: {fileID: 1942447315}
+  homeScreen: {fileID: 1761303848}
   screenshotTaken: 0
   flashImage: {fileID: 1761303830}
   flashDuration: 1
@@ -89162,14 +89164,16 @@ MonoBehaviour:
   scamshieldScreen: {fileID: 1761303867}
   scamshieldLoadingScreen: {fileID: 91297079}
   whatHappenButton: {fileID: 380537252}
+  whatShouldYouDoButton: {fileID: 0}
+  whatShouldYouDoButtonPos: {fileID: 0}
   winScreen: {fileID: 1761303871}
   loseScreen: {fileID: 1761303827}
   reportAfterScammedScreen: {fileID: 1621467190}
   ignoreOfferScreen: {fileID: 1621467191}
+  scamManager: {fileID: 0}
   whatsupScreen: {fileID: 1761303851}
   amailScreen: {fileID: 1761303849}
   jasonEmailScreen: {fileID: 1761303831}
-  homeScreen: {fileID: 1761303848}
   websiteHomeScreen: {fileID: 1761303847}
   websiteCreateAccountScreen: {fileID: 1761303846}
   detailsInputText:
@@ -92725,9 +92729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71f88ac1a93b7b148a7c608a820641b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyTags: []
   knotName: 
   stopStory: 0
+  isOnHomeScreen: 0
   xrMove: {fileID: 22154376}
   leftControllerNearFar: {fileID: 1065256375}
   rightControllerNearFar: {fileID: 1834406784}
@@ -92747,7 +92751,6 @@ MonoBehaviour:
   fadeScript: {fileID: 1387297153}
   recapVideoScript: {fileID: 997144092}
   uIManager: {fileID: 777099823}
-  whatShouldYouDoButtonPos: {fileID: 982936779}
 --- !u!4 &1373964407
 Transform:
   m_ObjectHideFlags: 0
@@ -116683,6 +116686,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4343774893195973816, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4448937386789881476, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -117003,6 +117010,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6087062092316700665, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087062092316700665, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087062092316700665, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6087062092316700665, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6099496910825089420, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -117119,6 +117142,38 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 777099823}
+    - target: {fileID: 6814665663926026536, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814665663926026536, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814665663926026536, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814665663926026536, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881462161357967618, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881462161357967618, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881462161357967618, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881462161357967618, guid: e493492c7e1687e49a056547034f8e39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6888348031052960183, guid: e493492c7e1687e49a056547034f8e39, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -158374,7 +158429,7 @@ MonoBehaviour:
   scamOrNotEndingUI:
   - {fileID: 850761594}
   - {fileID: 689101208}
-  whatsupContent: {fileID: 0}
+  messageContentParent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!4 &1942447316
 Transform:
@@ -160004,7 +160059,7 @@ MonoBehaviour:
   - {fileID: 1761303828}
   scamOrNotEndingUI:
   - {fileID: 689101208}
-  whatsupContent: {fileID: 0}
+  messageContentParent: {fileID: 0}
   scenarioCanvas: {fileID: 0}
 --- !u!1 &2092139007
 GameObject:
