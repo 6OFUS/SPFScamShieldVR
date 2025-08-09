@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 04/08/2025
-    Description: The NotPhishingScamUIManager class is used to manage all UI related to the non phishing scam scenario
+    Description: The NotPhishingScamUIManager class is used to manage all UI related functions to the non phishing scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;

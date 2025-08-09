@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
+    public AudioClip cryingClip;
     public AudioClip screenshotClip;
     public AudioClip loseClip;
     public AudioClip winClip;

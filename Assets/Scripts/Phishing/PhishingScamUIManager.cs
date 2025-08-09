@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 03/08/2025
-    Description: The PhishingScamUIManager class is used to manage all UI related to the phishing scam scenario
+    Description: The PhishingScamUIManager class is used to manage all UI related functions to the phishing scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;

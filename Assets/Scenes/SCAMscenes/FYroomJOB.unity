@@ -60326,7 +60326,6 @@ MonoBehaviour:
   fadeScript: {fileID: 1387297153}
   recapVideoScript: {fileID: 997144092}
   uIManager: {fileID: 1328289315}
-  cryingClip: {fileID: 8300000, guid: 474c2c86ea4c4ce42861197b56a2a55c, type: 3}
   checkOutClip: {fileID: 8300000, guid: fec838df365d6be43a7ba0348b4660b8, type: 3}
   errorClip: {fileID: 8300000, guid: 379653cc0e3c05347be4748bbd33ce22, type: 3}
   inputCount: 0
@@ -73486,6 +73485,7 @@ MonoBehaviour:
   frontFacingCamera: {fileID: 2067456786}
   homeButtonLine: {fileID: 186265436}
   audioSource: {fileID: 1761303879}
+  cryingClip: {fileID: 8300000, guid: 474c2c86ea4c4ce42861197b56a2a55c, type: 3}
   screenshotClip: {fileID: 8300000, guid: 1ec2d4d713a211444b3a72adbe00eb24, type: 3}
   loseClip: {fileID: 8300000, guid: f2e65dd9ca935ed498cc5860e8766aed, type: 3}
   winClip: {fileID: 8300000, guid: a0e64c158e9166e4aa69c5ab9f610d74, type: 3}
@@ -89158,6 +89158,7 @@ MonoBehaviour:
   frontFacingCamera: {fileID: 105999850}
   homeButtonLine: {fileID: 168011500}
   audioSource: {fileID: 1761303879}
+  cryingClip: {fileID: 8300000, guid: 474c2c86ea4c4ce42861197b56a2a55c, type: 3}
   screenshotClip: {fileID: 8300000, guid: 1ec2d4d713a211444b3a72adbe00eb24, type: 3}
   loseClip: {fileID: 8300000, guid: f2e65dd9ca935ed498cc5860e8766aed, type: 3}
   winClip: {fileID: 8300000, guid: a0e64c158e9166e4aa69c5ab9f610d74, type: 3}
@@ -89170,7 +89171,7 @@ MonoBehaviour:
   loseScreen: {fileID: 1761303827}
   reportAfterScammedScreen: {fileID: 1621467190}
   ignoreOfferScreen: {fileID: 1621467191}
-  scamManager: {fileID: 0}
+  scamManager: {fileID: 398172843}
   whatsupScreen: {fileID: 1761303851}
   amailScreen: {fileID: 1761303849}
   jasonEmailScreen: {fileID: 1761303831}

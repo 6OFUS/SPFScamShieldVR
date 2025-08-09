@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 01/07/2025
-    Description: The ProfessionalJobManager class is used to handle all the functions related to the professional job ad scenario
+    Description: The ProfessionalJobManager class is used to handle all the dialogue choice options related to the professional job ad scenario
 */
 using System;
 using System.Collections;

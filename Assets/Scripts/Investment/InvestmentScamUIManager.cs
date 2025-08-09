@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 04/08/2025
-    Description: The InvestmentScamUIManager class is used to manage all UI related to the investment scam scenario
+    Description: The InvestmentScamUIManager class is used to manage all UI related functions to the investment scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -204,5 +204,25 @@ public class InvestmentScamUIManager : UIManager
         DisableAllCanvasChildren();
         kachagramScreen.SetActive(true);
         StartCoroutine(scamManager.WaitAndContinueStory(1));
+    }
+
+    public IEnumerator HandleLoseEnding()
+    {
+        kachagramAccountMissingScreen.SetActive(true);
+        audioSource.clip = cryingClip;
+        audioSource.Play();
+        yield return new WaitForSeconds(cryingClip.length);
+        scenarioController.scenarioCanvas.SetActive(false);
+        loseScreen.SetActive(true);
+        audioSource.clip = loseClip;
+        audioSource.Play();
+        scamManager.ClearChoices();
+        Destroy(scamManager.scamshieldButton);
+        yield return new WaitForSeconds(loseClip.length);
+        whatHappenButton.onClick.AddListener(() =>
+        {
+            scamManager.recapVideoScript.PlayVideo(scamManager.whatHappenLoseVideoClip);
+        });
+        scamManager.ProceedToVideo(scamManager.gameOverVideoClip);
     }
 }

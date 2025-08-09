@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 03/08/2025
-    Description: The PhishingScamManager class is used to handle all the functions related to the phishing scam scenario
+    Description: The PhishingScamManager class is used to handle all the dialogue choice options related to the phishing scam scenario
 */
 using System;
 using System.Collections;

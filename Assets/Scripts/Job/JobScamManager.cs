@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 05/06/2025
-    Description: The JobScamManager class is used to handle all the functions related to the job scam scenario
+    Description: The JobScamManager class is used to handle all the dialogue choice options related to the job scam scenario
 */
 using Ink.Parsed;
 using Ink.Runtime;
@@ -18,7 +18,6 @@ public class JobScamManager : InkManager
     public JobScamUIManager uIManager;
 
     [Header("Audio")]
-    public AudioClip cryingClip;
     public AudioClip checkOutClip;
     public AudioClip errorClip;
 

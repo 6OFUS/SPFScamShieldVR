@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 01/07/2025
-    Description: The ProfessionalJobUIManager class is used to manage all UI related to the professional job ad scenario
+    Description: The ProfessionalJobUIManager class is used to manage all UI related functions to the professional job ad scenario
 */
 using System;
 using System.Collections;

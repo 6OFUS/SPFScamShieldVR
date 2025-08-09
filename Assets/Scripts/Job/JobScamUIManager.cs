@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 26/06/2025
-    Description: The JobScamUIManager class is used to manage all UI related to the job scam scenario
+    Description: The JobScamUIManager class is used to manage all UI related functions to the job scam scenario
 */
 using System;
 using System.Collections;
@@ -181,9 +181,9 @@ public class JobScamUIManager : UIManager
 
     public IEnumerator HandleLoseEnding()
     {
-        audioSource.clip = scamManager.cryingClip;
+        audioSource.clip = cryingClip;
         audioSource.Play();
-        yield return new WaitForSeconds(scamManager.cryingClip.length);
+        yield return new WaitForSeconds(cryingClip.length);
         scenarioController.scenarioCanvas.SetActive(false);
         loseScreen.SetActive(true);
         audioSource.clip = loseClip;

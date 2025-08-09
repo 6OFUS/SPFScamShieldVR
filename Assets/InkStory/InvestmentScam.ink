@@ -81,7 +81,7 @@ You just need to make a small deposit. Most people start with $300 or $500 but i
 + [Player:action_open_ezprofit Return to "EZProfit"] -> tap_bei_bei
 
 === tap_bei_bei ===
-+ [Player:action_tap_bao_bei Tap on "Bei Bei"] -> tap_on_invest
++ [Player:action_tap_bei_bei Tap on "Bei Bei"] -> tap_on_invest
 
 === tap_on_invest ===
 + [Player:action_tap_on_invest Tap on "Invest"] -> invest_amount

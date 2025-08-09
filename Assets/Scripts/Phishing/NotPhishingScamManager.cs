@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 04/08/2025
-    Description: The NotPhishingScamUIManager class is used to manage all UI related to the non phishing scam scenario
+    Description: The NotPhishingScamManager class is used to handle all the dialogue choice options related to the non phishing scam scenario
 */
 using System;
 using System.Collections;

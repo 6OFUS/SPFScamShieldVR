@@ -16710,7 +16710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &275770316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41798,6 +41798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingTime: 3
+  scenarioController: {fileID: 888909075}
   homeScreen: {fileID: 1673574715}
   screenshotTaken: 0
   flashImage: {fileID: 6040814721440844533}
@@ -41805,6 +41806,7 @@ MonoBehaviour:
   frontFacingCamera: {fileID: 6040814721440844539}
   homeButtonLine: {fileID: 475820437}
   audioSource: {fileID: 6040814721440844534}
+  cryingClip: {fileID: 8300000, guid: 474c2c86ea4c4ce42861197b56a2a55c, type: 3}
   screenshotClip: {fileID: 8300000, guid: 1ec2d4d713a211444b3a72adbe00eb24, type: 3}
   loseClip: {fileID: 8300000, guid: f2e65dd9ca935ed498cc5860e8766aed, type: 3}
   winClip: {fileID: 8300000, guid: a0e64c158e9166e4aa69c5ab9f610d74, type: 3}
@@ -41816,8 +41818,6 @@ MonoBehaviour:
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
-  inkManager: {fileID: 1368885621}
-  scenarioController: {fileID: 888909075}
   scamManager: {fileID: 1368885621}
   smsScammerScreen: {fileID: 6040814721440844536}
   websiteHomeScreen: {fileID: 6040814721440844535}
@@ -52696,6 +52696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingTime: 3
+  scenarioController: {fileID: 888909075}
   homeScreen: {fileID: 558620816}
   screenshotTaken: 0
   flashImage: {fileID: 124743900}
@@ -52703,6 +52704,7 @@ MonoBehaviour:
   frontFacingCamera: {fileID: 1176693747}
   homeButtonLine: {fileID: 1653621858}
   audioSource: {fileID: 6040814721440844534}
+  cryingClip: {fileID: 8300000, guid: 474c2c86ea4c4ce42861197b56a2a55c, type: 3}
   screenshotClip: {fileID: 8300000, guid: 1ec2d4d713a211444b3a72adbe00eb24, type: 3}
   loseClip: {fileID: 8300000, guid: f2e65dd9ca935ed498cc5860e8766aed, type: 3}
   winClip: {fileID: 8300000, guid: a0e64c158e9166e4aa69c5ab9f610d74, type: 3}
@@ -52714,8 +52716,6 @@ MonoBehaviour:
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
-  inkManager: {fileID: 780273069}
-  scenarioController: {fileID: 888909075}
   notScamManager: {fileID: 780273069}
   smsScreen: {fileID: 473814313}
   websiteHomeScreen: {fileID: 1395436174}

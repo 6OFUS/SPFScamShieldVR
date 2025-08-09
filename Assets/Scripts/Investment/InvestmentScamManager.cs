@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
     Date: 06/08/2025
-    Description: The InvestmentScamManager class is used to handle all the functions related to the investment scam scenario
+    Description: The InvestmentScamManager class is used to handle all the dialogue choice options related to the investment scam scenario
 */
 using System;
 using System.Collections;
@@ -24,12 +24,12 @@ public class InvestmentScamManager : InkManager
     {
         actionHandlers = new Dictionary<string, Action<int>>
         {
-            { "action_scammer_notification", _ => uIManager.ScammerNotification() },
-            { "message_add_pfp", index => uIManager.AddProfilePicture(index) },
+            { "action_scammer_notification", _ => uIManager.ScammerNotification()},
+            { "message_add_pfp", index => uIManager.AddProfilePicture(index)},
             { "action_home_screen", _ => uIManager.HomeScreen() },
             { "action_open_appshop", _ => uIManager.OpenAppShop()},
             { "action_appshop_ezprofit", _ => uIManager.OpenEZProfitInAppShop()},
-            { "action_download_ezprofit", _ => StartCoroutine(uIManager.DownloadingEZProfit()) },
+            { "action_download_ezprofit", _ => StartCoroutine(uIManager.DownloadingEZProfit())},
             { "action_open_ezprofit", _ => uIManager.OpenEZProfitApp()},
             { "action_fill_details_ezprofit", _ => uIManager.FillUpAccountDetails()},
             { "action_signup_ezprofit", _ => uIManager.SignUpEZProfitAccount()},
@@ -44,7 +44,7 @@ public class InvestmentScamManager : InkManager
             { "action_close_investment_confirmation", _ => uIManager.EarningsScreen()},
             { "action_withdraw_money", _ => StartCoroutine(uIManager.WithdrawEarnings())},
             { "action_withdraw_error", _ => uIManager.AskRachel()},
-            { "lose_ending", _ => uIManager.kachagramAccountMissingScreen.SetActive(true)},
+            { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
         };
     }
 
