@@ -37,7 +37,7 @@ public class JobScamManager : InkManager
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 uIManager.Screenshot(this);
-                ClearChoices();
+                ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager,1));
             });
@@ -79,7 +79,7 @@ public class JobScamManager : InkManager
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
         }
     }
 

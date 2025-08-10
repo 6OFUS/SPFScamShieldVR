@@ -73,7 +73,7 @@ public class NotPhishingScamUIManager : UIManager
     public IEnumerator HandleWinEnding()
     {
         yield return new WaitForSeconds(2);
-        notScamManager.ClearChoices();
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
         scenarioController.scenarioCanvas.SetActive(false);
         audioSource.clip = winClip;

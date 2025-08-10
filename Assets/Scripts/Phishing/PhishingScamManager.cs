@@ -26,7 +26,7 @@ public class PhishingScamManager : InkManager
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 uIManager.Screenshot(this);
-                ClearChoices();
+                ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager, 1));
             });

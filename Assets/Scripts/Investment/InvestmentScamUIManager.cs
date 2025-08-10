@@ -216,7 +216,7 @@ public class InvestmentScamUIManager : UIManager
         loseScreen.SetActive(true);
         audioSource.clip = loseClip;
         audioSource.Play();
-        scamManager.ClearChoices();
+        scamManager.ClearChoices(scamManager.choiceContainer);
         Destroy(scamManager.scamshieldButton);
         yield return new WaitForSeconds(loseClip.length);
         whatHappenButton.onClick.AddListener(() =>

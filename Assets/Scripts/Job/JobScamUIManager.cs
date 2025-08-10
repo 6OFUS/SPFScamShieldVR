@@ -188,7 +188,7 @@ public class JobScamUIManager : UIManager
         loseScreen.SetActive(true);
         audioSource.clip = loseClip;
         audioSource.Play();
-        scamManager.ClearChoices();
+        scamManager.ClearChoices(scamManager.choiceContainer);
         Destroy(scamManager.scamshieldButton);
         yield return new WaitForSeconds(loseClip.length);
         whatHappenButton.onClick.AddListener(() =>
@@ -204,7 +204,7 @@ public class JobScamUIManager : UIManager
         audioSource.clip = winClip;
         audioSource.Play();
         ignoreOfferScreen.SetActive(true);
-        scamManager.ClearChoices();
+        scamManager.ClearChoices(scamManager.choiceContainer);
         Destroy(scamManager.scamshieldButton);
         yield return new WaitForSeconds(winClip.length);
         whatHappenButton.onClick.AddListener(() =>

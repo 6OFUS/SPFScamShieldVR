@@ -62,7 +62,7 @@ public class NotJobScamUIManager : UIManager
 
     public IEnumerator HandleLoseEnding()
     {
-        notScamManager.ClearChoices();
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
         scenarioController.scenarioCanvas.SetActive(false);
         audioSource.clip = loseClip;
@@ -76,7 +76,7 @@ public class NotJobScamUIManager : UIManager
 
     public IEnumerator HandleWinEnding()
     {
-        notScamManager.ClearChoices();
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
         scenarioController.scenarioCanvas.SetActive(false);
         audioSource.clip = winClip;

@@ -46,7 +46,7 @@ public class NotJobScamManager : InkManager
                 image.sprite = uIManager.stickers[capturedIndex];
                 buttonObj.GetComponent<Button>().onClick.AddListener(() => {
                     ChooseOption(capturedIndex);
-                    ClearChoices();
+                    ClearChoices(choiceContainer);
                 });
             }
         }
@@ -57,7 +57,7 @@ public class NotJobScamManager : InkManager
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 uIManager.Screenshot(this);
-                ClearChoices();
+                ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
                 StartCoroutine(SpawnHomeButton(uIManager, 1));
             });

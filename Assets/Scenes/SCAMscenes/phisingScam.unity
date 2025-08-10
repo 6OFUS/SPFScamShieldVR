@@ -124016,6 +124016,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -3.9119997
       objectReference: {fileID: 0}
+    - target: {fileID: 1073908164131699641, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2b504f2406225364794aafe2a0e39b98, type: 2}
     - target: {fileID: 1723191062834759329, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -124084,6 +124088,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -250
       objectReference: {fileID: 0}
+    - target: {fileID: 5248611113532391628, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 9ab2f47587ff5bf4c8e033e36547c9b6, type: 2}
     - target: {fileID: 5973445823112795501, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -125091,6 +125099,14 @@ PrefabInstance:
     - target: {fileID: 5633325048185613861, guid: fe88d00e20eb86541920048ace301bf5, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186835404048300837, guid: fe88d00e20eb86541920048ace301bf5, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8186835404048300837, guid: fe88d00e20eb86541920048ace301bf5, type: 3}
+      propertyPath: m_Texture
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

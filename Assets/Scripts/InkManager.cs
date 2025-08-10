@@ -163,45 +163,37 @@ public class InkManager : MonoBehaviour
     /// </summary>
     public virtual void DisplayChoices()
     {
-        foreach (var choice in playerChoices)
+        for (int i = 0; i < playerChoices.Count; i++)
         {
+            var choice = playerChoices[i];
+
             if (choice.choiceAction.Contains("action"))
             {
-                GameObject buttonObj = Instantiate(actionChoiceButtonPrefab, choiceContainer);
-                TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = choice.choiceName;
-
-                // Capture the correct index in a local variable to avoid closure issue
-                int capturedIndex = playerChoices.IndexOf(choice);
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-                    ChooseOption(capturedIndex);
-                    ClearChoices();
-                });
+                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
             }
-            else if(choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
+            else if (choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
             {
-                GameObject buttonObj = Instantiate(dialogueChoiceButtonPrefab, choiceContainer);
-                TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = choice.choiceName;
-
-                // Capture the correct index in a local variable to avoid closure issue
-                int capturedIndex = playerChoices.IndexOf(choice);
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-                    ChooseOption(capturedIndex);
-                    ClearChoices();
-                });
-            }
-            else
-            {
-                continue;
+                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
             }
         }
+    }
+
+    protected virtual void CreateChoiceButton(GameObject prefab, Transform container, string choiceName, int choiceIndex, Transform choiceContainer)
+    {
+        GameObject buttonObj = Instantiate(prefab, container);
+        TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+        buttonText.text = choiceName;
+
+        buttonObj.GetComponent<Button>().onClick.AddListener(() => {
+            ChooseOption(choiceIndex);
+            ClearChoices(choiceContainer);
+        });
     }
 
     /// <summary>
     /// Remove all choices UI from the choice list
     /// </summary>
-    public void ClearChoices()
+    public void ClearChoices(Transform choiceContainer)
     {
         foreach (Transform button in choiceContainer)
         {
@@ -363,7 +355,7 @@ public class InkManager : MonoBehaviour
 
         buttonObj.GetComponent<Button>().onClick.AddListener(() =>
         {
-            ClearChoices();
+            ClearChoices(choiceContainer);
             StartCoroutine(fadeScript.FadeTeleport(videoClip));
             xrMove.SetActive(false);
             leftControllerNearFar.GetComponent<NearFarInteractor>().enableFarCasting = true;

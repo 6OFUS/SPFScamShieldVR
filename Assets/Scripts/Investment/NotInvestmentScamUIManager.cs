@@ -95,7 +95,7 @@ public class NotInvestmentScamUIManager : UIManager
         winScreen.SetActive(true);
         audioSource.clip = winClip;
         audioSource.Play();
-        notScamManager.ClearChoices();
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
         yield return new WaitForSeconds(winClip.length);
         whatHappenButton.onClick.AddListener(() =>
