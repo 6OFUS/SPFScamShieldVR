@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
-    Date: 10/08/2025
-    Description: The EcommerceScamUIManager class is used to manage all UI related functions to the ecommerce scam scenario
+    Date: 11/08/2025
+    Description: The NotEcommerceScamUIManager class is used to manage all UI related functions to the non ecommerce scam scenario
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,23 +9,24 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-public class EcommerceScamUIManager : UIManager
+public class NotEcommerceScamUIManager : UIManager
 {
-    public EcommerceScamManager scamManager;
+    public NotEcommerceScamManager notScamManager;
 
     [Header("IPad")]
     public GameObject careToSellWebsite;
     public GameObject careToSellChat;
     public GameObject browzePlusSearch;
     public GameObject browzePlusUploadImage;
-    public GameObject errorMessage;
+
     public Sprite proofImage;
+    public GameObject senderVideoPrefab;
 
     [Header("Phone")]
     public GameObject pickUpUI;
     public XRGrabInteractable phoneInteractable;
-    public GameObject phoneCanvas;
 
+    public GameObject phoneCanvas;
     public GameObject phoneHomeScreen;
     public GameObject aCTBankLogin;
     public GameObject aCTBankHome;
@@ -36,39 +37,39 @@ public class EcommerceScamUIManager : UIManager
     public void OpenCareToSell()
     {
         careToSellWebsite.SetActive(true);
-        scamManager.isOn6OfUsWebsite = false;
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        notScamManager.isOn6OfUsWebsite = false;
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void StartChatting()
     {
         careToSellChat.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void CheckImageOnBrowzePlus()
     {
         browzePlusSearch.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void UploadImageOnBrowzePlus()
     {
         browzePlusUploadImage.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void ReturnToChat()
     {
         DisableAllCanvasChildren();
         careToSellChat.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void Purchase()
     {
-        scamManager.messagingSystem.PlayerNextMessage("Okay. What's your ActNow?");
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        notScamManager.messagingSystem.PlayerNextMessage("Okay. What's your ActNow?");
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void TurnOnPhone()
@@ -78,16 +79,16 @@ public class EcommerceScamUIManager : UIManager
         phoneInteractable.selectEntered.AddListener((SelectEnterEventArgs args) =>
         {
             pickUpUI.SetActive(false);
-            scamManager.phoneChoiceContainer.gameObject.SetActive(true);
+            notScamManager.phoneChoiceContainer.gameObject.SetActive(true);
             phoneCanvas.SetActive(true);
         });
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void UnlockPhone()
     {
         phoneHomeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public IEnumerator LoginACTBankApp()
@@ -95,67 +96,65 @@ public class EcommerceScamUIManager : UIManager
         aCTBankLogin.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         aCTBankHome.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void ActNow()
     {
         aCTBankTransfer.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void EnterTransferDetails()
     {
         aCTBankAmountInput.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void TransferSuccess()
     {
         aCTBankTransferSuccess.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public void ShareTransferredMessage()
     {
-        scamManager.messagingSystem.PlayerNextMessage("Hi! I just sent S$70 to your mobile number via ActNow.");
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        notScamManager.messagingSystem.PlayerNextMessage("Hi! I just sent S$85 to your mobile number via ActNow.");
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
     }
 
     public IEnumerator HandleWinEnding()
     {
+        yield return new WaitForSeconds(notScamManager.messageTime);
         scenarioController.scenarioCanvas.SetActive(false);
         winScreen.SetActive(true);
         audioSource.clip = winClip;
         audioSource.Play();
-        scamManager.ClearChoices(scamManager.choiceContainer);
-        Destroy(scamManager.scamshieldButton);
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
+        Destroy(notScamManager.scamshieldButton);
         yield return new WaitForSeconds(winClip.length);
         whatHappenButton.onClick.AddListener(() =>
         {
-            scamManager.recapVideoScript.PlayVideo(scamManager.whatHappenWinVideoClip);
+            notScamManager.recapVideoScript.PlayVideo(notScamManager.whatHappenWinVideoClip);
         });
-        scamManager.ProceedToVideo(scamManager.winVideoClip);
+        notScamManager.ProceedToVideo(notScamManager.winVideoClip);
     }
 
     public IEnumerator HandleLoseEnding()
     {
-        errorMessage.SetActive(true);
-        errorMessage.transform.SetAsLastSibling();
-        audioSource.clip = cryingClip;
-        audioSource.Play();
-        yield return new WaitForSeconds(cryingClip.length);
         scenarioController.scenarioCanvas.SetActive(false);
         loseScreen.SetActive(true);
         audioSource.clip = loseClip;
         audioSource.Play();
-        scamManager.ClearChoices(scamManager.choiceContainer);
-        Destroy(scamManager.scamshieldButton);
+        notScamManager.ClearChoices(notScamManager.choiceContainer);
+        Destroy(notScamManager.scamshieldButton);
         yield return new WaitForSeconds(loseClip.length);
+        whatHappenButton.gameObject.SetActive(false);
+        whatShouldYouDoButton.transform.position = whatShouldYouDoButtonPos.position;
         whatHappenButton.onClick.AddListener(() =>
         {
-            scamManager.recapVideoScript.PlayVideo(scamManager.whatHappenLoseVideoClip);
+            notScamManager.recapVideoScript.PlayVideo(notScamManager.whatHappenLoseVideoClip);
         });
-        scamManager.ProceedToVideo(scamManager.gameOverVideoClip);
+        notScamManager.ProceedToVideo(notScamManager.gameOverVideoClip);
     }
 }

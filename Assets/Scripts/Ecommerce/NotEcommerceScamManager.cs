@@ -1,7 +1,7 @@
 /*
     Author: Kevin Heng
-    Date: 10/08/2025
-    Description: The EcommerceScamManager class is used to handle all the dialogue choice options related to the ecommerce scam scenario
+    Date: 11/08/2025
+    Description: The NotEcommerceScamManager class is used to handle all the dialogue choice options related to the non ecommerce scam scenario
 */
 using System;
 using System.Collections;
@@ -11,9 +11,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class EcommerceScamManager : InkManager
+public class NotEcommerceScamManager : InkManager
 {
-    public EcommerceScamUIManager uIManager;
+    public NotEcommerceScamUIManager uIManager;
 
     public Transform phoneChoiceContainer;
 
@@ -78,14 +78,9 @@ public class EcommerceScamManager : InkManager
 
     protected override void Report()
     {
-        if (!isMoneyTransferred)
-        {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
-        }
-        else
-        {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
-        }
+        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }
 
     public override void SenderAction(string action, string dialogue)
@@ -94,6 +89,13 @@ public class EcommerceScamManager : InkManager
         {
             case "image":
                 StartCoroutine(SendImage());
+                break;
+            case "video":
+                StartCoroutine(SendVideo());
+                break;
+            case "win_ending":
+                messagingSystem.SenderNextMessage(dialogue);
+                StartCoroutine(uIManager.HandleWinEnding());
                 break;
             default:
                 base.SenderAction(action, dialogue);
@@ -105,5 +107,14 @@ public class EcommerceScamManager : InkManager
     {
         yield return new WaitForSeconds(messageTime);
         messagingSystem.SenderImage(uIManager.proofImage);
+    }
+
+    private IEnumerator SendVideo()
+    {
+        yield return new WaitForSeconds(messageTime);
+        GameObject newMessage = Instantiate(uIManager.senderVideoPrefab, uIManager.scenarioController.messageContentParent);
+
+        messagingSystem.audioSource.clip = messagingSystem.messageReceived;
+        messagingSystem.audioSource.Play();
     }
 }
