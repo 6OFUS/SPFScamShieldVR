@@ -10,6 +10,7 @@ using UnityEngine;
 public class PhishingScamUIManager : UIManager
 {
     public PhishingScamManager scamManager;
+    public PhishingScenariosAudioManager audioManager;
 
     public GameObject smsScammerScreen;
     public GameObject websiteHomeScreen;
@@ -18,13 +19,13 @@ public class PhishingScamUIManager : UIManager
     public GameObject bankMessage;
     public GameObject smsBankScreen;
 
-    public override void Screenshot(InkManager inkManager)
+    public override void Screenshot(InkManager inkManager, AudioManager audioManager)
     {
         if (!screenshotTaken)
         {
             screenshotTaken = true;
-            audioSource.clip = screenshotClip;
-            audioSource.Play();
+            audioManager.audioSource.clip = audioManager.screenshotClip;
+            audioManager.audioSource.Play();
             flashImage.gameObject.SetActive(true);
             StartCoroutine(FlashEffect());
         }
@@ -33,19 +34,19 @@ public class PhishingScamUIManager : UIManager
     public void ScammerNotification()
     {
         smsScammerScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(0));
+        StartCoroutine(scamManager.WaitAndContinueStory(0, audioManager));
     }
 
     public void TapLink()
     {
         websiteHomeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void FillUpDetails()
     {
         userDetails.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void ClaimCDC()
@@ -58,39 +59,41 @@ public class PhishingScamUIManager : UIManager
     private IEnumerator BankSMS()
     {
         yield return new WaitForSeconds(loadingTime);
-        StartCoroutine(scamManager.WaitAndContinueStory(0));
+        StartCoroutine(scamManager.WaitAndContinueStory(0, audioManager));
+        audioManager.PlayAudio(audioManager.smsNotification);
         bankMessage.SetActive(true);
     }
 
     public void TapBankSMSNotification()
     {
         smsBankScreen.SetActive(true);
+        audioManager.PlayAudio(audioManager.cryingClip);
         Destroy(scamManager.scamshieldButton);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void TakeScreenshot()
     {
-        Screenshot(scamManager);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        Screenshot(scamManager, audioManager);
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void HomeScreen()
     {
         DisableAllCanvasChildren();
         homeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void OpenScamShield()
     {
         scamshieldScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime));
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
     public void ReportLose()
     {
         scamshieldLoadingScreen.SetActive(true);
-        StartCoroutine(scamManager.ReportToScamShield(this, loseClip, reportAfterScammedScreen, scamManager.whatHappenLoseVideoClip, scamManager.gameOverVideoClip));
+        StartCoroutine(scamManager.ReportToScamShield(this, audioManager.loseClip, reportAfterScammedScreen, scamManager.whatHappenLoseVideoClip, scamManager.gameOverVideoClip, audioManager));
     }
 }

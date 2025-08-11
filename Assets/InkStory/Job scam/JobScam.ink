@@ -10,7 +10,13 @@ Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and w
 + [Player:action_open_amail Check Amail] -> open_jason_email
 
 === open_jason_email ===
-+ [Player:action_open_jason_email Open Jason's email] -> job_offer_dialogue_1
++ [Player:action_open_jason_email Open Jason's email] -> home_screen_after_email
+
+=== home_screen_after_email ===
++ [Player:action_home_screen Go to home screen] -> open_whatsup_after_email
+
+=== open_whatsup_after_email ===
++ [Player:action_open_whatsup Open WhatsUp] -> job_offer_dialogue_1 
 
 === job_offer_dialogue_1 ===
 //SHOW THIS ONLY WHEN GO BACK TO WHATSUP
@@ -72,7 +78,13 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 + [Player:action_enter_details Enter details] -> create_account
 
 === create_account ===
-+ [Player:action_submit_and_create Submit and create account] -> job_task_2_dialogue_1
++ [Player:action_submit_and_create Submit and create account] -> home_screen
+
+=== home_screen ===
++ [Player:action_home_screen Go to home screen] -> open_whatsup
+
+=== open_whatsup ===
++ [Player:action_open_whatsup Open WhatsUp] -> job_task_2_dialogue_1 
 
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
@@ -88,7 +100,13 @@ You've completed 1 task, great job! Just two more group needed. It will be retur
 + [Player:message_withdraw I think I will withdraw now.] ->  withdraw
 
 === withdraw ===
-+ [Player:action_withdraw Withdraw] ->  job_task_2_withdrawal_error
++ [Player:action_withdraw Withdraw] ->  home_screen_after_withdraw_error
+
+=== home_screen_after_withdraw_error ===
++ [Player:action_home_screen Go to home screen] -> return_to_chat_after_withdraw_error
+
+=== return_to_chat_after_withdraw_error ===
++ [Player:action_open_whatsup Open Whatsup] -> job_task_2_withdrawal_error 
 
 === job_task_2_dialogue_3 ===
 That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
@@ -105,8 +123,13 @@ That's a great question! For new users, the system requires a minimum of 3 compl
 + [Player:action_add_items Add items to cart] -> check_out
 
 === check_out ===
-+ [Player:action_check_out Check out] -> job_task_2_dialogue_2
++ [Player:action_check_out Check out] -> home_screen_after_checkout
 
+=== home_screen_after_checkout ===
++ [Player:action_home_screen Go to home screen] -> return_to_chat_after_checkout
+
+=== return_to_chat_after_checkout ===
++ [Player:action_open_whatsup Open Whatsup] -> job_task_2_dialogue_2 
 
 === job_task_2_withdrawal_error ===
 //SYSTEM ERROR NEED COMPLETE BONUS TASK
@@ -133,7 +156,13 @@ I totally understand where you're coming from, Taylor. The 3-task withdrawal rul
 + [Player:action_select_silver_tier Select silver tier] -> select_task_2
 
 === select_task_2 ===
-+ [Player:action_select_task_2 Select task 2] -> job_task_2_loading_error
++ [Player:action_select_task_2 Select task 2] -> home_screen_after_error
+
+=== home_screen_after_error ===
++ [Player:action_home_screen Go to home screen] -> return_to_chat_after_error
+
+=== return_to_chat_after_error ===
++ [Player:action_open_whatsup Open WhatsUp] -> job_task_2_loading_error 
 
 === job_task_2_dialogue_6 ===
 I totally get it, Taylor. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message

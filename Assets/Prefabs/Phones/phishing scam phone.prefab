@@ -2725,8 +2725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00037, y: 0.02123}
-  m_SizeDelta: {x: 100, y: 134.34586}
+  m_AnchoredPosition: {x: 0.00037, y: 0.01794}
+  m_SizeDelta: {x: 100, y: 176.6789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2027084554306275212
 CanvasRenderer:
@@ -4618,9 +4618,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4478318283724076644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1610, y: -250}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4338646480754830600
@@ -9279,7 +9279,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1049
+  m_VersionIndex: 1052
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15882,7 +15882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0066, y: 0.0192}
+  m_AnchoredPosition: {x: 0.0066, y: 0.0158}
   m_SizeDelta: {x: 361.94, y: 83.37997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4336271524252774104
@@ -15941,8 +15941,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16801,7 +16801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7976530190868874214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21413,7 +21413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0066, y: 0.0173}
+  m_AnchoredPosition: {x: 0.0066, y: 0.0141}
   m_SizeDelta: {x: 361.94, y: 54.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9065288274421794165
@@ -21473,8 +21473,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -32865,9 +32865,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4478318283724076644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 250, y: -250}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5883838279063240030
@@ -35694,9 +35694,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4478318283724076644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 930, y: -250}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2961218614222831110
@@ -39395,8 +39395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00037, y: 0.01961}
-  m_SizeDelta: {x: 100, y: 155.1771}
+  m_AnchoredPosition: {x: 0.00037, y: 0.01649}
+  m_SizeDelta: {x: 100, y: 195.3006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2899646729855593287
 CanvasRenderer:
@@ -44291,7 +44291,7 @@ Animator:
   m_GameObject: {fileID: 8639443765091029845}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be6a495578e220649a3f5671a92a6a67, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2b504f2406225364794aafe2a0e39b98, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -44311,7 +44311,7 @@ Animation:
   m_GameObject: {fileID: 8639443765091029845}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 39e304e69116edd4d9f84175718386c7, type: 2}
+  m_Animation: {fileID: 7400000, guid: 9ab2f47587ff5bf4c8e033e36547c9b6, type: 2}
   m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 1

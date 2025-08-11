@@ -10,6 +10,7 @@ using UnityEngine;
 public class NotPhishingScamUIManager : UIManager
 {
     public NotPhishingScamManager notScamManager;
+    public PhishingScenariosAudioManager audioManager;
 
     public GameObject smsScreen;
     public GameObject websiteHomeScreen;
@@ -23,25 +24,25 @@ public class NotPhishingScamUIManager : UIManager
     public void RealNotification()
     {
         smsScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void TapLink()
     {
         websiteHomeScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void ClaimCDC()
     {
         redeemScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void LoginSingpass()
     {
         singPassLoginScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void EnterSingpassPasscode()
@@ -53,7 +54,8 @@ public class NotPhishingScamUIManager : UIManager
     private IEnumerator BankSMS()
     {
         yield return new WaitForSeconds(3);
-        StartCoroutine(notScamManager.WaitAndContinueStory(0));
+        StartCoroutine(notScamManager.WaitAndContinueStory(0, audioManager));
+        audioManager.PlayAudio(audioManager.smsNotification);
         bankMessage.SetActive(true);
     }
 
@@ -61,7 +63,7 @@ public class NotPhishingScamUIManager : UIManager
     {
         smsBankScreen.SetActive(true);
         Destroy(notScamManager.scamshieldButton);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void TapLinkBank()
@@ -76,10 +78,9 @@ public class NotPhishingScamUIManager : UIManager
         notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
         scenarioController.scenarioCanvas.SetActive(false);
-        audioSource.clip = winClip;
-        audioSource.Play();
+        audioManager.PlayAudio(audioManager.winClip);
         winScreen.SetActive(true);
-        yield return new WaitForSeconds(winClip.length);
+        yield return new WaitForEndOfFrame();
         whatHappenButton.onClick.AddListener(() =>
         {
             notScamManager.recapVideoScript.PlayVideo(notScamManager.whatHappenWinVideoClip);

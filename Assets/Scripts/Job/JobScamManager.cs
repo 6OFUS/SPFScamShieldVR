@@ -16,10 +16,7 @@ using UnityEngine.Video;
 public class JobScamManager : InkManager
 {
     public JobScamUIManager uIManager;
-
-    [Header("Audio")]
-    public AudioClip checkOutClip;
-    public AudioClip errorClip;
+    public JobScenariosAudioManager audioManager;
 
     [Header("Account creation")]
     public int inputCount;
@@ -28,18 +25,18 @@ public class JobScamManager : InkManager
     [Header("Website task")]
     public bool firstTaskCompleted;
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
-        base.DisplayChoices();
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager,1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -67,7 +64,9 @@ public class JobScamManager : InkManager
             { "action_withdraw", _ => StartCoroutine(uIManager.Withdraw())},
             { "error_message", _ => ErrorMessage()},
             { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
-            { "ignre_ending", _ => StartCoroutine(uIManager.HandleIgnoreOfferEnding())},
+            { "ignore_ending", _ => StartCoroutine(uIManager.HandleIgnoreOfferEnding())},
+            { "action_home_screen", _ => uIManager.HomeScreen()},
+            { "action_open_whatsup", _ => uIManager.OpenWhatsUp()},
         };
     }
 
@@ -75,18 +74,18 @@ public class JobScamManager : InkManager
     {
         if (!firstTaskCompleted)
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip, audioManager));
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         }
     }
 
     private void ErrorMessage()
     {
         messagingSystem.PlayerNextMessage("<color=grey>You can no longer send messages to this contact.</color>");
-        StartCoroutine(WaitAndContinueStory(messageTime));
+        StartCoroutine(WaitAndContinueStory(messageTime, audioManager));
     }
 
     public override void SenderAction(string action, string dialogue)

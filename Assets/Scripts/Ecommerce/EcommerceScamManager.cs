@@ -14,6 +14,7 @@ using UnityEngine.Video;
 public class EcommerceScamManager : InkManager
 {
     public EcommerceScamUIManager uIManager;
+    public EcommerceScenariosAudioManager audioManager;
 
     public Transform phoneChoiceContainer;
 
@@ -43,7 +44,7 @@ public class EcommerceScamManager : InkManager
         };
     }
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
         for (int i = 0; i < playerChoices.Count; i++)
         {
@@ -51,15 +52,15 @@ public class EcommerceScamManager : InkManager
             
             if (choice.choiceAction.Contains("action_phone"))
             {
-                CreateChoiceButton(actionChoiceButtonPrefab, phoneChoiceContainer, choice.choiceName, i, phoneChoiceContainer);
+                CreateChoiceButton(actionChoiceButtonPrefab, phoneChoiceContainer, choice.choiceName, i, phoneChoiceContainer, audioManager);
             }
             else if (choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
             {
-                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
             else if (choice.choiceAction.Contains("action"))
             {
-                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
         }
         if (scamshieldButton == null && !isOnHomeScreen && !isOn6OfUsWebsite)
@@ -67,10 +68,10 @@ public class EcommerceScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -80,11 +81,11 @@ public class EcommerceScamManager : InkManager
     {
         if (!isMoneyTransferred)
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip, audioManager));
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         }
     }
 

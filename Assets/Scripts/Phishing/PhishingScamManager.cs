@@ -15,20 +15,23 @@ public class PhishingScamManager : InkManager
 {
     public PhishingScamUIManager uIManager;
 
+    public PhishingScenariosAudioManager audioManager;
+
     public bool cdcClaimed;
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
-        base.DisplayChoices();
+        manager = audioManager;
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !cdcClaimed)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -55,11 +58,11 @@ public class PhishingScamManager : InkManager
     {
         if (!cdcClaimed)
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip, audioManager));
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         }
     }
 }

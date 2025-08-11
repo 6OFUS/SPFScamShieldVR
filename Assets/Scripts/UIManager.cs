@@ -29,13 +29,6 @@ public class UIManager : MonoBehaviour
     public GameObject frontFacingCamera;
     public GameObject homeButtonLine;
 
-    [Header("Audio")]
-    public AudioSource audioSource;
-    public AudioClip cryingClip;
-    public AudioClip screenshotClip;
-    public AudioClip loseClip;
-    public AudioClip winClip;
-
     [Header("Scamshield UI")]
     public GameObject scamshieldScreen;
     public GameObject scamshieldLoadingScreen;
@@ -48,14 +41,14 @@ public class UIManager : MonoBehaviour
     public GameObject loseScreen;
     public GameObject reportAfterScammedScreen;
 
-    public virtual void Screenshot(InkManager inkManager)
+    public virtual void Screenshot(InkManager inkManager, AudioManager audioManager)
     {
         if (!screenshotTaken)
         {
             inkManager.stopStory = true;
             screenshotTaken = true;
-            audioSource.clip = screenshotClip;
-            audioSource.Play();
+            audioManager.audioSource.clip = audioManager.screenshotClip;
+            audioManager.audioSource.Play();
             flashImage.gameObject.SetActive(true);
             StartCoroutine(FlashEffect());
         }

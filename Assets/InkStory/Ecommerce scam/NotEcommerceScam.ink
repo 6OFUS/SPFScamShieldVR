@@ -43,8 +43,8 @@ Wow! You're fast. Pls transfer to 8888 8888 (ActNow) and send me a proof. Will m
 +[Player:action_turn_on_phone Pick up and turn on phone] -> unlock_phone
 
 === transfer_received_dialogue ===
-Got it! Will mail out ltr, no worries can i have your address  #Sender:win_ending
--> END //WIN ENDING HERE
+Got it! Will mail out ltr, no worries can i have your address  #Sender:message
++[Player:action_send_address Send address] -> END
 
 // ------------------------- Phone section -----------------------------------------
 

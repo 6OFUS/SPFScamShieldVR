@@ -13,6 +13,7 @@ using UnityEngine.Video;
 public class NotInvestmentScamManager : InkManager
 {
     public NotInvestmentScamUIManager uIManager;
+    public InvestmentScenariosAudioManager audioManager;
 
     private void Awake()
     {
@@ -32,24 +33,26 @@ public class NotInvestmentScamManager : InkManager
         };
     }
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
-        base.DisplayChoices();
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
     }
     protected override void Report()
     {
-        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }
 }

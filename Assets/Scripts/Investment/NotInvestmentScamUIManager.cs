@@ -10,6 +10,7 @@ using UnityEngine;
 public class NotInvestmentScamUIManager : UIManager
 {
     public NotInvestmentScamManager notScamManager;
+    public InvestmentScenariosAudioManager audioManager;
 
     public GameObject kachagramScreen;
     public GameObject rachelKachagramPfp;
@@ -24,7 +25,7 @@ public class NotInvestmentScamUIManager : UIManager
     public void TapNotification()
     {
         kachagramScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(0));
+        StartCoroutine(notScamManager.WaitAndContinueStory(0, audioManager));
     }
 
     public void AddProfilePicture(int index)
@@ -33,7 +34,7 @@ public class NotInvestmentScamUIManager : UIManager
         rachelKachagramPfp.transform.SetAsFirstSibling();
         string selectedText = notScamManager.playerChoices[index].choiceName;
         notScamManager.messagingSystem.PlayerNextMessage(selectedText);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void HomeScreen()
@@ -46,32 +47,32 @@ public class NotInvestmentScamUIManager : UIManager
         {
             Destroy(notScamManager.scamshieldButton);
         }
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void OpenBrowzePlus()
     {
         notScamManager.isOnHomeScreen = false;
         browzePlusScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void SearchBrowzePlus()
     {
         browzePlusSearchedScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void TapFirstLink()
     {
         mASWebsiteScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void EnterRepresentativeNumber()
     {
         representativeNumber.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public IEnumerator SearchRepresentative()
@@ -79,25 +80,24 @@ public class NotInvestmentScamUIManager : UIManager
         mASLoadingScreen.SetActive(true);
         yield return new WaitForSeconds(loadingTime);
         mASRachelConfirmedScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public void OpenKachagram()
     {
         DisableAllCanvasChildren();
         kachagramScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime));
+        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
     public IEnumerator HandleWinEnding()
     {
         scenarioController.scenarioCanvas.SetActive(false);
         winScreen.SetActive(true);
-        audioSource.clip = winClip;
-        audioSource.Play();
+        audioManager.PlayAudio(audioManager.winClip);
+        yield return new WaitForEndOfFrame();
         notScamManager.ClearChoices(notScamManager.choiceContainer);
         Destroy(notScamManager.scamshieldButton);
-        yield return new WaitForSeconds(winClip.length);
         whatHappenButton.onClick.AddListener(() =>
         {
             notScamManager.recapVideoScript.PlayVideo(notScamManager.whatHappenWinVideoClip);

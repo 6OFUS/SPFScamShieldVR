@@ -27,7 +27,6 @@ public class InkManager : MonoBehaviour
     /// </summary>v
     private List<string> storyTags = new List<string>();
 
-    public string knotName;
     public bool stopStory;
 
     public bool isOnHomeScreen;
@@ -85,16 +84,16 @@ public class InkManager : MonoBehaviour
     /// <summary>
     /// Function to start the story via messages
     /// </summary>
-    public void StartStory()
+    public void StartStory(AudioManager audioManager)
     {
-        StartCoroutine(ContinueStory());
+        StartCoroutine(ContinueStory(audioManager));
     }
 
     /// <summary>
     /// Coroutine to continue Ink story automatically
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public virtual IEnumerator ContinueStory()
+    public virtual IEnumerator ContinueStory(AudioManager audioManager)
     {
         while (story.canContinue)
         {
@@ -123,45 +122,40 @@ public class InkManager : MonoBehaviour
             }
 
             ShuffleChoices(playerChoices);
-            DisplayChoices();
-        }
-        else
-        {
-            LoadStoryPoint(knotName);
+            DisplayChoices(audioManager);
         }
     }
 
-    public virtual void LoadStoryPoint(string knotName)
-    {
-        story.ChoosePathString(knotName);
-        StartCoroutine(ContinueStory());
-    }
 
     /// <summary>
     /// Coroutine to wait for next message to send
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public IEnumerator WaitAndContinueStory(float replyTime)
+    public IEnumerator WaitAndContinueStory(float replyTime, AudioManager audioManager)
     {
         yield return new WaitForSeconds(replyTime);
-        yield return StartCoroutine(ContinueStory());
+        yield return StartCoroutine(ContinueStory(audioManager));
     }
 
     /// <summary>
     /// Handles the player's choice selection from the current Ink choices
     /// </summary>
     /// <param name="index">Index of the selected choice from choices given</param>
-    public void ChooseOption(int index)
+    public void ChooseOption(int index, AudioManager audioManager)
     {
         string action = playerChoices[index].choiceAction;
-        PlayerAction(action, index);
+        PlayerAction(action, index, audioManager);
+        if (action.Contains("action"))
+        {
+            audioManager.PlayAudio(audioManager.tapActionButton);
+        }
         story.ChooseChoiceIndex(playerChoices[index].choiceIndex);
     }
 
     /// <summary>
     /// Function to display the UI choice buttons
     /// </summary>
-    public virtual void DisplayChoices()
+    public virtual void DisplayChoices(AudioManager audioManager)
     {
         for (int i = 0; i < playerChoices.Count; i++)
         {
@@ -169,23 +163,23 @@ public class InkManager : MonoBehaviour
 
             if (choice.choiceAction.Contains("action"))
             {
-                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
             else if (choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
             {
-                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
         }
     }
 
-    protected virtual void CreateChoiceButton(GameObject prefab, Transform container, string choiceName, int choiceIndex, Transform choiceContainer)
+    protected virtual void CreateChoiceButton(GameObject prefab, Transform container, string choiceName, int choiceIndex, Transform choiceContainer, AudioManager audioManager)
     {
         GameObject buttonObj = Instantiate(prefab, container);
         TextMeshProUGUI buttonText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
         buttonText.text = choiceName;
 
         buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-            ChooseOption(choiceIndex);
+            ChooseOption(choiceIndex, audioManager);
             ClearChoices(choiceContainer);
         });
     }
@@ -258,7 +252,7 @@ public class InkManager : MonoBehaviour
         }
     }
 
-    public void PlayerAction(string action,int index)
+    public void PlayerAction(string action,int index, AudioManager audioManager)
     {
         if (actionHandlers.TryGetValue(action, out var handler))
         {
@@ -268,12 +262,12 @@ public class InkManager : MonoBehaviour
         {
             string selectedText = playerChoices[index].choiceName;
             messagingSystem.PlayerNextMessage(selectedText);
-            StartCoroutine(WaitAndContinueStory(messageTime));                  
+            StartCoroutine(WaitAndContinueStory(messageTime, audioManager));                  
         }
 
     }
 
-    protected IEnumerator SpawnActionButton(string buttonText, float delay, UnityEngine.Events.UnityAction onClickAction)
+    protected IEnumerator SpawnActionButton(string buttonText, float delay, AudioManager audioManager, UnityEngine.Events.UnityAction onClickAction)
     {
         yield return new WaitForSeconds(delay);
 
@@ -284,14 +278,15 @@ public class InkManager : MonoBehaviour
         buttonObj.GetComponent<Button>().onClick.AddListener(() => {
             onClickAction.Invoke();
             Destroy(buttonObj);
+            audioManager.PlayAudio(audioManager.tapActionButton);
         });
 
         scamshieldButton.transform.SetAsLastSibling();
     }
 
-    public IEnumerator SpawnHomeButton(UIManager uIManager, float time)
+    public IEnumerator SpawnHomeButton(UIManager uIManager, float time, AudioManager audioManager)
     {
-        yield return SpawnActionButton("Go to home screen", time, () => {
+        yield return SpawnActionButton("Go to home screen", time, audioManager, () => {
             isOnHomeScreen = true;
             uIManager.DisableAllCanvasChildren();
 
@@ -303,36 +298,34 @@ public class InkManager : MonoBehaviour
             }
             if (uIManager.screenshotTaken)
             {
-                StartCoroutine(SpawnOpenScamshieldButton(uIManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             }
         });
     }
 
-    protected IEnumerator SpawnOpenScamshieldButton(UIManager uIManager)
+    protected IEnumerator SpawnOpenScamshieldButton(UIManager uIManager, AudioManager audioManager)
     {
-        yield return SpawnActionButton("Open Scamshield app", 1f, () => {
+        yield return SpawnActionButton("Open Scamshield app", 1f, audioManager, () => {
             uIManager.scamshieldScreen.SetActive(true);
             isOnHomeScreen = false;
-            StartCoroutine(SpawnReportButton());
+            StartCoroutine(SpawnReportButton(audioManager));
         });
     }
 
-    protected IEnumerator SpawnReportButton()
+    protected IEnumerator SpawnReportButton(AudioManager audioManager)
     {
-        yield return SpawnActionButton("Report", 1f, () => {
+        yield return SpawnActionButton("Report", 1f, audioManager, () => {
             Report();
         });
     }
 
-    public IEnumerator ReportToScamShield(UIManager uIManager, AudioClip endingAudioClip, GameObject endingScreen, VideoClip whatHappenVideoClip, VideoClip endingVideoClip)
+    public IEnumerator ReportToScamShield(UIManager uIManager, AudioClip endingAudioClip, GameObject endingScreen, VideoClip whatHappenVideoClip, VideoClip endingVideoClip, AudioManager audioManager)
     {
         uIManager.scamshieldLoadingScreen.SetActive(true);
         yield return new WaitForSeconds(scamshieldLoading.length);
         uIManager.scenarioController.scenarioCanvas.SetActive(false);
-        uIManager.audioSource.clip = endingAudioClip;
-        uIManager.audioSource.Play();
+        audioManager.PlayAudio(endingAudioClip);
         endingScreen.SetActive(true);
-        yield return new WaitForSeconds(endingAudioClip.length);
         uIManager.whatHappenButton.onClick.AddListener(() =>
         {
             recapVideoScript.PlayVideo(whatHappenVideoClip);
@@ -366,7 +359,8 @@ public class InkManager : MonoBehaviour
 
     private void Start()
     {
-        StartStory();
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        StartStory(audioManager);
     }
 
 

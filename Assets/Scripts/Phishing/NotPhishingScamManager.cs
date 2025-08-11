@@ -14,20 +14,21 @@ using UnityEngine.Video;
 public class NotPhishingScamManager : InkManager
 {
     public NotPhishingScamUIManager uIManager;
+    public PhishingScenariosAudioManager audioManager;
 
-
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
-        base.DisplayChoices();
+        manager = audioManager;
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !uIManager.screenshotTaken)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager,1));
+                StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -50,7 +51,7 @@ public class NotPhishingScamManager : InkManager
 
     protected override void Report()
     {
-        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         uIManager.whatHappenButton.gameObject.SetActive(false);
         uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }

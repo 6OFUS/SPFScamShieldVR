@@ -15,6 +15,7 @@ using UnityEngine.Video;
 public class InvestmentScamManager : InkManager
 {
     public InvestmentScamUIManager uIManager;
+    public InvestmentScenariosAudioManager audioManager;
 
     public bool eZProfitAccountCreated;
     public bool isInvestAmountEntered;
@@ -48,18 +49,18 @@ public class InvestmentScamManager : InkManager
         };
     }
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
-        base.DisplayChoices();
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager,1));
+                StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -68,11 +69,11 @@ public class InvestmentScamManager : InkManager
     {
         if (!isMoneyInvested)
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.winClip, uIManager.winScreen, whatHappenWinVideoClip, winVideoClip, audioManager));
         }
         else
         {
-            StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+            StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.reportAfterScammedScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         }
 
     }   

@@ -14,6 +14,7 @@ using UnityEngine.Video;
 public class NotEcommerceScamManager : InkManager
 {
     public NotEcommerceScamUIManager uIManager;
+    public EcommerceScenariosAudioManager audioManager;
 
     public Transform phoneChoiceContainer;
 
@@ -37,13 +38,13 @@ public class NotEcommerceScamManager : InkManager
             { "action_phone_enter_details", _ => uIManager.EnterTransferDetails()},
             { "action_phone_transfer", _ => uIManager.TransferSuccess()},
             { "action_phone_share", _ => uIManager.ShareTransferredMessage()},
-            { "win_ending", _ => StartCoroutine(uIManager.HandleWinEnding())},
+            { "action_send_address", _ => StartCoroutine(uIManager.HandleWinEnding())},
             { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
 
         };
     }
 
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
         for (int i = 0; i < playerChoices.Count; i++)
         {
@@ -51,15 +52,15 @@ public class NotEcommerceScamManager : InkManager
             
             if (choice.choiceAction.Contains("action_phone"))
             {
-                CreateChoiceButton(actionChoiceButtonPrefab, phoneChoiceContainer, choice.choiceName, i, phoneChoiceContainer);
+                CreateChoiceButton(actionChoiceButtonPrefab, phoneChoiceContainer, choice.choiceName, i, phoneChoiceContainer, audioManager);
             }
             else if (choice.choiceAction.Contains("message") || choice.choiceAction.Contains("ending"))
             {
-                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(dialogueChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
             else if (choice.choiceAction.Contains("action"))
             {
-                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer);
+                CreateChoiceButton(actionChoiceButtonPrefab, choiceContainer, choice.choiceName, i, choiceContainer, audioManager);
             }
         }
         if (scamshieldButton == null && !isOnHomeScreen && !isOn6OfUsWebsite)
@@ -67,10 +68,10 @@ public class NotEcommerceScamManager : InkManager
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -78,7 +79,7 @@ public class NotEcommerceScamManager : InkManager
 
     protected override void Report()
     {
-        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
         uIManager.whatHappenButton.gameObject.SetActive(false);
         uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }
@@ -92,10 +93,6 @@ public class NotEcommerceScamManager : InkManager
                 break;
             case "video":
                 StartCoroutine(SendVideo());
-                break;
-            case "win_ending":
-                messagingSystem.SenderNextMessage(dialogue);
-                StartCoroutine(uIManager.HandleWinEnding());
                 break;
             default:
                 base.SenderAction(action, dialogue);

@@ -21,18 +21,24 @@ Totally understand the concern. Yes, this is a legitimate role.<br><br>You appli
 + [Player:action_check_website Check the site] -> website_career_section
 
 === website_career_section ===
-+ [Player:action_check_website_careers Tap on Careers] -> job_verification_dialogue_1
++ [Player:action_check_website_careers Tap on Careers] -> home_screen
+
+=== home_screen ===
++ [Player:action_home_screen Go to home screen] -> return_to_chat
+
+=== return_to_chat ===
++ [Player:action_return_to_chat Open WhatsUp] -> job_verification_dialogue_1
 
 === job_offer_dialogue_2 ===
 The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! #Sender:message
 
-+ [Player:win_ending Sounds good! I'm okay to take the call today.] -> win_ending
++ [Player:win_ending Sounds good! I'm okay to take the call today.] -> END
 + [Player:message Is this job legit?] -> job_offer_dialogue_1
 
 === job_offer_dialogue_3 ===
 Hey Taylor... not sure if that was meant as a joke, but just to clarify, I'm a legitimate recruiter from T-Commerce Asia.<br><br>We reached out because you applied on LinkedIn, and we really liked your profile.<br><br>It's okay to double-check things but calling someone a scammer without confirming first isn't very respectful.<br><br>I'll withdraw your application for now. Best of luck with your job search. #Sender:message
 
-+ [Player:lose_ending Ok, I'm really sorry.]-> lose_ending
++ [Player:lose_ending Ok, I'm really sorry.]-> END
 
 === job_verification_dialogue_1 ===
 //OPEN WEBSITE THEN REPLY
@@ -54,13 +60,8 @@ Alright email sent! #Sender:message
 + [Player:action_open_lucia_email Open Lucia's email] -> return_from_email
 
 === return_from_email ===
-+ [Player:win_ending Thank you. Let's proceed.] -> win_ending
++ [Player:action_return_to_chat Open WhatsUp] -> win_ending
 
-
-//------------------------------ ENDINGS ------------------------------
 === win_ending ===
-//PLAYER WINS
--> END
++ [Player:win_ending Thank you. Let's proceed.] -> END
 
-=== lose_ending ===
--> END

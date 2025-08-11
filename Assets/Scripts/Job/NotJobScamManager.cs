@@ -14,7 +14,7 @@ using UnityEngine.Video;
 public class NotJobScamManager : InkManager
 {  
     public NotJobScamUIManager uIManager;
-
+    public JobScenariosAudioManager audioManager;
     private void Awake()
     {
         actionHandlers = new Dictionary<string, Action<int>>
@@ -25,12 +25,14 @@ public class NotJobScamManager : InkManager
             { "action_check_website_careers", _ => uIManager.CheckWebsiteCareersSection()},
             { "action_open_amail", _ => uIManager.OpenAmail()},
             { "action_open_lucia_email", _ => uIManager.OpenLuciaEmail()},
-            { "win_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
-            { "lose_ending", _ => uIManager.HandleWinEnding()},
+            { "action_home_screen", _ => uIManager.HomeScreen()},
+            { "action_return_to_chat", _ => uIManager.ReturnToChat()},
+            { "win_ending", _ => StartCoroutine(uIManager.HandleWinEnding())},
+            { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
 
         };
     }
-    public override void DisplayChoices()
+    public override void DisplayChoices(AudioManager manager)
     {
         //IMAGE OPTIONS HERE
         foreach (var choice in playerChoices)
@@ -45,21 +47,21 @@ public class NotJobScamManager : InkManager
                 Image image = buttonObj.GetComponent<Image>();
                 image.sprite = uIManager.stickers[capturedIndex];
                 buttonObj.GetComponent<Button>().onClick.AddListener(() => {
-                    ChooseOption(capturedIndex);
+                    ChooseOption(capturedIndex, audioManager);
                     ClearChoices(choiceContainer);
                 });
             }
         }
-        base.DisplayChoices();
+        base.DisplayChoices(manager);
         if (scamshieldButton == null && !isOnHomeScreen)
         {
             scamshieldButton = Instantiate(scamshieldChoiceButtonPrefab, choiceContainer);
             scamshieldButton.GetComponent<Button>().onClick.AddListener(() =>
             {
-                uIManager.Screenshot(this);
+                uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1));
+                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -67,6 +69,8 @@ public class NotJobScamManager : InkManager
 
     protected override void Report()
     {
-        StartCoroutine(ReportToScamShield(uIManager, uIManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip));
+        StartCoroutine(ReportToScamShield(uIManager, audioManager.loseClip, uIManager.loseScreen, whatHappenLoseVideoClip, gameOverVideoClip, audioManager));
+        uIManager.whatHappenButton.gameObject.SetActive(false);
+        uIManager.whatShouldYouDoButton.transform.position = uIManager.whatShouldYouDoButtonPos.position;
     }
 }
