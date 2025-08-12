@@ -78,8 +78,6 @@ public class EcommerceScamUIManager : UIManager
         phoneInteractable.enabled = true;
         phoneInteractable.selectEntered.AddListener((SelectEnterEventArgs args) =>
         {
-            pickUpUI.SetActive(false);
-            scamManager.phoneChoiceContainer.gameObject.SetActive(true);
             phoneCanvas.SetActive(true);
         });
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));

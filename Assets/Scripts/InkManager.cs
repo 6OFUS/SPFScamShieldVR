@@ -93,7 +93,7 @@ public class InkManager : MonoBehaviour
     /// Coroutine to continue Ink story automatically
     /// </summary>
     /// <returns>Time taken for next message to send</returns>
-    public virtual IEnumerator ContinueStory(AudioManager audioManager)
+    public IEnumerator ContinueStory(AudioManager audioManager)
     {
         while (story.canContinue)
         {

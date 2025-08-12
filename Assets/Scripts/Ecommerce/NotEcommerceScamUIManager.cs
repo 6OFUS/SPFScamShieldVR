@@ -79,8 +79,6 @@ public class NotEcommerceScamUIManager : UIManager
         phoneInteractable.enabled = true;
         phoneInteractable.selectEntered.AddListener((SelectEnterEventArgs args) =>
         {
-            pickUpUI.SetActive(false);
-            notScamManager.phoneChoiceContainer.gameObject.SetActive(true);
             phoneCanvas.SetActive(true);
         });
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
