@@ -14,10 +14,6 @@ public class UIManager : MonoBehaviour
 {
     public float loadingTime;
 
-    [Header("Script references")]
-
-    public ScenarioController scenarioController;
-
     [Header("Home")]
     public GameObject homeScreen;
 
@@ -40,6 +36,10 @@ public class UIManager : MonoBehaviour
     public GameObject winScreen;
     public GameObject loseScreen;
     public GameObject reportAfterScammedScreen;
+
+    [Header("Script references")]
+
+    public ScenarioController scenarioController;
 
     public virtual void Screenshot(InkManager inkManager, AudioManager audioManager)
     {

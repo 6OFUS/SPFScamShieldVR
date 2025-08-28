@@ -117,8 +117,6 @@ public class InkManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 playerChoices.Add(new ChoiceData(i, story.currentChoices[i].text));
-                Debug.Log(playerChoices[i].choiceName);
-                Debug.Log(playerChoices[i].choiceIndex);
             }
 
             ShuffleChoices(playerChoices);
@@ -284,6 +282,7 @@ public class InkManager : MonoBehaviour
         scamshieldButton.transform.SetAsLastSibling();
     }
 
+    //--------------------------------------------------------------------------------------------------
     public IEnumerator SpawnHomeButton(UIManager uIManager, float time, AudioManager audioManager)
     {
         yield return SpawnActionButton("Go to home screen", time, audioManager, () => {
@@ -311,6 +310,8 @@ public class InkManager : MonoBehaviour
             StartCoroutine(SpawnReportButton(audioManager));
         });
     }
+
+    //--------------------------------------------------------------------------------------------------------------
 
     protected IEnumerator SpawnReportButton(AudioManager audioManager)
     {

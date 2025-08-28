@@ -13,10 +13,19 @@ using UnityEngine.Video;
 
 public class PhishingScamManager : InkManager
 {
+    /// <summary>
+    /// Reference PhishingScamUIManager script
+    /// </summary>
     public PhishingScamUIManager uIManager;
-
+    /// <summary>
+    /// Reference PhishingScenariosAudioManager script
+    /// </summary>
     public PhishingScenariosAudioManager audioManager;
 
+    /// <summary>
+    /// Boolean to check if CDC vouchers have been claimed
+    /// </summary>
+    [Header("CDC")]
     public bool cdcClaimed;
 
     public override void DisplayChoices(AudioManager manager)
@@ -31,7 +40,8 @@ public class PhishingScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                //StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -47,7 +57,7 @@ public class PhishingScamManager : InkManager
             { "action_claim", _ => uIManager.ClaimCDC()},
             { "action_tap_bank_notification", _ => uIManager.TapBankSMSNotification()},
             { "action_screenshot", _ => uIManager.TakeScreenshot()},
-            { "action_home_screen", _ => uIManager.HomeScreen()},
+            //{ "action_home_screen", _ => uIManager.HomeScreen()},
             { "action_open_scamshield", _ => uIManager.OpenScamShield()},
             { "action_report_lose", _ => uIManager.ReportLose()},
 

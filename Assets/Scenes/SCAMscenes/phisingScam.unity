@@ -14545,6 +14545,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 722554574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &168706736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6082952439626331953, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &174590595
 Mesh:
   m_ObjectHideFlags: 0
@@ -41738,28 +41743,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingTime: 3
-  scenarioController: {fileID: 888909075}
   homeScreen: {fileID: 1673574715}
   screenshotTaken: 0
   flashImage: {fileID: 6040814721440844533}
   flashDuration: 1
   frontFacingCamera: {fileID: 6040814721440844539}
   homeButtonLine: {fileID: 475820437}
-  scamshieldScreen: {fileID: 6040814721440844538}
-  scamshieldLoadingScreen: {fileID: 6040814721440844537}
+  scamshieldScreen: {fileID: 1989284406}
+  scamshieldLoadingScreen: {fileID: 1989284405}
   whatHappenButton: {fileID: 1313255594}
   whatShouldYouDoButton: {fileID: 1601858337}
   whatShouldYouDoButtonPos: {fileID: 1707646224}
   winScreen: {fileID: 1092385115}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
+  scenarioController: {fileID: 888909075}
   scamManager: {fileID: 1368885621}
   audioManager: {fileID: 8964129}
   smsScammerScreen: {fileID: 6040814721440844536}
   websiteHomeScreen: {fileID: 6040814721440844535}
   userDetails: {fileID: 1772033269}
   loadingScreen: {fileID: 609390276}
-  bankMessage: {fileID: 1715674591}
+  bankMessage: {fileID: 168706736}
   smsBankScreen: {fileID: 352309178}
 --- !u!1 &1135856921
 GameObject:
@@ -42529,6 +42534,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43576e4841fa9cf498fee2480df00501, type: 3}
   m_PrefabInstance: {fileID: 1200469211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1202596364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1609023138223995967, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207119100
 GameObject:
@@ -52897,7 +52907,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingTime: 3
-  scenarioController: {fileID: 888909075}
   homeScreen: {fileID: 558620816}
   screenshotTaken: 0
   flashImage: {fileID: 124743900}
@@ -52909,9 +52918,10 @@ MonoBehaviour:
   whatHappenButton: {fileID: 1313255594}
   whatShouldYouDoButton: {fileID: 1601858337}
   whatShouldYouDoButtonPos: {fileID: 1707646224}
-  winScreen: {fileID: 1092385115}
+  winScreen: {fileID: 1794187616}
   loseScreen: {fileID: 1092385114}
   reportAfterScammedScreen: {fileID: 1092385113}
+  scenarioController: {fileID: 888909075}
   notScamManager: {fileID: 780273069}
   audioManager: {fileID: 8964129}
   smsScreen: {fileID: 473814313}
@@ -52919,7 +52929,7 @@ MonoBehaviour:
   redeemScreen: {fileID: 428838666}
   singPassLoginScreen: {fileID: 1669346022}
   singPassLoginSuccessScreen: {fileID: 345138908}
-  bankMessage: {fileID: 2030334800}
+  bankMessage: {fileID: 1202596364}
   smsBankScreen: {fileID: 2039523007}
   vouchersClaimedScreen: {fileID: 1984800491}
 --- !u!1 &1514613558
@@ -60410,11 +60420,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5054834981948465373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1715674591 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3259652284214173258, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
-  m_PrefabInstance: {fileID: 6040814721440844530}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1716929415
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61392,6 +61397,11 @@ Transform:
   - {fileID: 1947093746}
   m_Father: {fileID: 3145389800669900460}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1794187616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2905855686866485499, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1797194954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119987,6 +119997,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1792930173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1989284405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4833375099657496106, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1989284406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3277319629077142240, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
+  m_PrefabInstance: {fileID: 6040814721440844530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2006117256
 GameObject:
   m_ObjectHideFlags: 0
@@ -120632,11 +120652,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &2030334800 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7265100776462555286, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
-  m_PrefabInstance: {fileID: 6040814721440844530}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2039523007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6161206283845938572, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
@@ -124378,7 +124393,7 @@ PrefabInstance:
       objectReference: {fileID: 878498296}
     - target: {fileID: 6826283977727365830, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: m_VersionIndex
-      value: 1061
+      value: 1085
       objectReference: {fileID: 0}
     - target: {fileID: 6938986183087708244, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
       propertyPath: scenarioController
@@ -124433,16 +124448,6 @@ GameObject:
 --- !u!1 &6040814721440844536 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6085004459478989799, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
-  m_PrefabInstance: {fileID: 6040814721440844530}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6040814721440844537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3291407280204504576, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
-  m_PrefabInstance: {fileID: 6040814721440844530}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6040814721440844538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2107456306515121741, guid: fcd1cb67a8a0ba1409ec0d55269c19de, type: 3}
   m_PrefabInstance: {fileID: 6040814721440844530}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6040814721440844539 stripped

@@ -13,7 +13,13 @@ using UnityEngine.Video;
 
 public class NotPhishingScamManager : InkManager
 {
+    /// <summary>
+    /// Reference NotPhishingScamUIManager script
+    /// </summary>
     public NotPhishingScamUIManager uIManager;
+    /// <summary>
+    /// Reference PhishingScenariosAudioManager script
+    /// </summary>
     public PhishingScenariosAudioManager audioManager;
 
     public override void DisplayChoices(AudioManager manager)
@@ -28,7 +34,8 @@ public class NotPhishingScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
+                //StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
