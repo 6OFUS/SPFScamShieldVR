@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class AnimationAudioEvent : MonoBehaviour
 {
+    /// <summary>
+    /// Audio clip to play
+    /// </summary>
     public AudioClip audioClip;
 
+    /// <summary>
+    /// Function to play audio
+    /// </summary>
     public void PlayAudio()
     {
         // Create a temporary AudioSource if one doesn't exist

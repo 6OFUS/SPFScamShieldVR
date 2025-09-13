@@ -11,26 +11,44 @@ using UnityEngine.UI;
 
 public class MessagingSystem : MonoBehaviour
 {
+    /// <summary>
+    /// Reference ScenarioController script
+    /// </summary>
     public ScenarioController scenarioController;
 
-    [Header("Sender messages")]
     /// <summary>
-    /// The prefab used for sender message
+    /// Prefab used for sender message
     /// </summary>
+    [Header("Sender messages")]
     public GameObject senderMessagePrefab;
-
+    /// <summary>
+    /// Prefab used for sender image
+    /// </summary>
     public GameObject senderImagePrefab;
 
+    /// <summary>
+    /// Prefab used for player message
+    /// </summary>
     [Header("Player messages")]
     public GameObject playerMessagePrefab;
+    /// <summary>
+    /// Prefab used for player sticker
+    /// </summary>
     public GameObject playerStickerPrefab;
 
+    /// <summary>
+    /// Audio source
+    /// </summary>
     [Header("Audio")]
     public AudioSource audioSource;
+    /// <summary>
+    /// Message received audio
+    /// </summary>
     public AudioClip messageReceived;
+    /// <summary>
+    /// Message sent audio
+    /// </summary>
     public AudioClip messageSent;
-
-
 
     /// <summary>
     /// Sends the next message from the sender
@@ -48,6 +66,10 @@ public class MessagingSystem : MonoBehaviour
         audioSource.clip = messageReceived;
         audioSource.Play();
     }
+    /// <summary>
+    /// Sends the image from the sender
+    /// </summary>
+    /// <param name="image"></param>
     public void SenderImage(Sprite image)
     {
         GameObject newImage = Instantiate(senderImagePrefab, scenarioController.messageContentParent);
@@ -72,7 +94,10 @@ public class MessagingSystem : MonoBehaviour
         audioSource.clip = messageReceived;
         audioSource.Play();
     }
-
+    /// <summary>
+    /// Sends the message selected by player
+    /// </summary>
+    /// <param name="message"></param>
     public void PlayerNextMessage(string message)
     {
         GameObject newMessage = Instantiate(playerMessagePrefab, scenarioController.messageContentParent);
@@ -87,6 +112,10 @@ public class MessagingSystem : MonoBehaviour
         audioSource.Play();
     }
 
+    /// <summary>
+    /// Sends the sticker selected by player
+    /// </summary>
+    /// <param name="image"></param>
     public void PlayerSendSticker(Sprite image)
     {
         GameObject newSticker = Instantiate(playerStickerPrefab, scenarioController.messageContentParent);

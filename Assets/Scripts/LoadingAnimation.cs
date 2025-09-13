@@ -9,6 +9,9 @@ using UnityEngine;
 
 public class LoadingAnimation : MonoBehaviour
 {
+    /// <summary>
+    /// Loading UI rotation speed
+    /// </summary>
     public float rotationSpeed;
 
     // Update is called once per frame

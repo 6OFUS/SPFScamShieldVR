@@ -40,7 +40,6 @@ public class PhishingScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                //StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
                 StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
@@ -57,7 +56,6 @@ public class PhishingScamManager : InkManager
             { "action_claim", _ => uIManager.ClaimCDC()},
             { "action_tap_bank_notification", _ => uIManager.TapBankSMSNotification()},
             { "action_screenshot", _ => uIManager.TakeScreenshot()},
-            //{ "action_home_screen", _ => uIManager.HomeScreen()},
             { "action_open_scamshield", _ => uIManager.OpenScamShield()},
             { "action_report_lose", _ => uIManager.ReportLose()},
 

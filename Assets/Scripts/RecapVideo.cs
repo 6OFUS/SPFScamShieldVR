@@ -11,22 +11,18 @@ using UnityEngine.Video;
 
 public class RecapVideo : MonoBehaviour
 {
+    /// <summary>
+    /// Video player for recap video
+    /// </summary>
     public VideoPlayer videoPlayer;
 
+    /// <summary>
+    /// Play recap video
+    /// </summary>
+    /// <param name="videoClip"></param>
     public void PlayVideo(VideoClip videoClip)
     {
         videoPlayer.clip = videoClip;
         videoPlayer.Play();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

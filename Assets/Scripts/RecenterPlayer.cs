@@ -12,7 +12,13 @@ using UnityEngine.XR.Management;
 
 public class RecenterPlayer : MonoBehaviour
 {
+    /// <summary>
+    /// Player spawn position
+    /// </summary>
     public Transform spawnPoint;
+    /// <summary>
+    /// XR origin position
+    /// </summary>
     public Transform xrOrigin;
 
     void Start()
@@ -32,11 +38,5 @@ public class RecenterPlayer : MonoBehaviour
         {
             subsystem.TryRecenter();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

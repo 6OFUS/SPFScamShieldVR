@@ -71,10 +71,4 @@ public class Phone : MonoBehaviour
         interactable.selectEntered.AddListener(OnPickUp);
         interactable.selectExited.AddListener(OnDrop);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

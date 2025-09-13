@@ -20,10 +20,7 @@
 + [Player:action_tap_bank_notification Tap the notification] -> take_screenshot
 
 === take_screenshot ===
-+ [Player:action_screenshot Take a screenshot] -> home_screen
-
-=== home_screen ===
-+ [Player:action_home_screen Go to home screen] -> scamshield_app
++ [Player:action_screenshot Take a screenshot] -> scamshield_app
 
 === scamshield_app ===
 + [Player:action_open_scamshield Open Scamshield app] -> report_scamshield_lose

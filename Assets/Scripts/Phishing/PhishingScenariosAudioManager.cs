@@ -9,5 +9,8 @@ using UnityEngine;
 
 public class PhishingScenariosAudioManager : AudioManager
 {
+    /// <summary>
+    /// SMS notification audio
+    /// </summary>
     public AudioClip smsNotification;
 }

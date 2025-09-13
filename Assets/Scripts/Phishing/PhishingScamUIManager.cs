@@ -125,15 +125,6 @@ public class PhishingScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
-    /*
-    public void HomeScreen()
-    {
-        DisableAllCanvasChildren();
-        homeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-    */
-
     /// <summary>
     /// Function to open scamshield app
     /// Change UI to scamshield screen after selecting option to open Scamshield app

@@ -9,10 +9,24 @@ using UnityEngine;
 
 public class ChoiceData
 {
+    /// <summary>
+    /// Option choice index
+    /// </summary>
     public int choiceIndex;
+    /// <summary>
+    /// Option choice name
+    /// </summary>
     public string choiceName;
+    /// <summary>
+    /// Option choice action
+    /// </summary>
     public string choiceAction;
 
+    /// <summary>
+    /// Store choice options data
+    /// </summary>
+    /// <param name="index">Choice index</param>
+    /// <param name="fullText">Original choice naming in Ink</param>
     public ChoiceData(int index, string fullText)
     {
         choiceIndex = index;

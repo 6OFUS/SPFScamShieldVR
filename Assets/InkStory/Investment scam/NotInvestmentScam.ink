@@ -47,22 +47,7 @@ Hahaha Thanks! #Sender:message
 
 === dialogue_9 ===
 Okie! #Sender:message
-+[Player:action_home_screen Go to home screen] -> open_browze_plus
-
-=== open_browze_plus ===
-+[Player:action_browze_plus Tap on "Browze+"] -> search_mas
-
-=== search_mas ===
-+[Player:action_search Search for "MAS Register of Representatives"] -> tap_link
-
-=== tap_link ===
-+[Player:action_tap_link Tap the first link] -> key_representative_number
-
-=== key_representative_number ===
-+[Player:action_key_representative_number Key in "R123456Z" and tick the box] -> search_representative
-
-=== search_representative ===
-+[Player:action_search_representative Search] -> open_kachagram
++[Player:action_check_legitimacy Check whether legitimate] -> open_kachagram
 
 === open_kachagram ===
 +[Player:action_open_kachagram Return to Kachagram chat] -> dialogue_10

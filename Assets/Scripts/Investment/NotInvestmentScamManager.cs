@@ -12,7 +12,13 @@ using UnityEngine.Video;
 
 public class NotInvestmentScamManager : InkManager
 {
+    /// <summary>
+    /// Reference NotInvestmentScamUIManager script
+    /// </summary>
     public NotInvestmentScamUIManager uIManager;
+    /// <summary>
+    /// Reference InvestmentScenariosAudioManager script
+    /// </summary>
     public InvestmentScenariosAudioManager audioManager;
 
     private void Awake()
@@ -21,12 +27,7 @@ public class NotInvestmentScamManager : InkManager
         {
             { "action_tap_notification", _ => uIManager.TapNotification()},
             { "message_add_pfp", index => uIManager.AddProfilePicture(index)},
-            { "action_home_screen", _ => uIManager.HomeScreen()},
-            { "action_browze_plus", _ => uIManager.OpenBrowzePlus()},
-            { "action_search", _ => uIManager.SearchBrowzePlus()},
-            { "action_tap_link", _ => uIManager.TapFirstLink()},
-            { "action_key_representative_number", _ => uIManager.EnterRepresentativeNumber()},
-            { "action_search_representative", _ => StartCoroutine(uIManager.SearchRepresentative())},
+            { "action_check_legitimacy", _ => StartCoroutine(uIManager.CheckLegitimacy())},
             { "action_open_kachagram", _ => uIManager.OpenKachagram()},
             { "win_ending", _ => StartCoroutine(uIManager.HandleWinEnding())},
 
@@ -44,7 +45,7 @@ public class NotInvestmentScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();

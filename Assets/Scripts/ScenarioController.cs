@@ -11,26 +11,38 @@ using UnityEngine.SceneManagement;
 
 public class ScenarioController : MonoBehaviour
 {
-    [Header("Scenario selection")]
     /// <summary>
     /// List of Ink JSON files representing the different possible scenarios
     /// </summary>
+    [Header("Scenario selection")]
     public TextAsset[] inkJsonFiles;
     /// <summary>
-    /// Corresponding UI canvases for each scenario
+    /// Array for corresponding UI canvases for each scenario
     /// </summary>
     public GameObject[] uiCanvas;
-
+    /// <summary>
+    /// Array for corresponding ink managers for each scenario
+    /// </summary>
     public InkManager[] inkManagers;
-
+    /// <summary>
+    /// Array for corresponding ui managers for each scenario
+    /// </summary>
     public UIManager[] uiManagers;
-
+    /// <summary>
+    /// Array for corresponding messages content for each scenario
+    /// </summary>
     public Transform[] messagesContent;
-
+    /// <summary>
+    /// Array for corresponding ending ui for each scenario
+    /// </summary>
     public GameObject[] scamOrNotEndingUI;
-
+    /// <summary>
+    /// Transform of chosen message content
+    /// </summary>
     public Transform messageContentParent;
-
+    /// <summary>
+    /// Chosen scenario canvas
+    /// </summary>
     public GameObject scenarioCanvas;
 
 
@@ -64,6 +76,10 @@ public class ScenarioController : MonoBehaviour
         LoadScenario(index);
     }
 
+    /// <summary>
+    /// Load scenario with corresponding UI
+    /// </summary>
+    /// <param name="index">Scenario array index number</param>
     private void LoadScenario(int index)
     {
         TextAsset selectedInk = inkJsonFiles[index];

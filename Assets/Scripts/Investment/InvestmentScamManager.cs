@@ -14,11 +14,19 @@ using UnityEngine.Video;
 
 public class InvestmentScamManager : InkManager
 {
+    /// <summary>
+    /// Reference InvestmentScamUIManager script
+    /// </summary>
     public InvestmentScamUIManager uIManager;
+    /// <summary>
+    /// Reference InvestmentScenariosAudioManager script
+    /// </summary>
     public InvestmentScenariosAudioManager audioManager;
 
-    public bool eZProfitAccountCreated;
-    public bool isInvestAmountEntered;
+    /// <summary>
+    /// Boolean if money is invested in Bei Bei
+    /// </summary>
+    [Header("Booleans")]
     public bool isMoneyInvested;
 
     private void Awake()
@@ -27,21 +35,10 @@ public class InvestmentScamManager : InkManager
         {
             { "action_scammer_notification", _ => uIManager.ScammerNotification()},
             { "message_add_pfp", index => uIManager.AddProfilePicture(index)},
-            { "action_home_screen", _ => uIManager.HomeScreen() },
-            { "action_open_appshop", _ => uIManager.OpenAppShop()},
-            { "action_appshop_ezprofit", _ => uIManager.OpenEZProfitInAppShop()},
-            { "action_download_ezprofit", _ => StartCoroutine(uIManager.DownloadingEZProfit())},
+            { "action_download_ezprofit", _ => StartCoroutine(uIManager.DownloadEZProfitAnimation())},
+            { "action_create_ezprofit_account", _ => StartCoroutine(uIManager.CreateEZProfitAccount())},
             { "action_open_ezprofit", _ => uIManager.OpenEZProfitApp()},
-            { "action_fill_details_ezprofit", _ => uIManager.FillUpAccountDetails()},
-            { "action_signup_ezprofit", _ => uIManager.SignUpEZProfitAccount()},
-            { "action_open_kachagram", _ => uIManager.OpenKachagram()},
-            { "action_tap_bei_bei", _ => uIManager.TapOnBeiBei()},
-            { "action_tap_on_invest", _ => uIManager.InvestInBaoBei()},
-            { "action_invest_$300", _ => uIManager.InvestAmount()},
-            { "action_add_payment_method", _ => uIManager.AddNewPaymentMethod()},
-            { "action_scan_credit_card", _ => StartCoroutine(uIManager.ScanCreditCard())},
-            { "action_add_credit_card", _ => uIManager.AddCreditCard()},
-            { "action_pick_card", _ => StartCoroutine(uIManager.PickCard())},
+            { "action_invest_bei_bei", _ => StartCoroutine(uIManager.InvestAnimation())},
             { "action_close_investment_confirmation", _ => uIManager.EarningsScreen()},
             { "action_withdraw_money", _ => StartCoroutine(uIManager.WithdrawEarnings())},
             { "action_withdraw_error", _ => uIManager.AskRachel()},
@@ -60,7 +57,7 @@ public class InvestmentScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();

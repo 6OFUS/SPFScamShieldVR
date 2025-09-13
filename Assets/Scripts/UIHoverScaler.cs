@@ -9,10 +9,22 @@ using UnityEngine.EventSystems;
 
 public class UIHoverScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    /// <summary>
+    /// Target scale of UI after hovering over it
+    /// </summary>
     public Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f);
+    /// <summary>
+    /// Scaling speed
+    /// </summary>
     public float scaleSpeed = 10f;
 
+    /// <summary>
+    /// Original scale of UI
+    /// </summary>
     private Vector3 originalScale;
+    /// <summary>
+    /// Target scale of UI
+    /// </summary>
     private Vector3 targetScale;
 
 
@@ -20,19 +32,30 @@ public class UIHoverScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         originalScale = transform.localScale;
     }
-
+    /// <summary>
+    /// When hovering over UI
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         targetScale = hoverScale;
         StartCoroutine(ScaleAnim());
     }
 
+    /// <summary>
+    /// When stop hovering over UI
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         targetScale = originalScale;
         StartCoroutine(ScaleAnim());
     }
 
+    /// <summary>
+    /// Animation for scaling UI
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ScaleAnim()
     {
         while (Vector3.Distance(transform.localScale, targetScale) > 0.001f)
@@ -41,6 +64,6 @@ public class UIHoverScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             yield return null;
         }
 
-        transform.localScale = targetScale; // Snap exactly to target
+        transform.localScale = targetScale;
     }
 }

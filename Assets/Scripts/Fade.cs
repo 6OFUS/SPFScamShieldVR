@@ -11,14 +11,34 @@ using UnityEngine.Video;
 
 public class Fade : MonoBehaviour
 {
+    /// <summary>
+    /// XR origin
+    /// </summary>
     public GameObject player;
+    /// <summary>
+    /// Point where player will be teleported to
+    /// </summary>
     public Transform tpPoint;
 
+    /// <summary>
+    /// Image used for fade in and out
+    /// </summary>
     public Image fadeImage;
+    /// <summary>
+    /// Duration of fade
+    /// </summary>
     public float fadeDuration = 2f;
 
+    /// <summary>
+    /// Reference RecapVideo script
+    /// </summary>
     public RecapVideo recapVideo;
 
+    /// <summary>
+    /// Transition animation
+    /// </summary>
+    /// <param name="targetAlpha">Opacity of fade image</param>
+    /// <returns></returns>
     public IEnumerator Transition(float targetAlpha)
     {
         Color startColor = fadeImage.color;
@@ -36,27 +56,30 @@ public class Fade : MonoBehaviour
         // Ensure it ends exactly at targetAlpha
         fadeImage.color = new Color(startColor.r, startColor.g, startColor.b, targetAlpha);
     }
-
+    /// <summary>
+    /// Function to fade into scene
+    /// </summary>
     public void FadeIn()
     {
         StartCoroutine(Transition(0f));
     }
-
+    /// <summary>
+    /// Function to fade out of scene
+    /// </summary>
     public void FadeOut()
     {
         StartCoroutine(Transition(1f));
     }
-
+    /// <summary>
+    /// Fade out then teleport player to teleport point
+    /// </summary>
+    /// <param name="videoClip"></param>
+    /// <returns></returns>
     public IEnumerator FadeTeleport(VideoClip videoClip)
     {
-        // Step 1: Fade Out (wait until fully black)
         yield return StartCoroutine(Transition(1f));
-
-        // Step 2: Teleport
         player.transform.position = tpPoint.position;
         player.transform.rotation = tpPoint.rotation;
-
-        // Step 3: Fade In (wait until transparent)
         yield return StartCoroutine(Transition(0f));
         recapVideo.PlayVideo(videoClip);
     }
@@ -67,11 +90,5 @@ public class Fade : MonoBehaviour
     void Start()
     {
         FadeIn();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

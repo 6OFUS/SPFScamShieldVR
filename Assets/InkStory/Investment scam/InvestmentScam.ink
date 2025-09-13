@@ -36,7 +36,7 @@ So im working as a part-time financial advisor. i'm part of a private group inve
 very simple one, just go and download "EZProfit" and create an account #Sender:message
 
 + [Player:message Really? Don't lie to me] -> investment_scam_start_dialogue_3
-+ [Player:action_home_screen Go to home screen] -> open_appshop
++ [Player:action_download_ezprofit Download EzProfit on AppShop] -> create_account_and_return_to_kachagram
 
 === investment_scam_start_dialogue_3 ===
 really! i just invested $300 yesterday and today i already got returns. you want? you just have to download this app #Sender:message
@@ -46,31 +46,10 @@ really! i just invested $300 yesterday and today i already got returns. you want
 === investment_scam_start_dialogue_4 ===
 my phone's dying, i can't call. go download the app called "EZProfit" and create an account there #Sender:message
 
-+ [Player:action_home_screen Go to home screen] -> open_appshop
++ [Player:action_download_ezprofit Download EzProfit on AppShop] -> create_account_and_return_to_kachagram
 
-=== open_appshop === 
-+ [Player:action_open_appshop Open AppShop] -> open_appshop_ezprofit
-
-=== open_appshop_ezprofit === 
-+ [Player:action_appshop_ezprofit Tap on "EZProfit"] -> download_ezprofit
-
-=== download_ezprofit === 
-+ [Player:action_download_ezprofit Tap on "Get" to download] -> open_ezprofit
-
-=== open_ezprofit === 
-+ [Player:action_open_ezprofit Open "EZProfit" app] -> fill_details_ezprofit
-
-=== fill_details_ezprofit === 
-+ [Player:action_fill_details_ezprofit Fill in details] -> signup_ezprofit
-
-=== signup_ezprofit === 
-+ [Player:action_signup_ezprofit Sign up] -> home_screen
-
-=== home_screen ===
-+ [Player:action_home_screen Go to homescreen] -> open_kachagram
-
-=== open_kachagram ===
-+ [Player:action_open_kachagram Open Kachagram] -> investment_scam_player_qns
+=== create_account_and_return_to_kachagram ===
++ [Player:action_create_ezprofit_account Create account and return to "Kachagram"] -> investment_scam_player_qns
 
 === investment_scam_player_qns ===
 + [Player:message Okay, I have created the account. Now what?] -> investment_scam_instruction_1
@@ -78,36 +57,13 @@ my phone's dying, i can't call. go download the app called "EZProfit" and create
 === investment_scam_instruction_1 ===
 You just need to make a small deposit. Most people start with $300 or $500 but it's up to you. #Sender:message
 
-+ [Player:action_open_ezprofit Return to "EZProfit"] -> tap_bei_bei
++ [Player:action_open_ezprofit Return to "EZProfit"] -> invest_bei_bei
 
-=== tap_bei_bei ===
-+ [Player:action_tap_bei_bei Tap on "Bei Bei"] -> tap_on_invest
-
-=== tap_on_invest ===
-+ [Player:action_tap_on_invest Tap on "Invest"] -> invest_amount
-
-=== invest_amount === 
-+ [Player:action_invest_$300 Key in $300] -> invest_confirmation
-
-=== invest_confirmation === 
-+ [Player:action_tap_on_invest Tap on "Invest"] -> add_payment_method
-
-=== add_payment_method === 
-+ [Player:action_add_payment_method Tap on "Add new payment method"] -> scan_credit_card
-
-=== scan_credit_card === 
-+ [Player:action_scan_credit_card Scan credit card] -> add_credit_card
-
-=== add_credit_card === 
-+ [Player:action_add_credit_card Tap on "Add"] -> pick_card
-
-=== pick_card === 
-+ [Player:action_pick_card Pick card] -> close_investment_confirmation
+=== invest_bei_bei ===
++ [Player:action_invest_bei_bei Invest in "Bei Bei"] -> close_investment_confirmation
 
 === close_investment_confirmation === 
-+ [Player:action_close_investment_confirmation Tap on "Close"] -> withdraw_money
-
-
++ [Player:action_close_investment_confirmation Tap on "Close"] -> withdraw_money 
 
 === withdraw_money === 
 + [Player:action_withdraw_money Try to withdraw] -> withdraw_error

@@ -5,21 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    /// <summary>
+    /// Reference Fade script
+    /// </summary>
     [SerializeField] private Fade fade;
+    /// <summary>
+    /// Target scene index number
+    /// </summary>
     public int sceneIndexNum;
 
+    /// <summary>
+    /// Function to change scene
+    /// </summary>
     public void ChangeScene()
     {
         Debug.Log("Changing scene...");
         StartCoroutine(FadeThenChange(sceneIndexNum));
     }
 
+    /// <summary>
+    /// Function to fade out then change scene
+    /// </summary>
+    /// <param name="index">Target scene index</param>
+    /// <returns></returns>
     private IEnumerator FadeThenChange(int index)
     {
         yield return fade.Transition(1f); // Wait for fade to complete
         SceneManager.LoadScene(index); // Load scene AFTER fade
     }
 
+    /// <summary>
+    /// Scene is picked at random
+    /// </summary>
     public void RandomScene()
     {
         int randomIndex = Random.Range(1, SceneManager.sceneCountInBuildSettings);
@@ -33,21 +50,13 @@ public class SceneChanger : MonoBehaviour
         StartCoroutine(FadeThenChange(randomIndex));
     }
 
+    /// <summary>
+    /// Restart current scene
+    /// </summary>
     public void RestartScene()
     {
         GameManager.Instance.isRestart = true;
         StartCoroutine(FadeThenChange(sceneIndexNum));
 
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

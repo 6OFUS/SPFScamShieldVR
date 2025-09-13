@@ -34,7 +34,6 @@ public class NotPhishingScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                //StartCoroutine(SpawnHomeButton(uIManager,1, audioManager));
                 StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
