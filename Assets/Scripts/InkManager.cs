@@ -282,26 +282,6 @@ public class InkManager : MonoBehaviour
         scamshieldButton.transform.SetAsLastSibling();
     }
 
-    //--------------------------------------------------------------------------------------------------
-    public IEnumerator SpawnHomeButton(UIManager uIManager, float time, AudioManager audioManager)
-    {
-        yield return SpawnActionButton("Go to home screen", time, audioManager, () => {
-            isOnHomeScreen = true;
-            uIManager.DisableAllCanvasChildren();
-
-            uIManager.homeScreen.SetActive(true);
-
-            if (scamshieldButton != null)
-            {
-                Destroy(scamshieldButton);
-            }
-            if (uIManager.screenshotTaken)
-            {
-                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
-            }
-        });
-    }
-
     protected IEnumerator SpawnOpenScamshieldButton(UIManager uIManager, AudioManager audioManager)
     {
         yield return SpawnActionButton("Open Scamshield app", 1f, audioManager, () => {
@@ -310,8 +290,6 @@ public class InkManager : MonoBehaviour
             StartCoroutine(SpawnReportButton(audioManager));
         });
     }
-
-    //--------------------------------------------------------------------------------------------------------------
 
     protected IEnumerator SpawnReportButton(AudioManager audioManager)
     {

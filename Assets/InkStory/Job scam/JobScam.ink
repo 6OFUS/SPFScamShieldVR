@@ -7,16 +7,16 @@
 Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and wanted to reach out regarding a part-time opportunity.<br><br>We're currently hiring E-Commerce Task Partners to help boost our product engagement for similar to major platforms like Shopee, Lazada, and TikTok Shop.<br><br>We've already sent you an email with full details and our official authorization letter for your assurance. Rest assured, we are a legitimate company registered in Singapore.<br><br>Let me know if you're keen, and I'll guide you through getting started! #Sender:message
 
 //OPEN AMAIL 
-+ [Player:action_open_amail Check Amail] -> open_jason_email
++ [Player:action_open_amail Open Jason's Amail] -> open_whatsup_after_email
 
-=== open_jason_email ===
-+ [Player:action_open_jason_email Open Jason's email] -> home_screen_after_email
+//=== open_jason_email ===
+//+ [Player:action_open_jason_email Open Jason's email] -> home_screen_after_email
 
-=== home_screen_after_email ===
-+ [Player:action_home_screen Go to home screen] -> open_whatsup_after_email
+//=== home_screen_after_email ===
+//+ [Player:action_home_screen Go to home screen] -> open_whatsup_after_email
 
 === open_whatsup_after_email ===
-+ [Player:action_open_whatsup Open WhatsUp] -> job_offer_dialogue_1 
++ [Player:action_open_whatsup Return to WhatsUp chat] -> job_offer_dialogue_1 
 
 === job_offer_dialogue_1 ===
 //SHOW THIS ONLY WHEN GO BACK TO WHATSUP
@@ -28,7 +28,7 @@ Hi Taylor! This is Jason from LUX Commerce Asia. I came across your resume and w
 === job_offer_dialogue_2 ===
 You will complete simple tasks directly from your mobile device - each takes under 10 minutes.<br><br>For example: If you're assigned a task to purchase an item worth SGD 20, you'll receive SGD 28 in return (your initial amount + SGD 8 commission).<<br><br>Earnings are paid out daily via PayNow, and all transactions will be reflected in your partner dashboard. <br><br><color=blue><u>luxcommerceasia.com</u></color> #Sender:message
 
-+ [Player:message_register_account Okay, I'll register and try a few tasks.] -> register_account
++ [Player:message_register_account Okay, I'll register and try a few tasks.] -> open_whatsup
 + [Player:message Do I need to spend money to start?] -> job_verification_payout_dialogue_1
 + [Player:ignore_ending I think I'll pass, this sounds like a scam.] -> END
 
@@ -44,21 +44,21 @@ That's a good question! This is a freelance contractor role - you'll be classifi
 That's a great question and totally understandable. You're not paying us anything. The system simply requires that new users complete a purchase cycle, which simulates a real transaction. <br><br>To activate your account, an initial top-up of SGD 50 is required. This is not a fee, but part of the system's anti-fraud measure to verify real users and enable transaction simulation. <br><br>Please note: <br>At least 3 tasks must be completed before funds can be withdrawn. This ensures fairness and prevents system abuse or premature withdrawal. <br><br><b><u>Our Legitimacy</u></b> <br>We are a registered business and committed to transparency. For your assurance, we have attached our official company authorization letter in the email sent to you. Our goal is to empower young adults and recent graduates with a fast, flexible income opportunity while supporting our e-commerce growth. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> open_whatsup
 + [Player:message Can I start without doing a purchase cycle?] -> job_verification_payout_dialogue_2
 
 === job_verification_payout_dialogue_2 === 
 I totally understand your concern. Unfortunately, the purchase cycle is a required step to unlock task access - it's part of the portal's anti-bot and fraud prevention system. I's not a payment to us, and it's not a fee - it's just a simulation of an actual task. <br><br>Once you complete it, your full amount plus 8-12% commission is immediately reflected in your dashboard, and you'll be eligible to withdraw after completing three groups. We've had thousands of users go through the same process smoothly. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> register_account
++ [Player:message_register_account Okay, that makes sense. I'll give it a try.] -> open_whatsup
 + [Player:message Can you guarantee I'll get the money back after the task?] -> job_verification_payout_dialogue_3
 
 === job_verification_payout_dialogue_3 === 
 Yes, absolutely. The system is automated and built to credit both your task amount and commission immediately after each completed group. <br><br>For example, if your task cycle involves $28, your balance will show $28 right after. We've processed over 2,000 contributor payouts this month alone, and all successful applicants receive their earnings as long as tasks are completed correctly. <br><Br>If you face any delay, our support team is available 24/7 to help. #Sender:message
 
 //PLAYER CHOICES
-+ [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
++ [Player:message_register_account Alright, I'll go ahead with the task.] -> open_whatsup
 + [Player:message Can I see a sample payout proof before I continue?] -> job_verification_payout_dialogue_4
 
 === job_verification_payout_dialogue_4 === 
@@ -66,70 +66,68 @@ Yes, absolutely. The system is automated and built to credit both your task amou
 (send payout image) #Sender:image
 
 //PLAYER CHOICES
-+ [Player:message_register_account Alright, I'll go ahead with the task.] -> register_account
++ [Player:message_register_account Alright, I'll go ahead with the task.] -> open_whatsup
 
 //------------------------------ TASK FLOW ------------------------------
-=== register_account ===
-//PLAYER TO REGISTER FOR ACCOUNT ON WEBSITE LINK
-//PAUSE HERE THEN GO TO job_task_2_dialogue_1
-+ [Player:action_create_account Create account] -> enter_details
+//=== register_account ===
+//+ [Player:action_create_account Create account] -> enter_details
 
-=== enter_details ===
-+ [Player:action_enter_details Enter details] -> create_account
+//=== enter_details ===
+//+ [Player:action_enter_details Enter details] -> create_account
 
-=== create_account ===
-+ [Player:action_submit_and_create Submit and create account] -> home_screen
+//=== create_account ===
+//+ [Player:action_submit_and_create Submit and create account] -> home_screen
 
-=== home_screen ===
-+ [Player:action_home_screen Go to home screen] -> open_whatsup
+//=== home_screen ===
+//+ [Player:action_home_screen Go to home screen] -> open_whatsup
 
 === open_whatsup ===
-+ [Player:action_open_whatsup Open WhatsUp] -> job_task_2_dialogue_1 
++ [Player:action_open_whatsup Return to WhatsUp chat] -> job_task_2_dialogue_1 
 
 === job_task_2_dialogue_1 ===
 Well done! As you complete each group, your balance increases. Withdrawals are processed after 3 task groups to prevent fraud. #Sender:message
 
-+ [Player:message_complete_task Okay, I'll complete the first task.] -> select_silver_tier
++ [Player:message_complete_task Okay, I'll complete the first task.] -> return_to_chat_after_checkout
 + [Player:message Can I withdraw after the first task group?] -> job_task_2_dialogue_3
+
+=== job_task_2_dialogue_3 ===
+That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
+
++ [Player:message_complete_task Okay, I'll complete the first task.] -> return_to_chat_after_checkout
+
+//=== select_silver_tier === 
+//+ [Player:action_select_silver_tier Select silver tier] -> select_task_1
+
+//=== select_task_1 ===
+//+ [Player:action_select_task_1 Select task 1] -> add_items
+
+//=== add_items ===
+//+ [Player:action_add_items Add items to cart] -> check_out
+
+//=== check_out ===
+//+ [Player:action_check_out Check out] -> home_screen_after_checkout
+
+//=== home_screen_after_checkout ===
+//+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_checkout
+
+=== return_to_chat_after_checkout ===
++ [Player:action_open_whatsup Return to WhatsUp chat] -> job_task_2_dialogue_2 
 
 === job_task_2_dialogue_2 ===
 //PLAYER TO DO FIRST TASK GROUPS BEFORE SENDER SENDS MESSAGE
 You've completed 1 task, great job! Just two more group needed. It will be returned with your full commission: $84. Most partners do this in 10 minutes. #Sender:message
 
-+ [Player:message_complete_task_2 Okay, I'll do the next group.] -> select_silver_tier_2
++ [Player:message_complete_task_2 Okay, I'll do the next group.] -> return_to_chat_after_error
 + [Player:message_withdraw I think I will withdraw now.] ->  withdraw
 
 === withdraw ===
-+ [Player:action_withdraw Withdraw] ->  home_screen_after_withdraw_error
++ [Player:action_withdraw Withdraw] ->  return_to_chat_after_withdraw_error
 
-=== home_screen_after_withdraw_error ===
-+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_withdraw_error
+//=== home_screen_after_withdraw_error ===
+//+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_withdraw_error
 
 === return_to_chat_after_withdraw_error ===
-+ [Player:action_open_whatsup Open Whatsup] -> job_task_2_withdrawal_error 
-
-=== job_task_2_dialogue_3 ===
-That's a great question! For new users, the system requires a minimum of 3 completed task groups before the withdrawal function is unlocked.<br><br>This is part of our fraud-prevention policy to ensure genuine engagement and prevent bots or mass fake signups.<br><br>Once you've completed 3 groups, the full amount - including all commissions - will be withdrawable instantly. Most users reach this in under 30 minutes. Let me know if you'd like to continue! #Sender:message
-
-+ [Player:message_complete_task Okay, I'll complete the first task.] -> select_silver_tier
-
-=== select_silver_tier === 
-+ [Player:action_select_silver_tier Select silver tier] -> select_task_1
-
-=== select_task_1 ===
-+ [Player:action_select_task_1 Select task 1] -> add_items
-
-=== add_items ===
-+ [Player:action_add_items Add items to cart] -> check_out
-
-=== check_out ===
-+ [Player:action_check_out Check out] -> home_screen_after_checkout
-
-=== home_screen_after_checkout ===
-+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_checkout
-
-=== return_to_chat_after_checkout ===
-+ [Player:action_open_whatsup Open Whatsup] -> job_task_2_dialogue_2 
++ [Player:action_open_whatsup Return to WhatsUp chat] -> job_task_2_withdrawal_error 
 
 === job_task_2_withdrawal_error ===
 //SYSTEM ERROR NEED COMPLETE BONUS TASK
@@ -138,31 +136,31 @@ That's a great question! For new users, the system requires a minimum of 3 compl
 === job_task_2_dialogue_4 ===
 Don't worry, everyone experiences this. Once 3 tasks are done, the system processes all balances instantly. You're so close! #Sender:message
 
-+ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> select_silver_tier_2 
++ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> return_to_chat_after_error 
 + [Player:message I want to withdraw now.] -> job_task_2_dialogue_5
+
+=== job_task_2_dialogue_5 ===
+I totally understand where you're coming from, Taylor. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
+
++ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> return_to_chat_after_error
++ [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
+
+//=== select_silver_tier_2 === 
+//+ [Player:action_select_silver_tier Select silver tier] -> select_task_2
+
+//=== select_task_2 ===
+//+ [Player:action_select_task_2 Select task 2] -> home_screen_after_error
+
+//=== home_screen_after_error ===
+//+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_error
+
+=== return_to_chat_after_error ===
++ [Player:action_open_whatsup Return to WhatsUp chat] -> job_task_2_loading_error 
 
 === job_task_2_loading_error ===
 //PLAYER ATTEMPT TO DO LAST TASK GROUP -> ERROR MESSAGE ON WEBSITE
 
 + [Player:message Hi, I clicked on the next task but it kept on loading. Is this normal?] -> job_cannot_send_message
-
-=== job_task_2_dialogue_5 ===
-I totally understand where you're coming from, Taylor. The 3-task withdrawal rule is part of the system's automated fraud filter. It's not something I can bypass manually - even I had to complete 3 tasks when I tested the platform myself. <br><br>All your earnings are safely stored in your balance. Once you finish the full cycle, the "Withdraw" button will unlock immediately. I'd hate for you to miss your pay out when you're already 1/3 of the way there. Totally your call but most contributors finish within 15-20 mins. #Sender:message
-
-+ [Player:message_complete_task_2 Okay, I'll continue with the next task group.] -> select_silver_tier_2 
-+ [Player:message Can I get a refund if I stop now?] -> job_task_2_dialogue_6
-
-=== select_silver_tier_2 === 
-+ [Player:action_select_silver_tier Select silver tier] -> select_task_2
-
-=== select_task_2 ===
-+ [Player:action_select_task_2 Select task 2] -> home_screen_after_error
-
-=== home_screen_after_error ===
-+ [Player:action_home_screen Go to home screen] -> return_to_chat_after_error
-
-=== return_to_chat_after_error ===
-+ [Player:action_open_whatsup Open WhatsUp] -> job_task_2_loading_error 
 
 === job_task_2_dialogue_6 ===
 I totally get it, Taylor. Let me do this, I'll escalate your case to our HR settlement team to check if we can push your withdrawal manually, even though the system usually requires 3 task groups. It might take a few minutes, but I'll keep you posted once I hear back. Just hang tight, okay? #Sender:message

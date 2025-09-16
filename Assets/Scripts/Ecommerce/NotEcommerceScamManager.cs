@@ -27,17 +27,10 @@ public class NotEcommerceScamManager : InkManager
         {
             { "action_open_caretosell", _ => uIManager.OpenCareToSell()},
             { "action_chat_with_seller", _ => uIManager.StartChatting()},
-            { "action_check_image", _ => uIManager.CheckImageOnBrowzePlus()},
-            { "action_upload_image", _ => uIManager.UploadImageOnBrowzePlus()},
+            { "action_check_image", _ => StartCoroutine(uIManager.CheckImageOnBrowzePlus())}, 
             { "action_return_to_chat", _ => uIManager.ReturnToChat()},
             { "action_purchase", _ => uIManager.Purchase()},
-            { "action_turn_on_phone", _ => uIManager.TurnOnPhone()},
-            { "action_phone_unlock", _ => uIManager.UnlockPhone()},
-            { "action_phone_open_actbank", _ => StartCoroutine(uIManager.LoginACTBankApp())},
-            { "action_phone_actnow", _ => uIManager.ActNow()},
-            { "action_phone_enter_details", _ => uIManager.EnterTransferDetails()},
-            { "action_phone_transfer", _ => uIManager.TransferSuccess()},
-            { "action_phone_share", _ => uIManager.ShareTransferredMessage()},
+            { "action_money_transferred", _ => uIManager.MoneyTransferred()}, 
             { "action_send_address", _ => StartCoroutine(uIManager.HandleWinEnding())},
             { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
 
@@ -71,7 +64,7 @@ public class NotEcommerceScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();

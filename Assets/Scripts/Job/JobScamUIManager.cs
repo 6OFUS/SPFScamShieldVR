@@ -3,6 +3,7 @@
     Date: 26/06/2025
     Description: The JobScamUIManager class is used to manage all UI related functions to the job scam scenario
 */
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,26 +24,39 @@ public class JobScamUIManager : UIManager
     [Header("Amail UI")]
     public GameObject amailScreen;
     public GameObject jasonEmailScreen;
+    public ScrollRect emailScrollRect;
+    public float emailScrollDuration;
 
     [Header("Scam website UI")]
     public GameObject websiteHomeScreen;
+    public ScrollRect websiteScrollRect;
+    public float websiteScrollDuration;
     public GameObject websiteCreateAccountScreen;
 
     public TextMeshProUGUI[] detailsInputText;
     public string[] detailsTextContent;
 
     public GameObject websiteHomeLoggedInScreen;
+    public ScrollRect websiteHomeLoggedInScrollRect;
+    public float websiteHomeLoggedInScrollDuration;
 
     public GameObject websiteSelectTaskScreen;
+    public ScrollRect websiteSelectTaskScrollRect;
+    public float websiteSelectTaskScrollDuration;
 
     public GameObject websiteHomeAfterFirstTaskScreen;
-    
+    public ScrollRect websiteHomeAfterFirstTaskScrollRect;
+    public float websiteHomeAfterFirstTaskScrollDuration;
+
     public GameObject websiteFirstTaskGroup;
 
     public GameObject websiteWithdrawErrorScreen;
 
     [Header("Scam website task UI")]
     public GameObject taskScreen;
+    public ScrollRect websiteFirstTaskScrollRect;
+    public float websiteFirstTaskScrollDuration;
+
     public GameObject itemNumThree;
 
     [Header("Loading screen UI")]
@@ -58,39 +72,38 @@ public class JobScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(0, audioManager));
     }
 
-    public void OpenAmail()
+    public IEnumerator OpenAmail()
     {
         amailScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
+        yield return new WaitForSeconds(loadingTime);
 
-    public void OpenJasonEmail()
-    {
         jasonEmailScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(5, audioManager));
+        yield return new WaitForSeconds(loadingTime);
+        emailScrollRect.normalizedPosition = new Vector2(0, 1);
+        emailScrollRect.DONormalizedPos(new Vector2(0, 0), emailScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(emailScrollDuration);
+
+        StartCoroutine(scamManager.WaitAndContinueStory(0, audioManager));
+
     }
 
-    public void MessageAndRegisterAccount(int index)
+
+    public IEnumerator MessageAndRegisterAccount(int index)
     {
         scamManager.messagingSystem.PlayerNextMessage(scamManager.playerChoices[index].choiceName);
         websiteHomeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void CreateAccount()
-    {
+        websiteScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteScrollRect.DONormalizedPos(new Vector2(0, 0), websiteScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteScrollDuration);
         websiteCreateAccountScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void EnterAccountDetails()
-    {
+        yield return new WaitForSeconds(loadingTime);
         for (int i = 0; i < detailsInputText.Length; i++)
         {
             detailsInputText[i].color = Color.black;
             detailsInputText[i].text = detailsTextContent[i];
         }
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
+        yield return new WaitForSeconds(loadingTime);
+        StartCoroutine(CreatingAccount());
     }
 
     public IEnumerator CreatingAccount()
@@ -101,23 +114,34 @@ public class JobScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(1, audioManager));
     }
 
-    public void MessageAndCompleteFirstTask(int index)
+
+    public IEnumerator MessageAndCompleteFirstTask(int index)
     {
         scamManager.messagingSystem.PlayerNextMessage(scamManager.playerChoices[index].choiceName);
         whatsupScreen.SetActive(false);
         websiteHomeLoggedInScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
+        yield return new WaitForSeconds(loadingTime);
+        websiteHomeLoggedInScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteHomeLoggedInScrollRect.DONormalizedPos(new Vector2(0, 0), websiteHomeLoggedInScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteHomeLoggedInScrollDuration);
+
+        websiteSelectTaskScreen.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
+        websiteSelectTaskScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteSelectTaskScrollRect.DONormalizedPos(new Vector2(0, 0), websiteSelectTaskScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteSelectTaskScrollDuration);
+
+        yield return StartCoroutine(HandleFirstTaskGroupSelection());
+
+        yield return new WaitForSeconds(loadingTime);
+        websiteFirstTaskScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteFirstTaskScrollRect.DONormalizedPos(new Vector2(0, 0), websiteFirstTaskScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteFirstTaskScrollDuration);
+        itemNumThree.SetActive(true);
+
+        StartCoroutine(HandleCheckOut());
     }
 
-    public void SelectSilverTier()
-    {
-        if (scamManager.firstTaskCompleted)
-        {
-            websiteHomeAfterFirstTaskScreen.SetActive(false);
-        }
-        websiteSelectTaskScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
 
     public IEnumerator HandleFirstTaskGroupSelection()
     {
@@ -130,14 +154,9 @@ public class JobScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
-    public void AddItemsToCart()
-    {
-        itemNumThree.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
     public IEnumerator HandleCheckOut()
     {
+        yield return new WaitForSeconds(loadingTime);
         taskScreen.SetActive(false);
         loadingBackToDashboardScreen.SetActive(true);
         scamManager.firstTaskCompleted = true;
@@ -148,12 +167,24 @@ public class JobScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(1, audioManager));
     }
 
-    public void MessageAndCompleteSecondTask(int index)
+    public IEnumerator MessageAndCompleteSecondTask(int index)
     {
         websiteHomeAfterFirstTaskScreen.SetActive(true);
         scamManager.messagingSystem.PlayerNextMessage(scamManager.playerChoices[index].choiceName);
         whatsupScreen.SetActive(false);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
+
+        websiteHomeAfterFirstTaskScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteHomeAfterFirstTaskScrollRect.DONormalizedPos(new Vector2(0, 0), websiteHomeAfterFirstTaskScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteHomeAfterFirstTaskScrollDuration);
+
+        websiteHomeAfterFirstTaskScreen.SetActive(false);
+        websiteSelectTaskScreen.SetActive(true);
+        websiteSelectTaskScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteSelectTaskScrollRect.DONormalizedPos(new Vector2(0, 0), websiteSelectTaskScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteSelectTaskScrollDuration);
+
+        StartCoroutine(HandleSecondTaskGroupSelection());
+
     }
 
     public IEnumerator HandleSecondTaskGroupSelection()
@@ -215,21 +246,9 @@ public class JobScamUIManager : UIManager
         scamManager.ProceedToVideo(scamManager.winVideoClip);
     }
 
-    public void HomeScreen()
-    {
-        scamManager.isOnHomeScreen = true;
-        DisableAllCanvasChildren();
-        homeScreen.SetActive(true);
-
-        if (scamManager.scamshieldButton != null)
-        {
-            Destroy(scamManager.scamshieldButton);
-        }
-        StartCoroutine(scamManager.WaitAndContinueStory(1, audioManager));
-    }
-
     public void OpenWhatsUp()
     {
+        DisableAllCanvasChildren();
         whatsupScreen.SetActive(true);
         scamManager.isOnHomeScreen = false;
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));

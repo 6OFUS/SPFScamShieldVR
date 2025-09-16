@@ -4,7 +4,7 @@
 
 //------------------------------ JOB OFFER INTRO ------------------------------
 === job_offer_intro ===
-Hello Taylor, this is Lucia from the Talent Acquisition team at T Commerce.<br><br>We've reviewed your application for the <b>Customer Support & Operations</b> role and would love to connect to learn more about you and your experience.<br><br>T-Commerce is a digital solutions company focused on building smart, user-centric platforms for businesses across Southeast Asia.<br><br>Would you be available for a short WhatsApp call today? Just about 10 minutes. #Sender:message
+Hello Taylor, this is Lucia from the Talent Acquisition team at T Commerce.<br><br>We've reviewed your application for the <b>Customer Support & Operations</b> role and would love to connect to learn more about you and your experience.<br><br>T-Commerce is a digital solutions company focused on building smart, user-centric platforms for businesses across Southeast Asia.<br><br>Would you be available for a short WhatsUp call today? Just about 10 minutes. #Sender:message
 
 + [Player:message Is this job legit?] -> job_offer_dialogue_1
 + [Player:message Can I ask more about the role first before the call?] -> job_offer_dialogue_2
@@ -18,16 +18,10 @@ Hello Taylor, this is Lucia from the Talent Acquisition team at T Commerce.<br><
 === job_offer_dialogue_1 ===
 Totally understand the concern. Yes, this is a legitimate role.<br><br>You applied via Linkedin, and I'm reaching out on behalf of T Commerce's HR team.<br><br>You can also check us out at:<br><color=blue><u>www.t-commerce.com</u></color> #Sender:message
 
-+ [Player:action_check_website Check the site] -> website_career_section
-
-=== website_career_section ===
-+ [Player:action_check_website_careers Tap on Careers] -> home_screen
-
-=== home_screen ===
-+ [Player:action_home_screen Go to home screen] -> return_to_chat
++ [Player:action_check_website Check the site] -> return_to_chat
 
 === return_to_chat ===
-+ [Player:action_return_to_chat Open WhatsUp] -> job_verification_dialogue_1
++ [Player:action_return_to_chat Return to WhatsUp chat] -> job_verification_dialogue_1 
 
 === job_offer_dialogue_2 ===
 The Customer Support & Operations Executive role is full-time and mostly remote.<br><br>You'll be handling basic customer enquiries, managing orders, and assisting with operational tasks on platforms like Shopee and Lazada.<br><br>Training will be provided, and we're a small but friendly team! #Sender:message
@@ -54,10 +48,7 @@ No worries at all! My email is listed on the Careers page, easy to miss sometime
 Alright email sent! #Sender:message
 //OPEN EMAIL 
 
-+ [Player:action_open_amail Check Amail] -> open_lucia_email
-
-=== open_lucia_email ===
-+ [Player:action_open_lucia_email Open Lucia's email] -> return_from_email
++ [Player:action_open_amail Check Amail] -> return_from_email
 
 === return_from_email ===
 + [Player:action_return_to_chat Open WhatsUp] -> win_ending

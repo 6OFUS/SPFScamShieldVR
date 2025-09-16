@@ -36,7 +36,7 @@ public class JobScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();
@@ -47,25 +47,18 @@ public class JobScamManager : InkManager
         actionHandlers = new Dictionary<string, Action<int>>
         {
             { "action_tap_notification", _ => uIManager.TapNotification()},
-            { "action_open_amail", _ => uIManager.OpenAmail()},
-            { "action_open_jason_email", _ => uIManager.OpenJasonEmail()},
-            { "message_register_account", index => uIManager.MessageAndRegisterAccount(index)},
-            { "action_create_account" , _ => uIManager.CreateAccount()},
-            { "action_enter_details", _ => uIManager.EnterAccountDetails()},
-            { "action_submit_and_create", _ => StartCoroutine(uIManager.CreatingAccount())},
-            { "message_complete_task", index => uIManager.MessageAndCompleteFirstTask(index)},
-            { "action_select_silver_tier", _ => uIManager.SelectSilverTier()},
-            { "action_select_task_1", _ => StartCoroutine(uIManager.HandleFirstTaskGroupSelection())},
-            { "action_add_items", _ => uIManager.AddItemsToCart()},
-            { "action_check_out", _ => StartCoroutine(uIManager.HandleCheckOut())},
+            { "action_open_amail", _ => StartCoroutine(uIManager.OpenAmail())},
+            { "message_register_account", index => StartCoroutine(uIManager.MessageAndRegisterAccount(index))}, 
+            { "message_complete_task", index => StartCoroutine(uIManager.MessageAndCompleteFirstTask(index))},
+
             { "message_complete_task_2", index => uIManager.MessageAndCompleteSecondTask(index)},
-            { "action_select_task_2", _ => StartCoroutine(uIManager.HandleSecondTaskGroupSelection())},
+
             { "message_withdraw", index => uIManager.MessageAndWithdraw(index)},
             { "action_withdraw", _ => StartCoroutine(uIManager.Withdraw())},
+
             { "error_message", _ => ErrorMessage()},
             { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
             { "ignore_ending", _ => StartCoroutine(uIManager.HandleIgnoreOfferEnding())},
-            { "action_home_screen", _ => uIManager.HomeScreen()},
             { "action_open_whatsup", _ => uIManager.OpenWhatsUp()},
         };
     }

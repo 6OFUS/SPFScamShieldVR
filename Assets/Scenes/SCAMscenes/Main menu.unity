@@ -11050,30 +11050,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8884531756212293616, guid: e8052ab57fdf8e64ea179ed4e15b7624, type: 3}
   m_PrefabInstance: {fileID: 276199030}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &296298253 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5558898693603716733, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
-  m_PrefabInstance: {fileID: 1788300055}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &296298254 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5558898693603716734, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
-  m_PrefabInstance: {fileID: 1788300055}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &296298260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296298253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3640d67f33a306f47bd97725be50147b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 372601242}
-  xrOrigin: {fileID: 296298254}
 --- !u!1 &299639867
 GameObject:
   m_ObjectHideFlags: 0
@@ -51981,10 +51957,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2432040751937822340, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3065925841390659001, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 372601242}
     - target: {fileID: 4598988618888370220, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 372601242}
+    - target: {fileID: 4670472044995149851, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
+      propertyPath: m_EnableFarCasting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5558898693603716733, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig) NEW
@@ -52034,12 +52022,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1910329060355023349, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5558898693603716733, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 296298260}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc37713b5e4e1244c8f5f8c09ebacc45, type: 3}
 --- !u!1 &1792930172
 GameObject:

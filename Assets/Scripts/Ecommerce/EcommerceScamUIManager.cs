@@ -22,17 +22,6 @@ public class EcommerceScamUIManager : UIManager
     public GameObject errorMessage;
     public Sprite proofImage;
 
-    [Header("Phone")]
-    public GameObject pickUpUI;
-    public XRGrabInteractable phoneInteractable;
-    public GameObject phoneCanvas;
-
-    public GameObject phoneHomeScreen;
-    public GameObject aCTBankLogin;
-    public GameObject aCTBankHome;
-    public GameObject aCTBankTransfer;
-    public GameObject aCTBankAmountInput;
-    public GameObject aCTBankTransferSuccess;
 
     public void OpenCareToSell()
     {
@@ -47,15 +36,13 @@ public class EcommerceScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
-    public void CheckImageOnBrowzePlus()
+    public IEnumerator CheckImageOnBrowzePlus()
     {
         browzePlusSearch.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
+        yield return new WaitForSeconds(loadingTime);
 
-    public void UploadImageOnBrowzePlus()
-    {
         browzePlusUploadImage.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
@@ -72,50 +59,16 @@ public class EcommerceScamUIManager : UIManager
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
     }
 
-    public void TurnOnPhone()
-    {
-        pickUpUI.SetActive(true);
-        phoneInteractable.enabled = true;
-        phoneInteractable.selectEntered.AddListener((SelectEnterEventArgs args) =>
-        {
-            phoneCanvas.SetActive(true);
-        });
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void UnlockPhone()
-    {
-        phoneHomeScreen.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public IEnumerator LoginACTBankApp()
-    {
-        aCTBankLogin.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        aCTBankHome.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void ActNow()
-    {
-        aCTBankTransfer.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void EnterTransferDetails()
-    {
-        aCTBankAmountInput.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
-
-    public void TransferSuccess()
-    {
-        aCTBankTransferSuccess.SetActive(true);
-        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
-    }
+    /*
 
     public void ShareTransferredMessage()
+    {
+        scamManager.messagingSystem.PlayerNextMessage("Hi! I just sent S$70 to your mobile number via ActNow.");
+        StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));
+    }
+    */
+
+    public void MoneyTransferred()
     {
         scamManager.messagingSystem.PlayerNextMessage("Hi! I just sent S$70 to your mobile number via ActNow.");
         StartCoroutine(scamManager.WaitAndContinueStory(scamManager.messageTime, audioManager));

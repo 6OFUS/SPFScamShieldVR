@@ -40,11 +40,12 @@ Aiyo okok wait. #Sender:message
 === proof_image === 
 (send proof image) #Sender:image
 
-+[Player:action_check_image Check if this image is taken online. Search browze+.] -> checking_image
++[Player:action_check_image Check if this image is taken online. Search browze+.] -> return_to_chat
 +[Player:message Wah! Okay. I transfer now.] -> transfer_dialogue
 
-=== checking_image ===
-+[Player:action_upload_image Upload image] -> return_to_chat
+
+//=== checking_image ===
+//+[Player:action_upload_image Upload image] -> return_to_chat
 
 === return_to_chat ===
 +[Player:action_return_to_chat Back to chat] -> purchase
@@ -55,30 +56,10 @@ Aiyo okok wait. #Sender:message
 === transfer_dialogue ===
 Wow! You're fast. Pls transfer to 8888 8888 (ActNow) and send me a proof. Will mail out after that! #Sender:message
 
-+[Player:action_turn_on_phone Pick up and turn on phone] -> unlock_phone
++[Player:action_money_transferred Money Transferred] -> transfer_received_dialogue
 
 === transfer_received_dialogue ===
 Got it! Will mail out tmr, no worries :) tracking will send u once I drop it off. #Sender:message
 
 +[Player:lose_ending Can you send me the tracking number?] -> END
 +[Player:lose_ending Ok! Can't wait :D] -> END
-
-// ------------------------- Phone section -----------------------------------------
-
-=== unlock_phone ===
-+[Player:action_phone_unlock Unlock Phone] -> open_actbank
-
-=== open_actbank ===
-+[Player:action_phone_open_actbank Tap on "ACTBank"] -> transfer_page //face scanning loading
-
-=== transfer_page ===
-+[Player:action_phone_actnow Tap on "ActNow"] -> enter_details 
-
-=== enter_details ===
-+[Player:action_phone_enter_details Enter details] -> confirm_transfer
-
-=== confirm_transfer ===
-+[Player:action_phone_transfer Tap on "Send"] -> transfer_success
-
-=== transfer_success ===
-+[Player:action_phone_share Tap on "Share" and return to tablet] -> transfer_received_dialogue //message sent: Hi! I just sent S$70 to your mobile number via ActNow.

@@ -3,6 +3,7 @@
     Date: 01/07/2025
     Description: The ProfessionalJobUIManager class is used to manage all UI related functions to the professional job ad scenario
 */
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ public class NotJobScamUIManager : UIManager
 {
     public NotJobScamManager notScamManager;
     public JobScenariosAudioManager audioManager;
+
+    public ScrollRect websiteScrollRect;
+    public ScrollRect websiteCareersScrollRect;
+    public ScrollRect luciaEmailScrollRect;
+    public float websiteScrollDuration;
+    public float luciaEmailScrollDuration;
 
     [Header("Stickers")]
     public Sprite[] stickers;
@@ -38,41 +45,37 @@ public class NotJobScamUIManager : UIManager
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
-    public void CheckWebsite()
+    public IEnumerator CheckWebsite()
     {
         websiteHomeScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(5, audioManager));
-    }
-    public void CheckWebsiteCareersSection()
-    {
+        yield return new WaitForSeconds(loadingTime);
+        websiteScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteScrollRect.DONormalizedPos(new Vector2(0, 0), websiteScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteScrollDuration);
+
         websiteCareersScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
+        yield return new WaitForSeconds(loadingTime);
+        websiteCareersScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteCareersScrollRect.DONormalizedPos(new Vector2(0, 0), websiteScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(websiteScrollDuration);
+
+        StartCoroutine(notScamManager.WaitAndContinueStory(0, audioManager));
     }
 
-    public void OpenAmail()
+
+    public IEnumerator OpenAmail()
     {
         amailScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
+        yield return new WaitForSeconds(loadingTime);
 
-    public void OpenLuciaEmail()
-    {
         luciaEmailScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(5, audioManager));
+        yield return new WaitForSeconds(loadingTime);
+        websiteCareersScrollRect.normalizedPosition = new Vector2(0, 1);
+        websiteCareersScrollRect.DONormalizedPos(new Vector2(0, 0), luciaEmailScrollDuration).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(luciaEmailScrollDuration);
+        StartCoroutine(notScamManager.WaitAndContinueStory(0, audioManager));
     }
 
-    public void HomeScreen()
-    {
-        notScamManager.isOnHomeScreen = true;
-        DisableAllCanvasChildren();
-        homeScreen.SetActive(true);
-
-        if (notScamManager.scamshieldButton != null)
-        {
-            Destroy(notScamManager.scamshieldButton);
-        }
-        StartCoroutine(notScamManager.WaitAndContinueStory(1, audioManager));
-    }
 
     public void ReturnToChat()
     {

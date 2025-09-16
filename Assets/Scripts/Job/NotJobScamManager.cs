@@ -21,12 +21,9 @@ public class NotJobScamManager : InkManager
         {
             { "action_tap_notification", _ => uIManager.TapNotification()},
             { "sticker", index => uIManager.SendSticker(index)},
-            { "action_check_website", _ => uIManager.CheckWebsite()},
-            { "action_check_website_careers", _ => uIManager.CheckWebsiteCareersSection()},
-            { "action_open_amail", _ => uIManager.OpenAmail()},
-            { "action_open_lucia_email", _ => uIManager.OpenLuciaEmail()},
-            { "action_home_screen", _ => uIManager.HomeScreen()},
+            { "action_check_website", _ => StartCoroutine(uIManager.CheckWebsite())},
             { "action_return_to_chat", _ => uIManager.ReturnToChat()},
+            { "action_open_amail", _ => StartCoroutine(uIManager.OpenAmail())},
             { "win_ending", _ => StartCoroutine(uIManager.HandleWinEnding())},
             { "lose_ending", _ => StartCoroutine(uIManager.HandleLoseEnding())},
 
@@ -61,7 +58,7 @@ public class NotJobScamManager : InkManager
                 uIManager.Screenshot(this, audioManager);
                 ClearChoices(choiceContainer);
                 Destroy(scamshieldButton);
-                StartCoroutine(SpawnHomeButton(uIManager, 1, audioManager));
+                StartCoroutine(SpawnOpenScamshieldButton(uIManager, audioManager));
             });
         }
         scamshieldButton.transform.SetAsLastSibling();

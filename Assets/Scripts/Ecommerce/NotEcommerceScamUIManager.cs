@@ -23,18 +23,6 @@ public class NotEcommerceScamUIManager : UIManager
     public Sprite proofImage;
     public GameObject senderVideoPrefab;
 
-    [Header("Phone")]
-    public GameObject pickUpUI;
-    public XRGrabInteractable phoneInteractable;
-
-    public GameObject phoneCanvas;
-    public GameObject phoneHomeScreen;
-    public GameObject aCTBankLogin;
-    public GameObject aCTBankHome;
-    public GameObject aCTBankTransfer;
-    public GameObject aCTBankAmountInput;
-    public GameObject aCTBankTransferSuccess;
-
     public void OpenCareToSell()
     {
         careToSellWebsite.SetActive(true);
@@ -48,15 +36,13 @@ public class NotEcommerceScamUIManager : UIManager
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
-    public void CheckImageOnBrowzePlus()
+    public IEnumerator CheckImageOnBrowzePlus()
     {
         browzePlusSearch.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
+        yield return new WaitForSeconds(loadingTime);
 
-    public void UploadImageOnBrowzePlus()
-    {
         browzePlusUploadImage.SetActive(true);
+        yield return new WaitForSeconds(loadingTime);
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
@@ -73,55 +59,12 @@ public class NotEcommerceScamUIManager : UIManager
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
 
-    public void TurnOnPhone()
+    public void MoneyTransferred()
     {
-        pickUpUI.SetActive(true);
-        phoneInteractable.enabled = true;
-        phoneInteractable.selectEntered.AddListener((SelectEnterEventArgs args) =>
-        {
-            phoneCanvas.SetActive(true);
-        });
+        notScamManager.messagingSystem.PlayerNextMessage("Okay, I have just transferred the money!");
         StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
     }
-
-    public void UnlockPhone()
-    {
-        phoneHomeScreen.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
-    public IEnumerator LoginACTBankApp()
-    {
-        aCTBankLogin.SetActive(true);
-        yield return new WaitForSeconds(loadingTime);
-        aCTBankHome.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
-    public void ActNow()
-    {
-        aCTBankTransfer.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
-    public void EnterTransferDetails()
-    {
-        aCTBankAmountInput.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
-    public void TransferSuccess()
-    {
-        aCTBankTransferSuccess.SetActive(true);
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
-    public void ShareTransferredMessage()
-    {
-        notScamManager.messagingSystem.PlayerNextMessage("Hi! I just sent S$85 to your mobile number via ActNow.");
-        StartCoroutine(notScamManager.WaitAndContinueStory(notScamManager.messageTime, audioManager));
-    }
-
+    
     public IEnumerator HandleWinEnding()
     {
         scenarioController.scenarioCanvas.SetActive(false);
